@@ -1,0 +1,61 @@
+name: Build
+"on":
+  - push
+jobs:
+  build:
+    name: "Test on node ${{ matrix.node_version }} and ${{ matrix.os }}"
+    runs-on: "${{ matrix.os }}"
+    strategy:
+      matrix:
+        node_version:
+          - 16
+          - 18
+          - 20
+        os:
+          - ubuntu-latest
+          - windows-latest
+          - macOS-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: "Use Node.js ${{ matrix.node_version }}"
+        uses: actions/setup-node@v3
+        with:
+          node-version: "${{ matrix.node_version }}"
+      - name: npm build and test
+        run: |
+          npm run clean
+          npm run build
+          npm run test
+      - uses: actions/upload-artifact@v3
+        with:
+          name: dist-folder
+          path: dist
+
+  package:
+    name: Build Container Image
+    runs-on: ubuntu-latest
+    needs:
+      - build
+    steps:
+      - uses: actions/checkout@v3
+      - name: Download Dist Folder
+        uses: actions/download-artifact@v3
+        with:
+          name: dist-folder
+      - name: Buildah Action
+        id: build-image
+        uses: redhat-actions/buildah-build@v2
+        with:
+          image: continuoussecuritytooling/keycloak-reporting-cli
+          tags: "v1 ${{ github.sha }}"
+          containerfiles: |
+            ./Dockerfile
+      - name: Push To Docker Hub
+        id: push-to-dockerhub
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build-image.outputs.image }}
+          tags: ${{ steps.build-image.outputs.tags }}
+          registry: registry.hub.docker.com
+          username: continuoussecuritytooling
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
