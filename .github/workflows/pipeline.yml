@@ -3,7 +3,7 @@ name: Build
   - push
 jobs:
   build:
-    name: "Test on node ${{ matrix.node_version }} and ${{ matrix.os }}"
+    name: "Build and Test on Node ${{ matrix.node_version }} and ${{ matrix.os }}"
     runs-on: "${{ matrix.os }}"
     strategy:
       matrix:
@@ -26,10 +26,6 @@ jobs:
           npm run clean
           npm run build
           npm run test
-      - uses: actions/upload-artifact@v3
-        with:
-          name: dist-folder
-          path: dist
 
   package:
     name: Build Container Image
@@ -38,10 +34,11 @@ jobs:
       - build
     steps:
       - uses: actions/checkout@v3
-      - name: Download Dist Folder
-        uses: actions/download-artifact@v3
-        with:
-          name: dist-folder
+      - uses: actions/setup-node@v3
+      - name: "Build Package"
+        run: |
+          npm run clean
+          npm run build
       - name: Buildah Action
         id: build-image
         uses: redhat-actions/buildah-build@v2
@@ -59,3 +56,4 @@ jobs:
           registry: registry.hub.docker.com
           username: continuoussecuritytooling
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
+        if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/main'
