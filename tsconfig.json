@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "Node16",
+    "esModuleInterop": true,
+    "target": "es2017",
+    "sourceMap": true,
+    "outDir": "dist",
+    "lib": ["dom", "es2017"]
+  },
+  "exclude": ["test"]
+}
