@@ -1,0 +1,42 @@
+{{- $fullName := include "keycloak-reporter.fullname" . -}}
+{{- range .Values.cronjobs }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ printf "%s-job-%s" $fullName .name }}
+spec:
+  schedule: "{{ .schedule }}"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: {{ .name }}
+              image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
+              imagePullPolicy: {{ $.Values.image.pullPolicy }}
+              command:
+                - /bin/sh
+                - -c
+                - {{ .script }}
+              env:
+                - name: KEYCLOAK_URL
+                  value: "{{ $.Values.keycloak.config.url }}"
+                - name: KEYCLOAK_CLIENT_ID
+                  value: "{{ $.Values.keycloak.config.clientId }}"
+                - name: KEYCLOAK_CLIENT_SECRET
+                  value: "{{ $.Values.keycloak.config.clientSecret }}"
+          restartPolicy: OnFailure
+          {{- if $.Values.resources }}
+          resources:
+            {{ toYaml $.Values.resources }}
+          {{- end }}
+          {{- if $.Values.nodeSelector }}
+          nodeSelector:
+            {{ toYaml $.Values.nodeSelector | indent 12 }}
+          {{- end }}
+          {{- if $.Values.tolerations }}
+          tolerations:
+            {{ toYaml $.Values.tolerations | indent 12 }}
+          {{- end }}
+---
+{{- end -}}
