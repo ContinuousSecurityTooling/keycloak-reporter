@@ -1,0 +1,6 @@
+chart-dirs:
+  - charts/keycloak-reporter/
+debug: true
+target-branch: main
+check-version-increment: true
+validate-maintainers: false

@@ -27,6 +27,29 @@ jobs:
           npm run build
           npm run test
 
+  chart:
+    name: "Build and Test Helm Chart"
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      - name: Helm Chart Testing
+        uses: helm/chart-testing-action@v2.4.0
+
+      - name: Run chart-testing (list-changed)
+        id: list-changed
+        run: |
+          changed=$(ct list-changed --target-branch ${{ github.event.repository.default_branch }})
+          if [[ -n "$changed" ]]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run chart-testing (lint)
+        if: steps.list-changed.outputs.changed == 'true'
+        run: ct lint --target-branch ${{ github.event.repository.default_branch }}
+
       - uses: actions/upload-artifact@v3
         with:
           name: dist-folder
@@ -37,6 +60,7 @@ jobs:
     runs-on: "${{ matrix.os }}"
     needs:
       - build
+      - chart
     strategy:
       matrix:
         node_version:
