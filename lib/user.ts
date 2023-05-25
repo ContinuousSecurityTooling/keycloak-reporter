@@ -3,6 +3,7 @@ import KcAdminClient from '@keycloak/keycloak-admin-client';
 export interface User {
   username: string;
   realm: string;
+  id: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -12,6 +13,7 @@ export interface User {
 export interface Client {
   client: string;
   realm: string;
+  id: string;
   description: string;
   enabled: boolean;
   public: boolean;
@@ -35,6 +37,7 @@ export async function clientListing(
     for (const user of await client.clients.find()) {
       realmClients.push({
         client: user.clientId,
+        id: user.id,
         description: user.description,
         realm: realm.realm,
         enabled: user.enabled,
@@ -67,6 +70,7 @@ export async function userListing(client: KcAdminClient): Promise<Array<User>> {
     for (const user of await client.users.find()) {
       realmUsers.push({
         username: user.username,
+        id: user.id,
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
