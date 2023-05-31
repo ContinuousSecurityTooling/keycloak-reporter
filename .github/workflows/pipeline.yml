@@ -14,6 +14,7 @@ jobs:
         os:
           - ubuntu-latest
           - macOS-latest
+          - windows-latest
     steps:
       - uses: actions/checkout@v3
       - name: "Use Node.js ${{ matrix.node_version }}"
@@ -28,10 +29,10 @@ jobs:
 
       - name: Start Keycloak server
         run: npm run end2end:start-server &
-  
+
       - name: Wait for Keycloak server
         run: .bin/wait-for-server.sh
-  
+
       - name: Run end2end tests
         run: npm run end2end:test
       - uses: actions/upload-artifact@v3
@@ -39,11 +40,45 @@ jobs:
           name: dist-folder
           path: dist
 
+  end2end:
+    name: "End2End Test on Node ${{ matrix.node_version }} and ${{ matrix.os }}"
+    runs-on: "${{ matrix.os }}"
+    needs:
+      - build
+    strategy:
+      matrix:
+        node_version:
+          - 16
+          - 18
+          - 20
+        os:
+          - ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: "Use Node.js ${{ matrix.node_version }}"
+        uses: actions/setup-node@v3
+        with:
+          node-version: "${{ matrix.node_version }}"
+      - name: npm build and test
+        run: |
+          npm run clean
+          npm run build
+
+      - name: Start Keycloak server
+        run: npm run end2end:start-server &
+
+      - name: Wait for Keycloak server
+        run: .bin/wait-for-server.sh
+
+      - name: Run end2end tests
+        run: npm run end2end:test
+
   package:
     name: Build Container Image
     runs-on: ubuntu-latest
     needs:
       - build
+      - end2end
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
