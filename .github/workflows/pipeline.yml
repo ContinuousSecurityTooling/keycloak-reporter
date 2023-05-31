@@ -64,6 +64,9 @@ jobs:
 
       - name: Run end2end tests
         run: npm run end2end:test
+        env:
+          WEBHOOK_TESTING_TEAMS: ${{ secrets.WEBHOOK_TESTING_TEAMS }}
+          WEBHOOK_TESTING_SLACK: ${{ secrets.WEBHOOK_TESTING_SLACK }}
 
   package:
     name: Build Container Image
