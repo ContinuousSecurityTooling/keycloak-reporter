@@ -24,9 +24,14 @@ export async function clientListing(
   client: KcAdminClient
 ): Promise<Array<Client>> {
   const currentRealm = client.realmName;
-
-  // iterate over realms
-  const realms = await client.realms.find();
+  let realms;
+  try {
+    // iterate over realms
+    realms = await client.realms.find();
+  } catch (e) {
+    console.error('Check Client role:', e.response.statusText);
+    return Promise.reject();
+  }
   let allClients = new Array<Client>();
   for (const realm of realms) {
     // switch realm
@@ -57,9 +62,14 @@ export async function clientListing(
 
 export async function userListing(client: KcAdminClient): Promise<Array<User>> {
   const currentRealm = client.realmName;
-
+  let realms;
   // iterate over realms
-  const realms = await client.realms.find();
+  try {
+    realms = await client.realms.find();
+  } catch (e) {
+    console.error('Check Client role:', e.response.statusText);
+    return Promise.reject();
+  }
   let allUsers = new Array<User>();
   for (const realm of realms) {
     // switch realm
