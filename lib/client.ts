@@ -16,12 +16,17 @@ export async function createClient(options: Options): Promise<KcAdminClient> {
     realmName: 'master',
   });
 
-  // client login
-  await kcAdminClient.auth({
-    clientId: options.clientId,
-    clientSecret: options.clientSecret,
-    grantType: 'client_credentials',
-  });
+  try {
+    // client login
+    await kcAdminClient.auth({
+      clientId: options.clientId,
+      clientSecret: options.clientSecret,
+      grantType: 'client_credentials',
+    });
+  } catch (e) {
+    console.error('Check Client Config:',e.response.data.error_description);
+    return Promise.reject();
+  }
 
   const keycloakIssuer = await Issuer.discover(
     `${options.rootUrl}/realms/master`
