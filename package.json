@@ -1,12 +1,15 @@
 {
-  "name": "keycloak-reporter",
-  "version": "0.1.0",
+  "name": "@continuoussecuritytooling/keycloak-reporter",
+  "version": "0.1.1",
   "description": "Reporting Tools for Keycloak",
   "main": "dist/index.js",
+  "bin": {
+    "kc-reporter": "dist/cli.js"
+  },
   "type": "module",
   "scripts": {
     "clean": "rm -rf dist/* && npm i",
-    "build": "tsc && chmod +x dist/index.js && cp package.json dist/",
+    "build": "tsc && chmod +x dist/cli.js && cp package.json dist/",
     "test": "eslint . && jest",
     "end2end:start-server": ".bin/start-server.mjs -Dkeycloak.profile.feature.account_api=disabled -Dkeycloak.profile.feature.account2=disabled -Dkeycloak.migration.action=import -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.file=e2e/fixtures/auth-utils/test-realm.json -Dkeycloak.migration.strategy=OVERWRITE_EXISTING",
     "end2end:test": "./e2e/run-tests.sh"

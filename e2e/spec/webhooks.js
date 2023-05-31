@@ -8,7 +8,7 @@ test('Should post message to Teams', (t) => {
   const cli = spawn(
     path.join(path.dirname('.'), 'node'),
     [
-      'dist/index.js',
+      'dist/cli.js',
       'listUsers',
       'http://localhost:8080',
       'keycloak-reporter',
@@ -35,7 +35,7 @@ test('Should post message to Slack', (t) => {
     const cli = spawn(
       path.join(path.dirname('.'), 'node'),
       [
-        'dist/index.js',
+        'dist/cli.js',
         'listUsers',
         'http://localhost:8080',
         'keycloak-reporter',
