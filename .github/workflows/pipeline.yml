@@ -27,6 +27,19 @@ jobs:
           npm run build
           npm run test
 
+      - name: Start Keycloak server
+        run: npm run end2end:start-server &
+  
+      - name: Wait for Keycloak server
+        run: .bin/wait-for-server.sh
+  
+      - name: Run end2end tests
+        run: npm run end2end:test
+      - uses: actions/upload-artifact@v3
+        with:
+          name: dist-folder
+          path: dist
+
   package:
     name: Build Container Image
     runs-on: ubuntu-latest
