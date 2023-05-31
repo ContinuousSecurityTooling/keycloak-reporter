@@ -8,7 +8,7 @@ test('Should list clients as JSON', (t) => {
   const cli = spawn(
     path.join(path.dirname('.'), 'node'),
     [
-      'dist/index.js',
+      'dist/cli.js',
       'listClients',
       'http://localhost:8080',
       'keycloak-reporter',
