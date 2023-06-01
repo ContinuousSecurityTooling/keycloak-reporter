@@ -22,8 +22,6 @@ test('Should list clients as JSON', (t) => {
   );
   cli.stdout.on('data', (chunk) => {
     t.equal(JSON.parse(chunk.toString()).length, 24);
-  });
-  cli.stdout.on('end', () => {
     t.end();
   });
 });

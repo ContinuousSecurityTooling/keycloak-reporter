@@ -22,8 +22,6 @@ test('Should list users as JSON', (t) => {
   );
   cli.stdout.on('data', (chunk) => {
     t.equal(JSON.parse(chunk.toString()).length, 3);
-  });
-  cli.stdout.on('end', () => {
     t.end();
   });
 });
