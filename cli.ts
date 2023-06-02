@@ -9,6 +9,8 @@ import {
   convertJSON2CSV,
   post2Webhook,
 } from './index.js';
+import config from './src/config.js';
+
 
 class WebhookConfig {
   type: string;
@@ -63,9 +65,9 @@ yargs(hideBin(process.argv))
     () => {},
     async (argv) => {
       const users = await listUsers(<Options>{
-        clientId: argv.clientId as string,
-        clientSecret: argv.clientSecret as string,
-        rootUrl: argv.url as string,
+        clientId: argv.clientId ? argv.clientId as string: config.clientId,
+        clientSecret: argv.clientSecret ? argv.clientSecret as string: config.clientSecret,
+        rootUrl:argv.url ? argv.url as string: config.url,
       });
       await convert(
         argv.format as string,
@@ -86,9 +88,9 @@ yargs(hideBin(process.argv))
     () => {},
     async (argv) => {
       const clients = await listClients(<Options>{
-        clientId: argv.clientId as string,
-        clientSecret: argv.clientSecret as string,
-        rootUrl: argv.url as string,
+        clientId: argv.clientId ? argv.clientId as string: config.clientId,
+        clientSecret: argv.clientSecret ? argv.clientSecret as string: config.clientSecret,
+        rootUrl:argv.url ? argv.url as string: config.url,
       });
       await convert(
         argv.format as string,

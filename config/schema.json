@@ -1,0 +1,57 @@
+{
+  "$id": "https://github.com/ContinuousSecurityTooling/keycloak-reporter/blob/main/config/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Keycloak Reporter Config",
+  "type": "object",
+  "definitions": {},
+  "required": ["url", "clientId", "clientSecret"],
+  "properties": {
+    "command": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["listClients", "listUsers"]
+      }
+    },
+    "url": {
+      "type": "string",
+      "description": "Keycloak Server URL"
+    },
+    "clientId": {
+      "type": "string",
+      "description": "Keycloak Client used for reporting"
+    },
+    "clientSecret": {
+      "type": "string",
+      "description": "Keycloak Client Secret used for reporting"
+    },
+    "output": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["webhook", "stdout"]
+      },
+      "description": "Output channel to use"
+    },
+    "format": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["json", "csv"]
+      },
+      "description": "Report format"
+    },
+    "webhookType": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["slack", "teams"]
+      },
+      "description": "Type of webhook"
+    },
+    "webhookUrl": {
+      "type": "string",
+      "description": "URL of the webhook"
+    }
+  }
+}
