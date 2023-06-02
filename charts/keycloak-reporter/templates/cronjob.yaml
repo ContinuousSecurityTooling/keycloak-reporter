@@ -9,7 +9,15 @@ spec:
   jobTemplate:
     spec:
       template:
+        {{- with $.Values.podAnnotations }}
+        annotations:
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
         spec:
+          {{- with $.Values.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 8 }}
+          {{- end }}
           containers:
             - name: {{ .name }}
               image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
@@ -19,12 +27,12 @@ spec:
                 - -c
                 - {{ .script }}
               env:
-                - name: KEYCLOAK_URL
-                  value: "{{ $.Values.keycloak.config.url }}"
-                - name: KEYCLOAK_CLIENT_ID
-                  value: "{{ $.Values.keycloak.config.clientId }}"
-                - name: KEYCLOAK_CLIENT_SECRET
-                  value: "{{ $.Values.keycloak.config.clientSecret }}"
+                - name: CONFIG_FILE
+                  value: "/app/config.json"
+              volumeMounts:
+                - name: config-file
+                  mountPath: "/app/config.json"
+                  readOnly: true
           restartPolicy: OnFailure
           {{- if $.Values.resources }}
           resources:
@@ -38,5 +46,9 @@ spec:
           tolerations:
             {{ toYaml $.Values.tolerations | indent 12 }}
           {{- end }}
+          volumes:
+          - name: config-file
+            secret:
+              secretName: {{ $fullName }}
 ---
 {{- end -}}
