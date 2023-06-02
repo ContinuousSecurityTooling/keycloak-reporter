@@ -24,7 +24,10 @@ export async function createClient(options: Options): Promise<KcAdminClient> {
       grantType: 'client_credentials',
     });
   } catch (e) {
-    console.error('Check Client Config:',e.response.data.error_description);
+    console.error(
+      'Check Client Config:',
+      e.response ? e.response.data.error_description : e
+    );
     return Promise.reject();
   }
 

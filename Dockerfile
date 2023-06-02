@@ -1,4 +1,6 @@
-FROM node:20
+FROM node:16
+
+ENV CONFIG_FILE=/app/config.json
 
 COPY dist/ docker_entrypoint.sh /app
 
