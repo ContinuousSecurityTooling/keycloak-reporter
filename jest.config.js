@@ -10,7 +10,6 @@ export default {
   collectCoverage: true,
   collectCoverageFrom: [
     'index.ts',
-    'src/**',
     'lib/**',
   ],
   setupFilesAfterEnv: [
