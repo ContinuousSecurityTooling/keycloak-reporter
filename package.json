@@ -1,6 +1,6 @@
 {
   "name": "@continuoussecuritytooling/keycloak-reporter",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Reporting Tools for Keycloak",
   "main": "dist/index.js",
   "bin": {
@@ -9,7 +9,7 @@
   "type": "module",
   "scripts": {
     "clean": "rm -rf dist/* && npm i",
-    "build": "tsc && chmod +x dist/cli.js && cp package.json dist/",
+    "build": "tsc && chmod +x dist/cli.js && cp -rp config dist/",
     "test": "eslint . && jest",
     "end2end:start-server": ".bin/start-server.mjs -Dkeycloak.profile.feature.account_api=disabled -Dkeycloak.profile.feature.account2=disabled -Dkeycloak.migration.action=import -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.file=e2e/fixtures/auth-utils/test-realm.json -Dkeycloak.migration.strategy=OVERWRITE_EXISTING",
     "end2end:test": "./e2e/run-tests.sh"
@@ -28,10 +28,12 @@
     "@json2csv/node": "^7.0.0",
     "@keycloak/keycloak-admin-client": "^20.0.5",
     "@slack/webhook": "^6.1.0",
+    "ajv": "^8.12.0",
     "install": "^0.13.0",
     "ms-teams-webhook": "^2.0.2",
     "npm": "^9.6.7",
     "openid-client": "^5.4.2",
+    "ramda": "^0.29.0",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
