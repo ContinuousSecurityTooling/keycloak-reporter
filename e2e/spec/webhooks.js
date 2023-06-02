@@ -4,7 +4,7 @@ import { test } from 'tape';
 import { spawn } from 'node:child_process';
 import path from 'node:path';
 
-test('Should post message to Teams', (t) => {
+test('Should post message to Teams',  { timeout: 3000 }, (t) => {
   const cli = spawn(
     path.join(path.dirname('.'), 'node'),
     [
@@ -26,12 +26,15 @@ test('Should post message to Teams', (t) => {
   cli.stdout.on('data', (chunk) => {
     console.log(chunk.toString())
   });
+  cli.stderr.on('data', (msg) => {
+    t.fail(msg)
+  });
   cli.stdout.on('end', () => {
     t.end();
   });
 });
 
-test('Should post message to Slack', (t) => {
+test('Should post message to Slack', { timeout: 3000 }, (t) => {
     const cli = spawn(
       path.join(path.dirname('.'), 'node'),
       [
@@ -52,6 +55,9 @@ test('Should post message to Slack', (t) => {
     );
     cli.stdout.on('data', (chunk) => {
       console.log(chunk.toString())
+    });
+    cli.stderr.on('data', (msg) => {
+      t.fail(msg)
     });
     cli.stdout.on('end', () => {
       t.end();

@@ -4,7 +4,7 @@ import { test } from 'tape';
 import { spawn } from 'node:child_process';
 import path from 'node:path';
 
-test('Should list users as JSON', (t) => {
+test('Should list users as JSON', { timeout: 3000 }, (t) => {
   const cli = spawn(
     path.join(path.dirname('.'), 'node'),
     [
@@ -22,6 +22,11 @@ test('Should list users as JSON', (t) => {
   );
   cli.stdout.on('data', (chunk) => {
     t.equal(JSON.parse(chunk.toString()).length, 3);
+  });
+  cli.stderr.on('data', (msg) => {
+    t.fail(msg)
+  });
+  cli.stdout.on('end', () => {
     t.end();
   });
 });
