@@ -2,7 +2,7 @@ FROM node:16
 
 ENV CONFIG_FILE=/app/config.json
 
-COPY dist/ docker_entrypoint.sh /app
+COPY dist/ docker_entrypoint.sh package.json /app
 
 WORKDIR /app
 

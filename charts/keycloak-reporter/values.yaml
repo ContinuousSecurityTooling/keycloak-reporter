@@ -41,13 +41,16 @@ keycloak:
     url: ''
     clientId: ''
     clientSecret: ''
+    output: 'webhook'
+    webhookType: ''
+    webhookUrl: ''
 
 cronjobs:
   - name: clients
-    script: /app/index.js listClients $KEYCLOAK_URL $KEYCLOAK_CLIENT_ID $KEYCLOAK_CLIENT_SECRET --format=csv
+    script: /app/index.js listClients
     schedule: 0 0 1 */3 *
   - name: users
-    script: /app/index.js listUsers $KEYCLOAK_URL $KEYCLOAK_CLIENT_ID $KEYCLOAK_CLIENT_SECRET --format=csv
+    script: /app/index.js listUsers
     schedule: 0 0 1 */3 *
 
 resources: {}
