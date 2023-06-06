@@ -21,11 +21,9 @@ test('Should use config file', { timeout: 3000 }, (t) => {
   cli.stdout.on('data', (chunk) => {
     console.log(chunk.toString())
     t.equal(JSON.parse(chunk.toString()).length, 24);
+    t.end();
   });
   cli.stderr.on('data', (msg) => {
     t.fail(msg)
-  });
-  cli.stdout.on('end', () => {
-    t.end();
   });
 });
