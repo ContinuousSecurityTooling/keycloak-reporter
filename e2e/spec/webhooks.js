@@ -24,7 +24,7 @@ test('Should post message to Teams',  { timeout: 3000 }, (t) => {
     }
   );
   cli.stdout.on('data', (chunk) => {
-    console.log(chunk.toString())
+    console.log(chunk.toString());
   });
   cli.stderr.on('data', (msg) => {
     t.fail(msg)

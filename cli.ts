@@ -49,6 +49,7 @@ async function convert(
         );
       } catch (e) {
         console.error('Error during sending webhook: ', e);
+        throw e;
       }
       break;
     // defaulting to standard out
