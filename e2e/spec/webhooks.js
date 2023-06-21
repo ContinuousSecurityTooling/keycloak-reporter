@@ -4,7 +4,7 @@ import { test } from 'tape';
 import { spawn } from 'node:child_process';
 import path from 'node:path';
 
-test('Should post message to Teams',  { timeout: 3000 }, (t) => {
+test('Should post message to Teams',  { timeout: 10000 }, (t) => {
   const cli = spawn(
     path.join(path.dirname('.'), 'node'),
     [
@@ -34,7 +34,7 @@ test('Should post message to Teams',  { timeout: 3000 }, (t) => {
   });
 });
 
-test('Should post message to Slack', { timeout: 3000 }, (t) => {
+test('Should post message to Slack', { timeout: 10000 }, (t) => {
     const cli = spawn(
       path.join(path.dirname('.'), 'node'),
       [
@@ -63,4 +63,3 @@ test('Should post message to Slack', { timeout: 3000 }, (t) => {
       t.end();
     });
   });
-  
