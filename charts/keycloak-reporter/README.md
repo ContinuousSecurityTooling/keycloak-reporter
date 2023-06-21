@@ -1,6 +1,6 @@
 # keycloak-reporter
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.16.0](https://img.shields.io/badge/AppVersion-1.16.0-informational?style=flat-square)
+![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.2.0](https://img.shields.io/badge/AppVersion-0.2.0-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -11,10 +11,10 @@ A Helm chart for Kubernetes
 | affinity | object | `{}` |  |
 | cronjobs[0].name | string | `"clients"` |  |
 | cronjobs[0].schedule | string | `"0 0 1 */3 *"` |  |
-| cronjobs[0].script | string | `"/app/index.js listClients $KEYCLOAK_URL $KEYCLOAK_CLIENT_ID $KEYCLOAK_CLIENT_SECRET --format=csv"` |  |
+| cronjobs[0].script | string | `"/app/index.js listClients"` |  |
 | cronjobs[1].name | string | `"users"` |  |
 | cronjobs[1].schedule | string | `"0 0 1 */3 *"` |  |
-| cronjobs[1].script | string | `"/app/index.js listUsers $KEYCLOAK_URL $KEYCLOAK_CLIENT_ID $KEYCLOAK_CLIENT_SECRET --format=csv"` |  |
+| cronjobs[1].script | string | `"/app/index.js listUsers"` |  |
 | fullnameOverride | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"continuoussecuritytooling/keycloak-reporting-cli"` |  |
@@ -22,7 +22,11 @@ A Helm chart for Kubernetes
 | imagePullSecrets | list | `[]` |  |
 | keycloak.config.clientId | string | `""` |  |
 | keycloak.config.clientSecret | string | `""` |  |
+| keycloak.config.output | string | `"webhook"` |  |
 | keycloak.config.url | string | `""` |  |
+| keycloak.config.webhookType | string | `""` |  |
+| keycloak.config.webhookUrl | string | `""` |  |
+| keycloak.volumes.reports | string | `""` |  |
 | nameOverride | string | `""` |  |
 | nodeSelector | object | `{}` |  |
 | podAnnotations | object | `{}` |  |

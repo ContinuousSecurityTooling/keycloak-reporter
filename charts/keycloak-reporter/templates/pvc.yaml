@@ -1,0 +1,14 @@
+{{- if (.Values.keycloak.config.volumes).reports }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ $fullName }}-reports
+  annotations: {{ .Values.keycloak.config.volumes.reports.annotations }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: {{ .Values.keycloak.config.volumes.reports.storageClassName }}
+  resources:
+    requests:
+      storage: {{ .Values.keycloak.config.volumes.reports.volumeSize }}
+{{- end }}

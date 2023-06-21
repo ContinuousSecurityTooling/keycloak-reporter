@@ -52,6 +52,10 @@
     "webhookUrl": {
       "type": "string",
       "description": "URL of the webhook"
+    },
+    "reports": {
+      "type": "string",
+      "description": "Reports directory"
     }
   }
 }

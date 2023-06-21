@@ -33,6 +33,8 @@ spec:
                 - name: config-file
                   mountPath: "/app/config.json"
                   readOnly: true
+                - name: reports-dir
+                  mountPath: "/app/reports"
           restartPolicy: OnFailure
           {{- if $.Values.resources }}
           resources:
@@ -50,5 +52,10 @@ spec:
           - name: config-file
             secret:
               secretName: {{ $fullName }}
+          {{- if (.Values.keycloak.config.volumes).reports }}
+          - name: reports-dir
+            persistentVolumeClaim:
+              claimName: {{ $fullName }}-reports
+          {{- end }}
 ---
 {{- end -}}

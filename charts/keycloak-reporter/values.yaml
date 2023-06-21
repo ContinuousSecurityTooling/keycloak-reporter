@@ -44,6 +44,8 @@ keycloak:
     output: 'webhook'
     webhookType: ''
     webhookUrl: ''
+  volumes:
+    reports: ''
 
 cronjobs:
   - name: clients

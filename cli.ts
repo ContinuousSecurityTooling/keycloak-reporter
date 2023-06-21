@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+import { writeFileSync } from 'node:fs';
+import path from 'path';
 import yargs from 'yargs/yargs';
 import { hideBin } from 'yargs/helpers';
 import {
@@ -23,9 +25,15 @@ class WebhookConfig {
   }
 }
 
+class ReportConfig {
+  name: string;
+  directory: string;
+}
+
 async function convert(
   format: string,
   output: string,
+  reports: ReportConfig,
   config: WebhookConfig,
   json: object
 ) {
@@ -37,6 +45,10 @@ async function convert(
     // defaulting to JSON
     default:
       outputContent = JSON.stringify(json);
+  }
+  if (reports.directory) {
+    const date = new Date();
+    writeFileSync(path.join(`${reports.directory}`,`${reports.name}_${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}.${format.toLowerCase()}`), outputContent);
   }
   switch (output) {
     case 'webhook':
@@ -73,6 +85,10 @@ yargs(hideBin(process.argv))
       await convert(
         argv.format as string,
         argv.output as string,
+        {
+          name: 'user_listing',
+          directory: argv.reports as string,
+        },
         new WebhookConfig(
           argv.webhookType as string,
           argv.webhookUrl as string,
@@ -96,6 +112,10 @@ yargs(hideBin(process.argv))
       await convert(
         argv.format as string,
         argv.output as string,
+        {
+          name: 'client_listing',
+          directory: argv.reports as string,
+        },
         new WebhookConfig(
           argv.webhookType as string,
           argv.webhookUrl as string,
@@ -127,5 +147,10 @@ yargs(hideBin(process.argv))
     alias: 't',
     type: 'string',
     description: 'Webhook URL',
+  })
+  .option('reports', {
+    alias: 'r',
+    type: 'string',
+    description: 'Reports directory',
   })
   .parse();
