@@ -15,6 +15,7 @@ A Helm chart for Kubernetes
 | cronjobs[1].name | string | `"users"` |  |
 | cronjobs[1].schedule | string | `"0 0 1 */3 *"` |  |
 | cronjobs[1].script | string | `"/app/index.js listUsers"` |  |
+| env | object | `{}` |  |
 | fullnameOverride | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"continuoussecuritytooling/keycloak-reporting-cli"` |  |

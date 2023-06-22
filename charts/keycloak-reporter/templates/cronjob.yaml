@@ -29,6 +29,9 @@ spec:
               env:
                 - name: CONFIG_FILE
                   value: "/app/config.json"
+              {{- with .Values.env }}
+              {{- tpl (toYaml .) $  | nindent 12 }}
+              {{- end }}
               volumeMounts:
                 - name: config-file
                   mountPath: "/app/config.json"
