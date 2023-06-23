@@ -1,3 +1,4 @@
+{{- $fullName := include "keycloak-reporter.fullname" . -}}
 {{- if (.Values.keycloak.config.volumes).reports }}
 apiVersion: v1
 kind: PersistentVolumeClaim
