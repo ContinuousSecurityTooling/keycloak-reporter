@@ -40,14 +40,14 @@ env: {}
 
 keycloak:
   config:
-    url: ''
-    clientId: ''
-    clientSecret: ''
-    output: 'webhook'
-    webhookType: ''
-    webhookUrl: ''
+    url: ""
+    clientId: ""
+    clientSecret: ""
+    output: "webhook"
+    webhookType: ""
+    webhookUrl: ""
   volumes:
-    reports: ''
+    reports: ""
 
 cronjobs:
   - name: clients
