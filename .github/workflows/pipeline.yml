@@ -19,7 +19,7 @@ jobs:
           - macOS-latest
           - windows-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: "Use Node.js ${{ matrix.node_version }}"
         uses: actions/setup-node@v3
         with:
@@ -36,7 +36,7 @@ jobs:
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -94,7 +94,7 @@ jobs:
         os:
           - ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: "Use Node.js ${{ matrix.node_version }}"
         uses: actions/setup-node@v3
         with:
@@ -122,7 +122,7 @@ jobs:
     needs:
       - end2end
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
       # TODO: Support Node 16+
         with:
