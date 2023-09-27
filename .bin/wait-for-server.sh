@@ -7,6 +7,7 @@ until $(curl --output /dev/null --silent --head --fail http://localhost:8080/rea
     sleep 5
     if [[ "$counter" -gt 24 ]]; then
         printf "Keycloak server failed to start. Timeout!"
+        curl --head --fail http://localhost:8080/realms/master/.well-known/openid-configuration
         exit 1
     fi
     counter=$((counter + 1))
