@@ -87,9 +87,7 @@ jobs:
     strategy:
       matrix:
         node_version:
-          - 16
-          # TODO: Support Node 16+
-          #- 18
+          - 18
           #- 20
         os:
           - ubuntu-latest
