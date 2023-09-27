@@ -49,6 +49,10 @@
       },
       "description": "Type of webhook"
     },
+    "webhookMessage": {
+      "type": "string",
+      "description": "Message added to the webhook post"
+    },
     "webhookUrl": {
       "type": "string",
       "description": "URL of the webhook"

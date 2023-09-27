@@ -16,7 +16,8 @@ export async function post2Webhook(
   type: string,
   url: string,
   title: string,
-  reportContent: string
+  reportContent: string,
+  text?: string,
 ): Promise<unknown> {
   //const title= 'Keycloak Reporting';
   const date = new Date();
@@ -46,6 +47,11 @@ export async function post2Webhook(
                       }-${date.getFullYear()}`,
                     },
                   ],
+                },
+                {
+                  type: 'TextBlock',
+                  text: text!=null ? text : '',
+                  wrap: true,
                 },
               ],
               actions: [
@@ -85,6 +91,13 @@ export async function post2Webhook(
                 }-${date.getFullYear()}`,
               },
             ],
+          },
+          {
+            type: 'divider',
+          },
+          {
+            type: 'context',
+            elements: [{ type: 'plain_text', text:  text!=null ? text : ''}],
           },
           {
             type: 'divider',

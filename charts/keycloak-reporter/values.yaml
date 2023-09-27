@@ -46,6 +46,8 @@ keycloak:
     output: "webhook"
     webhookType: ""
     webhookUrl: ""
+    # -- optional message for the webhook post
+    webhookMessage: ""
   volumes:
     reports: ""
 

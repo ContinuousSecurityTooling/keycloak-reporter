@@ -18,10 +18,12 @@ class WebhookConfig {
   type: string;
   url: string;
   title: string;
-  constructor(type: string, url: string, title: string) {
+  message?: string;
+  constructor(type: string, url: string, title: string, message?: string) {
     this.type = type;
     this.url = url;
     this.title = title;
+    this.message = message;
   }
 }
 
@@ -57,7 +59,8 @@ async function convert(
           config.type,
           config.url,
           config.title,
-          outputContent
+          outputContent,
+          config.message,
         );
       } catch (e) {
         console.error('Error during sending webhook: ', e);
@@ -92,7 +95,8 @@ yargs(hideBin(process.argv))
         new WebhookConfig(
           argv.webhookType as string,
           argv.webhookUrl as string,
-          'User Listing'
+          'User Listing',
+          argv.webhookMessage ? argv.webhookMessage as string: config.webhookMessage
         ),
         users
       );
@@ -119,7 +123,8 @@ yargs(hideBin(process.argv))
         new WebhookConfig(
           argv.webhookType as string,
           argv.webhookUrl as string,
-          'Client Listing'
+          'Client Listing',
+          argv.webhookMessage ? argv.webhookMessage as string: config.webhookMessage
         ),
         clients
       );
@@ -142,6 +147,11 @@ yargs(hideBin(process.argv))
     type: 'string',
     default: 'slack',
     description: 'Webhook Type',
+  })
+  .option('webhookMessage', {
+    alias: 'm',
+    type: 'string',
+    description: 'Webhook Message',
   })
   .option('webhookUrl', {
     alias: 't',

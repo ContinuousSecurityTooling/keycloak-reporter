@@ -1,8 +1,14 @@
 # keycloak-reporter
 
-![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.2.0](https://img.shields.io/badge/AppVersion-0.2.0-informational?style=flat-square)
+![Version: 0.4.1](https://img.shields.io/badge/Version-0.4.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.2.0](https://img.shields.io/badge/AppVersion-0.2.0-informational?style=flat-square)
 
 A Helm chart for Kubernetes
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| hypery2k | <martin@m13t.de> |  |
 
 ## Values
 
@@ -25,6 +31,7 @@ A Helm chart for Kubernetes
 | keycloak.config.clientSecret | string | `""` |  |
 | keycloak.config.output | string | `"webhook"` |  |
 | keycloak.config.url | string | `""` |  |
+| keycloak.config.webhookMessage | string | `""` | optional message for the webhook post |
 | keycloak.config.webhookType | string | `""` |  |
 | keycloak.config.webhookUrl | string | `""` |  |
 | keycloak.volumes.reports | string | `""` |  |
