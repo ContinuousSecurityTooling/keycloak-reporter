@@ -11,7 +11,6 @@ jobs:
     strategy:
       matrix:
         node_version:
-          - 16
           - 18
           - 20
         os:
@@ -81,14 +80,11 @@ jobs:
   end2end:
     name: "End2End Test on Node ${{ matrix.node_version }} and ${{ matrix.os }}"
     runs-on: "${{ matrix.os }}"
-    needs:
-      - build
-      - chart
     strategy:
       matrix:
         node_version:
           - 18
-          #- 20
+          - 20
         os:
           - ubuntu-latest
     steps:
@@ -97,10 +93,17 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "${{ matrix.node_version }}"
+      - name: Install Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin' # See 'Supported distributions' for available options
+          java-version: '17'
       - name: npm build and test
         run: |
           npm run clean
           npm run build
+      - name: Tune GitHub-hosted runner network
+        uses: smorimoto/tune-github-hosted-runner-network@v1
 
       - name: Start Keycloak server
         run: npm run end2end:start-server &
