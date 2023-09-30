@@ -2,13 +2,13 @@
 module.exports = {
   env: {
     node: true,
-    commonjs: true,
+    commonjs: true
   },
   extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
   root: true,
   rules: {
-    quotes: [2, 'single', { avoidEscape: true }],
-  },
+    quotes: [2, 'single', { avoidEscape: true }]
+  }
 };
