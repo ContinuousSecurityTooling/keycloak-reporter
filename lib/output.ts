@@ -1,10 +1,10 @@
 import { IncomingWebhook as TeamsWebhook } from 'ms-teams-webhook';
-import { Block, SectionBlock } from '@slack/types';
+import { Block, ContextBlock, SectionBlock } from '@slack/types';
 import { IncomingWebhook as SlackWebhook } from '@slack/webhook';
 
 enum WebhookType {
   SLACK = 'slack',
-  TEAMS = 'teams',
+  TEAMS = 'teams'
 }
 
 export interface WebhookMessage {
@@ -17,7 +17,7 @@ export async function post2Webhook(
   url: string,
   title: string,
   reportContent: string,
-  text?: string,
+  text?: string
 ): Promise<unknown> {
   //const title= 'Keycloak Reporting';
   const date = new Date();
@@ -38,21 +38,21 @@ export async function post2Webhook(
                   facts: [
                     {
                       title: 'Type',
-                      value: title,
+                      value: title
                     },
                     {
                       title: 'Date',
                       value: `${date.getDate()}-${
                         date.getMonth() + 1
-                      }-${date.getFullYear()}`,
-                    },
-                  ],
+                      }-${date.getFullYear()}`
+                    }
+                  ]
                 },
                 {
                   type: 'TextBlock',
-                  text: text!=null ? text : '',
-                  wrap: true,
-                },
+                  text: text != null ? text : '',
+                  wrap: true
+                }
               ],
               actions: [
                 {
@@ -64,62 +64,68 @@ export async function post2Webhook(
                       {
                         type: 'TextBlock',
                         text: reportContent,
-                        wrap: true,
-                      },
+                        wrap: true
+                      }
                     ],
                     $schema:
-                      'http://adaptivecards.io/schemas/adaptive-card.json',
-                  },
-                },
-              ],
-            },
-          },
-        ],
+                      'http://adaptivecards.io/schemas/adaptive-card.json'
+                  }
+                }
+              ]
+            }
+          }
+        ]
       });
     // defaulting to Slack
     default:
-      return new SlackWebhook(url).send({
-        blocks: [
-          {
-            type: 'section',
-            fields: [
-              { type: 'mrkdwn', text: `*Type*: ${title}` },
-              {
-                type: 'mrkdwn',
-                text: `*Date*: ${date.getDate()}-${
-                  date.getMonth() + 1
-                }-${date.getFullYear()}`,
-              },
-            ],
-          },
-          {
-            type: 'divider',
-          },
-          {
-            type: 'context',
-            elements: [{ type: 'plain_text', text:  text!=null ? text : ''}],
-          },
-          {
-            type: 'divider',
-          },
-          {
-            type: 'context',
-            elements: [
-              {
-                type: 'mrkdwn',
-                text: `
+      // eslint-disable-next-line no-case-declarations
+      const blockEntries: Array<Block | ContextBlock | SectionBlock> = [
+        {
+          type: 'section',
+          fields: [
+            { type: 'mrkdwn', text: `*Type*: ${title}` },
+            {
+              type: 'mrkdwn',
+              text: `*Date*: ${date.getDate()}-${
+                date.getMonth() + 1
+              }-${date.getFullYear()}`
+            }
+          ]
+        },
+        {
+          type: 'divider'
+        }
+      ];
+      if (text != null) {
+        blockEntries.push({
+          type: 'context',
+          elements: [{ type: 'plain_text', text: text }]
+        });
+        blockEntries.push({
+          type: 'divider'
+        });
+      }
+      blockEntries.push(
+        {
+          type: 'context',
+          elements: [
+            {
+              type: 'mrkdwn',
+              text: `
 \`\`\`
 ${reportContent}
 \`\`\`
 `
-              },
-            ],
-          },
-          {
-            type: 'context',
-            elements: [{ type: 'plain_text', text: 'Raw report data' }],
-          },
-        ],
+            }
+          ]
+        },
+        {
+          type: 'context',
+          elements: [{ type: 'plain_text', text: 'Raw report data' }]
+        }
+      );
+      return new SlackWebhook(url).send({
+        blocks: blockEntries
       });
   }
 }
