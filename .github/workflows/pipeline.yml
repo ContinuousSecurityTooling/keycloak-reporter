@@ -110,17 +110,12 @@ jobs:
       - name: Wait for Keycloak server
         run: .bin/wait-for-server.sh
 
-      - name: Extract branch name
-        id: extract_branch
-        shell: bash
-        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
-
       - name: Run end2end tests
         run: npm run end2end:test
         env:
           WEBHOOK_TESTING_TEAMS: ${{ secrets.WEBHOOK_TESTING_TEAMS }}
           WEBHOOK_TESTING_SLACK: ${{ secrets.WEBHOOK_TESTING_SLACK }}
-          WEBHOOK_ADDITIONAL_MESSAGE: ${{ steps.extract_branch.outputs.branch }}
+          WEBHOOK_ADDITIONAL_MESSAGE: ${{ github.ref }}
 
   package:
     name: Build Container Image
