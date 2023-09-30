@@ -56,6 +56,14 @@ Valid commands are:
 
 ## Advanced
 
+### Helm
+
+To install the Helm Chart use the OCI Package:
+
+```
+helm install keycloak-reporter oci://cloudtooling/helm-charts
+```
+
 ### Config file
 
 You can also provider a config file via env var `CONFIG_FILE` and then just provide the commands, e.g.:
