@@ -9,10 +9,9 @@ import {
   listClients,
   Options,
   convertJSON2CSV,
-  post2Webhook,
+  post2Webhook
 } from './index.js';
 import config from './src/config.js';
-
 
 class WebhookConfig {
   type: string;
@@ -50,7 +49,15 @@ async function convert(
   }
   if (reports.directory) {
     const date = new Date();
-    writeFileSync(path.join(`${reports.directory}`,`${reports.name}_${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}.${format.toLowerCase()}`), outputContent);
+    writeFileSync(
+      path.join(
+        `${reports.directory}`,
+        `${reports.name}_${date.getFullYear()}-${
+          date.getMonth() + 1
+        }-${date.getDate()}.${format.toLowerCase()}`
+      ),
+      outputContent
+    );
   }
   switch (output) {
     case 'webhook':
@@ -60,11 +67,23 @@ async function convert(
           config.url,
           config.title,
           outputContent,
-          config.message,
+          config.message
         );
       } catch (e) {
-        console.error('Error during sending webhook: ', e);
-        throw e;
+        switch (e.code || e.message) {
+          case 'Request failed with status code 400':
+            console.error('Invalid Teams Webhook Payload. Check your params.');
+            throw new Error('Invalid Teams Payload');
+          case 'slack_webhook_http_error':
+            console.error('Invalid Slack Webhook Payload. Check your params.');
+            throw new Error('Invalid Slack Payload');
+          default:
+            console.error(
+              `Error during sending webhook.(${e?.code})`,
+              e?.original
+            );
+            throw e;
+        }
       }
       break;
     // defaulting to standard out
@@ -81,22 +100,26 @@ yargs(hideBin(process.argv))
     () => {},
     async (argv) => {
       const users = await listUsers(<Options>{
-        clientId: argv.clientId ? argv.clientId as string: config.clientId,
-        clientSecret: argv.clientSecret ? argv.clientSecret as string: config.clientSecret,
-        rootUrl:argv.url ? argv.url as string: config.url,
+        clientId: argv.clientId ? (argv.clientId as string) : config.clientId,
+        clientSecret: argv.clientSecret
+          ? (argv.clientSecret as string)
+          : config.clientSecret,
+        rootUrl: argv.url ? (argv.url as string) : config.url
       });
       await convert(
         argv.format as string,
         argv.output as string,
         {
           name: 'user_listing',
-          directory: argv.reports as string,
+          directory: argv.reports as string
         },
         new WebhookConfig(
           argv.webhookType as string,
           argv.webhookUrl as string,
           'User Listing',
-          argv.webhookMessage ? argv.webhookMessage as string: config.webhookMessage
+          argv.webhookMessage
+            ? (argv.webhookMessage as string)
+            : config.webhookMessage
         ),
         users
       );
@@ -109,22 +132,26 @@ yargs(hideBin(process.argv))
     () => {},
     async (argv) => {
       const clients = await listClients(<Options>{
-        clientId: argv.clientId ? argv.clientId as string: config.clientId,
-        clientSecret: argv.clientSecret ? argv.clientSecret as string: config.clientSecret,
-        rootUrl:argv.url ? argv.url as string: config.url,
+        clientId: argv.clientId ? (argv.clientId as string) : config.clientId,
+        clientSecret: argv.clientSecret
+          ? (argv.clientSecret as string)
+          : config.clientSecret,
+        rootUrl: argv.url ? (argv.url as string) : config.url
       });
       await convert(
         argv.format as string,
         argv.output as string,
         {
           name: 'client_listing',
-          directory: argv.reports as string,
+          directory: argv.reports as string
         },
         new WebhookConfig(
           argv.webhookType as string,
           argv.webhookUrl as string,
           'Client Listing',
-          argv.webhookMessage ? argv.webhookMessage as string: config.webhookMessage
+          argv.webhookMessage
+            ? (argv.webhookMessage as string)
+            : config.webhookMessage
         ),
         clients
       );
@@ -134,33 +161,33 @@ yargs(hideBin(process.argv))
     alias: 'f',
     type: 'string',
     default: 'json',
-    description: 'output format, e.g. JSON|CSV',
+    description: 'output format, e.g. JSON|CSV'
   })
   .option('output', {
     alias: 'o',
     type: 'string',
     default: 'stdout',
-    description: 'output channel',
+    description: 'output channel'
   })
   .option('webhookType', {
     alias: 'w',
     type: 'string',
     default: 'slack',
-    description: 'Webhook Type',
+    description: 'Webhook Type'
   })
   .option('webhookMessage', {
     alias: 'm',
     type: 'string',
-    description: 'Webhook Message',
+    description: 'Webhook Message'
   })
   .option('webhookUrl', {
     alias: 't',
     type: 'string',
-    description: 'Webhook URL',
+    description: 'Webhook URL'
   })
   .option('reports', {
     alias: 'r',
     type: 'string',
-    description: 'Reports directory',
+    description: 'Reports directory'
   })
   .parse();
