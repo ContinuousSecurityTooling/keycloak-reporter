@@ -50,8 +50,8 @@ test(
         '--webhookType=teams',
         '--webhookUrl=' + process.env.WEBHOOK_TESTING_TEAMS,
         '--webhookMessage="' +
-          (process.env.WEBHOOK_ADDITIONAL_MESSAGE |
-            ('From Github Actions' + '"'))
+          (process.env.WEBHOOK_ADDITIONAL_MESSAGE | 'From Github Actions') +
+          '"'
       ],
       {
         env: {
@@ -87,8 +87,8 @@ test(
         '--webhookType=slack',
         '--webhookUrl=' + process.env.WEBHOOK_TESTING_SLACK,
         '--webhookMessage="' +
-          (process.env.WEBHOOK_ADDITIONAL_MESSAGE |
-            ('From Github Actions' + '"'))
+          (process.env.WEBHOOK_ADDITIONAL_MESSAGE | 'From Github Actions') +
+          '"'
       ],
       {
         env: {

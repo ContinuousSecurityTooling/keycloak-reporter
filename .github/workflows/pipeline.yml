@@ -115,7 +115,7 @@ jobs:
         env:
           WEBHOOK_TESTING_TEAMS: ${{ secrets.WEBHOOK_TESTING_TEAMS }}
           WEBHOOK_TESTING_SLACK: ${{ secrets.WEBHOOK_TESTING_SLACK }}
-          WEBHOOK_ADDITIONAL_MESSAGE: ${{ github.ref }}
+          WEBHOOK_ADDITIONAL_MESSAGE: ${{ github.ref_name }}
 
   package:
     name: Build Container Image
