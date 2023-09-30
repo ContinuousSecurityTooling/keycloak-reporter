@@ -34,7 +34,7 @@ jobs:
         uses: helm/chart-testing-action@v2.4.0
 
       - name: Run chart-testing (lint)
-        run: ct lint --target-branch
+        run: ct lint --config .ct.yaml 
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.5.0
