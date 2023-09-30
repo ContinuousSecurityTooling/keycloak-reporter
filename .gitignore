@@ -12,3 +12,9 @@ logs/
 dist
 reports
 tmp/
+
+# helm chart dependencies
+charts/*/charts/
+charts/*/Chart.lock
+# release packages
+.cr-release-packages/
