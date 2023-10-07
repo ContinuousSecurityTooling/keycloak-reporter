@@ -4,15 +4,8 @@ import { writeFileSync } from 'node:fs';
 import path from 'path';
 import yargs from 'yargs/yargs';
 import { hideBin } from 'yargs/helpers';
-import {
-  listUsers,
-  listClients,
-  Options,
-  convertJSON2CSV,
-  post2Webhook
-} from './index.js';
+import { listUsers, listClients, Options, convertJSON2CSV, post2Webhook } from './index.js';
 import config from './src/config.js';
-
 class WebhookConfig {
   type: string;
   url: string;
@@ -31,13 +24,33 @@ class ReportConfig {
   directory: string;
 }
 
-async function convert(
-  format: string,
-  output: string,
-  reports: ReportConfig,
-  config: WebhookConfig,
-  json: object
-) {
+function getKeycloakConfig(config, argv): Options {
+  return {
+    clientId: config.clientId ? config.clientId : (argv.clientId as string),
+    clientSecret: config.clientSecret ? config.clientSecret : (argv.clientSecret as string),
+    rootUrl: config.url ? config.url : (argv.url as string)
+  };
+}
+
+function convertData(config, argv, name: string, title: string, json: object) {
+  convert(
+    config.format ? config.format : (argv.format as string),
+    config.output ? config.output : (argv.output as string),
+    {
+      name,
+      directory: argv.reports ? (argv.reports as string) : config.reports
+    },
+    new WebhookConfig(
+      config.webhookType ? config.webhookType : (argv.webhookType as string),
+      config.webhookUrl ? config.webhookUrl : (argv.webhookUrl as string),
+      title,
+      config.webhookMessage ? config.webhookMessage : (argv.webhookMessage as string)
+    ),
+    json
+  );
+}
+
+async function convert(format: string, output: string, reports: ReportConfig, config: WebhookConfig, json: object) {
   let outputContent: string;
   switch (format) {
     case 'csv':
@@ -52,9 +65,7 @@ async function convert(
     writeFileSync(
       path.join(
         `${reports.directory}`,
-        `${reports.name}_${date.getFullYear()}-${
-          date.getMonth() + 1
-        }-${date.getDate()}.${format.toLowerCase()}`
+        `${reports.name}_${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}.${format.toLowerCase()}`
       ),
       outputContent
     );
@@ -63,13 +74,7 @@ async function convert(
     case 'webhook':
       try {
         console.log(`Sending report via webhook to ${config.type} ....`);
-        await post2Webhook(
-          config.type,
-          config.url,
-          config.title,
-          outputContent,
-          config.message
-        );
+        await post2Webhook(config.type, config.url, config.title, outputContent, config.message);
         console.log('Done sending.');
       } catch (e) {
         switch (e.code || e.message) {
@@ -80,10 +85,7 @@ async function convert(
             console.error('Invalid Slack Webhook Payload. Check your params.');
             throw new Error('Invalid Slack Payload');
           default:
-            console.error(
-              `Error during sending webhook.(${e?.code})`,
-              e?.original
-            );
+            console.error(`Error during sending webhook.(${e?.code})`, e?.original);
             throw e;
         }
       }
@@ -101,32 +103,8 @@ yargs(hideBin(process.argv))
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     () => {},
     async (argv) => {
-      const users = await listUsers(<Options>{
-        clientId: config.clientId ? config.clientId : (argv.clientId as string),
-        clientSecret: config.clientSecret
-          ? config.clientSecret
-          : (argv.clientSecret as string),
-        rootUrl: config.url ? config.url : (argv.url as string)
-      });
-      await convert(
-        config.format ? config.format : (argv.format as string),
-        config.output ? config.output : (argv.output as string),
-        {
-          name: 'user_listing',
-          directory: argv.reports ? (argv.reports as string) : config.reports
-        },
-        new WebhookConfig(
-          config.webhookType
-            ? config.webhookType
-            : (argv.webhookType as string),
-          config.webhookUrl ? config.webhookUrl : (argv.webhookUrl as string),
-          'User Listing',
-          config.webhookMessage
-            ? config.webhookMessage
-            : (argv.webhookMessage as string)
-        ),
-        users
-      );
+      const users = await listUsers(getKeycloakConfig(config, argv));
+      convertData(config, argv, 'user_listing', 'User Listing', users);
     }
   )
   .command(
@@ -135,32 +113,8 @@ yargs(hideBin(process.argv))
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     () => {},
     async (argv) => {
-      const clients = await listClients(<Options>{
-        clientId: config.clientId ? config.clientId : (argv.clientId as string),
-        clientSecret: config.clientSecret
-          ? config.clientSecret
-          : (argv.clientSecret as string),
-        rootUrl: config.url ? config.url : (argv.url as string)
-      });
-      await convert(
-        config.format ? config.format : (argv.format as string),
-        config.output ? config.output : (argv.output as string),
-        {
-          name: 'client_listing',
-          directory: argv.reports ? (argv.reports as string) : config.reports
-        },
-        new WebhookConfig(
-          config.webhookType
-            ? config.webhookType
-            : (argv.webhookType as string),
-          config.webhookUrl ? config.webhookUrl : (argv.webhookUrl as string),
-          'Client Listing',
-          config.webhookMessage
-            ? config.webhookMessage
-            : (argv.webhookMessage as string)
-        ),
-        clients
-      );
+      const clients = await listClients(getKeycloakConfig(config, argv));
+      convertData(config, argv, 'client_listing', 'Client Listing', clients);
     }
   )
   .option('format', {
