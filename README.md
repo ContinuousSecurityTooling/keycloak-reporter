@@ -58,7 +58,7 @@ Valid commands are:
 
 ### Helm
 
-To install the Helm Chart use the OCI Package:
+To install the Helm Chart use the [OCI Package Registry](https://github.com/orgs/CloudTooling/packages):
 
 ```
 helm install keycloak-reporter oci://cloudtooling/helm-charts
