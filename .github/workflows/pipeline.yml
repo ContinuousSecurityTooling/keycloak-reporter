@@ -4,6 +4,8 @@ on:
   pull_request:
   merge_group:
   push:
+    branches:
+      - develop
 
 jobs:
   build:
@@ -118,7 +120,7 @@ jobs:
         env:
           WEBHOOK_TESTING_TEAMS: ${{ secrets.WEBHOOK_TESTING_TEAMS }}
           WEBHOOK_TESTING_SLACK: ${{ secrets.WEBHOOK_TESTING_SLACK }}
-          WEBHOOK_ADDITIONAL_MESSAGE: ${{ github.head_ref || github.ref_name }} 
+          WEBHOOK_ADDITIONAL_MESSAGE: ${{ github.head_ref || github.ref_name }}
 
   package:
     name: Build Container Image
