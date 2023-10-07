@@ -11,15 +11,19 @@ spec:
       template:
         {{- with $.Values.podAnnotations }}
         annotations:
-          {{- toYaml $ | nindent 8 }}
+          {{- toYaml $ | nindent 10 }}
         {{- end }}
         spec:
           {{- with $.Values.imagePullSecrets }}
           imagePullSecrets:
-            {{- toYaml . | nindent 8 }}
+            {{- toYaml . | nindent 12 }}
           {{- end }}
+          # automountServiceAccountToken: false # fix KubernetesClustersShouldDisableAutomountingAPICredentialsMonitoringEffect OPA policy
+          serviceAccountName: {{ default "default" ($.Values.serviceAccount).name }}
+          securityContext:
+            {{- toYaml $.Values.podSecurityContext | nindent 12 }}
           containers:
-            - name: {{ $config.name }}
+            - name: {{ $name }}
               image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
               imagePullPolicy: {{ $.Values.image.pullPolicy }}
               command:
@@ -32,6 +36,12 @@ spec:
               {{- with $.Values.env }}
               {{- tpl (toYaml .) $  | nindent 12 }}
               {{- end }}
+              {{- if $.Values.resources }}
+              resources:
+                {{- toYaml $.Values.resources | nindent 16 }}
+              {{- end }}
+              securityContext:
+                {{- toYaml $.Values.securityContext | nindent 16 }}
               volumeMounts:
                 - name: config-file
                   mountPath: "/app/config.json"
@@ -42,17 +52,13 @@ spec:
                   mountPath: "/app/reports"
                 {{- end }}
           restartPolicy: OnFailure
-          {{- if $.Values.resources }}
-          resources:
-            {{ toYaml $.Values.resources }}
-          {{- end }}
           {{- if $.Values.nodeSelector }}
           nodeSelector:
-            {{ toYaml $.Values.nodeSelector | indent 12 }}
+            {{ toYaml $.Values.nodeSelector | nindent 12 }}
           {{- end }}
           {{- if $.Values.tolerations }}
           tolerations:
-            {{ toYaml $.Values.tolerations | indent 12 }}
+            {{ toYaml $.Values.tolerations | nindent 12 }}
           {{- end }}
           volumes:
           - name: config-file
