@@ -62,6 +62,7 @@ async function convert(
   switch (output) {
     case 'webhook':
       try {
+        console.log(`Sending report via webhook to ${config.type} ....`);
         await post2Webhook(
           config.type,
           config.url,
@@ -69,6 +70,7 @@ async function convert(
           outputContent,
           config.message
         );
+        console.log('Done sending.');
       } catch (e) {
         switch (e.code || e.message) {
           case 'Request failed with status code 400':
@@ -100,26 +102,28 @@ yargs(hideBin(process.argv))
     () => {},
     async (argv) => {
       const users = await listUsers(<Options>{
-        clientId: argv.clientId ? (argv.clientId as string) : config.clientId,
-        clientSecret: argv.clientSecret
-          ? (argv.clientSecret as string)
-          : config.clientSecret,
-        rootUrl: argv.url ? (argv.url as string) : config.url
+        clientId: config.clientId ? config.clientId : (argv.clientId as string),
+        clientSecret: config.clientSecret
+          ? config.clientSecret
+          : (argv.clientSecret as string),
+        rootUrl: config.url ? config.url : (argv.url as string)
       });
       await convert(
-        argv.format as string,
-        argv.output as string,
+        config.format ? config.format : (argv.format as string),
+        config.output ? config.output : (argv.output as string),
         {
           name: 'user_listing',
-          directory: argv.reports as string
+          directory: argv.reports ? (argv.reports as string) : config.reports
         },
         new WebhookConfig(
-          argv.webhookType as string,
-          argv.webhookUrl as string,
+          config.webhookType
+            ? config.webhookType
+            : (argv.webhookType as string),
+          config.webhookUrl ? config.webhookUrl : (argv.webhookUrl as string),
           'User Listing',
-          argv.webhookMessage
-            ? (argv.webhookMessage as string)
-            : config.webhookMessage
+          config.webhookMessage
+            ? config.webhookMessage
+            : (argv.webhookMessage as string)
         ),
         users
       );
@@ -132,26 +136,28 @@ yargs(hideBin(process.argv))
     () => {},
     async (argv) => {
       const clients = await listClients(<Options>{
-        clientId: argv.clientId ? (argv.clientId as string) : config.clientId,
-        clientSecret: argv.clientSecret
-          ? (argv.clientSecret as string)
-          : config.clientSecret,
-        rootUrl: argv.url ? (argv.url as string) : config.url
+        clientId: config.clientId ? config.clientId : (argv.clientId as string),
+        clientSecret: config.clientSecret
+          ? config.clientSecret
+          : (argv.clientSecret as string),
+        rootUrl: config.url ? config.url : (argv.url as string)
       });
       await convert(
-        argv.format as string,
-        argv.output as string,
+        config.format ? config.format : (argv.format as string),
+        config.output ? config.output : (argv.output as string),
         {
           name: 'client_listing',
-          directory: argv.reports as string
+          directory: argv.reports ? (argv.reports as string) : config.reports
         },
         new WebhookConfig(
-          argv.webhookType as string,
-          argv.webhookUrl as string,
+          config.webhookType
+            ? config.webhookType
+            : (argv.webhookType as string),
+          config.webhookUrl ? config.webhookUrl : (argv.webhookUrl as string),
           'Client Listing',
-          argv.webhookMessage
-            ? (argv.webhookMessage as string)
-            : config.webhookMessage
+          config.webhookMessage
+            ? config.webhookMessage
+            : (argv.webhookMessage as string)
         ),
         clients
       );
