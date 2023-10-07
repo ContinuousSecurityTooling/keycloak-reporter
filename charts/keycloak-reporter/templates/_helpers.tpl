@@ -60,3 +60,24 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+}
+
+{{/*
+Create the name of the service account to use
+*/}}
+{{- define "keycloak-reporter.cronJobs" -}}
+{{- if .Values.cronjobs.users }}
+users: 
+  script: "listUsers"
+  schedule: {{ .Values.cronjobs.users }}
+{{- end }}
+{{- if .Values.cronjobs.clients }}
+clients: 
+  script: "listClients"
+  schedule: {{ .Values.cronjobs.clients }}
+{{- end }}
+{{- end -}}
+
+
+

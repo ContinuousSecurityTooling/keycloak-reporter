@@ -1,17 +1,17 @@
-{{- $fullName := include "keycloak-reporter.fullname" . -}}
-{{- range .Values.cronjobs }}
+{{- $fullName := include "keycloak-reporter.fullname" . }}
+{{- range $name, $config := include "keycloak-reporter.cronJobs" $ | fromYaml }}
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ printf "%s-job-%s" $fullName .name }}
+  name: {{ printf "%s-job-%s" $fullName $name }}
 spec:
-  schedule: "{{ .schedule }}"
+  schedule: {{ $config.schedule }}
   jobTemplate:
     spec:
       template:
         {{- with $.Values.podAnnotations }}
         annotations:
-          {{- toYaml . | nindent 8 }}
+          {{- toYaml $ | nindent 8 }}
         {{- end }}
         spec:
           {{- with $.Values.imagePullSecrets }}
@@ -19,13 +19,13 @@ spec:
             {{- toYaml . | nindent 8 }}
           {{- end }}
           containers:
-            - name: {{ .name }}
+            - name: {{ $config.name }}
               image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
               imagePullPolicy: {{ $.Values.image.pullPolicy }}
               command:
-                - /bin/sh
-                - -c
-                - {{ .script }}
+                - node
+                - /app/cli.js 
+                - {{ $config.script }}
               env:
                 - name: CONFIG_FILE
                   value: "/app/config.json"
@@ -35,6 +35,7 @@ spec:
               volumeMounts:
                 - name: config-file
                   mountPath: "/app/config.json"
+                  subPath: "config.json"
                   readOnly: true
                 {{- if ($.Values.keycloak.config.volumes).reports }}
                 - name: reports-dir
