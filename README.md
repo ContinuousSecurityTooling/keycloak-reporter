@@ -1,5 +1,6 @@
 # Keycloak Reporter
 
+Keycloak user and client reporting tool for automated regular access checks.
 
 [![License](https://img.shields.io/github/license/ContinuousSecurityTooling/keycloak-reporter.svg)](LICENSE)
 [![CI](https://github.com/ContinuousSecurityTooling/keycloak-reporter/actions/workflows/pipeline.yml/badge.svg)](https://github.com/ContinuousSecurityTooling/keycloak-reporter/actions/workflows/pipeline.yml)

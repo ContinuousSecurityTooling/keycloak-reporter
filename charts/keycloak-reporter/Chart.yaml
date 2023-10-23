@@ -1,6 +1,6 @@
 apiVersion: v2
 name: keycloak-reporter
-description: A Helm chart for Kubernetes
+description: Keycloak user and client reporting tool for automated regular access checks.
 
 # A chart can be either an 'application' or a 'library' chart.
 #
