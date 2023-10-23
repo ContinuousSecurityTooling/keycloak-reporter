@@ -11,6 +11,11 @@ WORKDIR /app
 RUN cd /app && npm install --omit=dev &&\
     chown -R 1000:2000 /app
 
+# apt update
+RUN apt-get update && apt-get -y upgrade &&\
+  # clean up to slim image
+  apt-get clean autoclean && apt-get autoremove --yes && rm -rf /var/lib/{apt,dpkg,cache,log}/
+
 USER 1000
 
 ENTRYPOINT ["/app/docker_entrypoint.sh"]
