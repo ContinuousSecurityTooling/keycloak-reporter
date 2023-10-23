@@ -7,8 +7,8 @@
 [![npm downloads](https://img.shields.io/npm/dm/@continuoussecuritytooling%2Fkeycloak-reporter.svg)](https://www.npmjs.com/package/@continuoussecuritytooling/keycloak-reporter)
 [![Docker Stars](https://img.shields.io/docker/stars/continuoussecuritytooling/keycloak-reporting-cli.svg)](https://hub.docker.com/r/continuoussecuritytooling/keycloak-reporting-cli/)
 [![Known Vulnerabilities](https://snyk.io/test/github/ContinuousSecurityTooling/keycloak-reporter/badge.svg)](https://snyk.io/test/github/ContinuousSecurityTooling/keycloak-reporter)
-
 [![Docker Stars](https://img.shields.io/docker/stars/continuoussecuritytooling/keycloak-reporting-cli.svg)](https://hub.docker.com/r/continuoussecuritytooling/keycloak-reporting-cli/)
+[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/keycloak-reporter)](https://artifacthub.io/packages/search?repo=keycloak-reporter)
 
 ## Usage
 
@@ -61,7 +61,7 @@ Valid commands are:
 To install the Helm Chart use the [OCI Package Registry](https://github.com/orgs/CloudTooling/packages):
 
 ```
-helm install keycloak-reporter oci://cloudtooling/helm-charts
+helm install keycloak-reporter oci://ghcr.io/cloudtooling/helm-charts
 ```
 
 ### Config file
