@@ -27,3 +27,9 @@ maintainers:
   # Martin Reinhardt
   - name: hypery2k
     email: martin@m13t.de
+annotations:
+  artifacthub.io/links: |
+      - name: GitHub
+        url: https://github.com/ContinuousSecurityTooling/keycloak-reporter
+      - name: Keycloak Auditor
+        url: https://github.com/ContinuousSecurityTooling/keycloak-auditor
