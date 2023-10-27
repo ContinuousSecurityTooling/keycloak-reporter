@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/ContinuousSecurityTooling/keycloak-reporter#readme",
   "dependencies": {
+    "@continuoussecuritytooling/keycloak-auditor": "^1.1.0",
     "@json2csv/node": "^7.0.0",
     "@keycloak/keycloak-admin-client": "^22.0.0",
     "@slack/webhook": "^7.0.0",

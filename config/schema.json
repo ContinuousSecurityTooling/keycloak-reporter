@@ -60,6 +60,11 @@
     "reports": {
       "type": "string",
       "description": "Reports directory"
+    },
+    "useAuditingEndpoint": {
+      "type": "boolean",
+      "default": "false",
+      "description": "Enable usage of keycloak reporter auditing endpoint"
     }
   }
 }

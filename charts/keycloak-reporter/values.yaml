@@ -52,6 +52,7 @@ keycloak:
     output: 'webhook'
     webhookType: ''
     webhookUrl: ''
+    useAuditingEndpoint: false
     # -- optional message for the webhook post
     webhookMessage: ''
   volumes:
