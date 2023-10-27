@@ -139,16 +139,18 @@ jobs:
         run: |
           npm run clean
           npm run build
-      - name: Buildah Action
+
+      - name: Build Container Image
         id: build-image
         uses: redhat-actions/buildah-build@v2
         with:
           image: continuoussecuritytooling/keycloak-reporting-cli
-          tags: 'v1 ${{ github.sha }}'
+          tags: 'rc_build ${{ github.sha }}'
           containerfiles: |
             ./Dockerfile
+
       - name: Push To Docker Hub
-        id: push-to-dockerhub
+        id: push-to-dockerhub-preview
         uses: redhat-actions/push-to-registry@v2
         with:
           image: ${{ steps.build-image.outputs.image }}
@@ -156,4 +158,33 @@ jobs:
           registry: registry.hub.docker.com
           username: continuoussecuritytooling
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
-        if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/develop'
+
+      - name: Write release version
+        run: |
+          VERSION=${GITHUB_REF_NAME#v}
+          echo Version: $VERSION
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          if: github.ref_type == 'tag'
+
+      - name: Push To Docker Hub
+        id: push-to-dockerhub-tagged
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build-image.outputs.image }}
+          tags: ${VERSION}
+          registry: registry.hub.docker.com
+          username: continuoussecuritytooling
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+        if: github.ref_type == 'tag'
+
+      - name: Push To Docker Hub
+        id: push-to-dockerhub
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build-image.outputs.image }}
+          tags: latest
+          registry: registry.hub.docker.com
+          username: continuoussecuritytooling
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+        if: github.ref == 'refs/heads/main'
