@@ -142,6 +142,15 @@ jobs:
           npm run clean
           npm run build
 
+      - name: Write version vars
+        run: |
+          BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
+          VERSION=${GITHUB_REF_NAME#v}
+          echo Version: $VERSION
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "APP_VERSION=$VERSION" >> $GITHUB_ENV
+          echo "BUILD_DATE=$BUILD_DATE" >> $GITHUB_ENV
+
       - name: Build Container Image
         id: build-image
         uses: redhat-actions/buildah-build@v2
@@ -161,16 +170,6 @@ jobs:
           username: continuoussecuritytooling
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
         if: github.ref == 'refs/heads/develop'
-
-      - name: Write version vars
-        run: |
-          BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
-          VERSION=${GITHUB_REF_NAME#v}
-          echo Version: $VERSION
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
-          echo "APP_VERSION=$VERSION" >> $GITHUB_ENV
-          echo "BUILD_DATE=$BUILD_DATE" >> $GITHUB_ENV
-          if: github.ref_type == 'tag'
 
       - name: Push To Docker Hub
         id: push-to-dockerhub-tagged
