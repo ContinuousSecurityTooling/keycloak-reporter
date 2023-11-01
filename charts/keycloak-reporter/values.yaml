@@ -8,8 +8,7 @@ image:
   repository: continuoussecuritytooling/keycloak-reporting-cli
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  # renovate: datasource=github-tags depName=ContinuousSecurityTooling/keycloak-reporter
-  tag: "0.6.0"
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ''
