@@ -29,7 +29,9 @@ function getKeycloakConfig(config, argv): Options {
     clientId: config.clientId ? config.clientId : (argv.clientId as string),
     clientSecret: config.clientSecret ? config.clientSecret : (argv.clientSecret as string),
     rootUrl: config.url ? config.url : (argv.url as string),
-    useAuditingEndpoint: config.useAuditingEndpoint ? config.useAuditingEndpoint : (argv.useAuditingEndpoint as boolean),
+    useAuditingEndpoint: config.useAuditingEndpoint
+      ? config.useAuditingEndpoint
+      : (argv.useAuditingEndpoint as boolean),
   };
 }
 
@@ -39,7 +41,7 @@ function convertData(config, argv, name: string, title: string, json: object) {
     config.output ? config.output : (argv.output as string),
     {
       name,
-      directory: argv.reports ? (argv.reports as string) : config.reports
+      directory: argv.reports ? (argv.reports as string) : config.reports,
     },
     new WebhookConfig(
       config.webhookType ? config.webhookType : (argv.webhookType as string),
@@ -73,6 +75,10 @@ async function convert(format: string, output: string, reports: ReportConfig, co
   }
   switch (output) {
     case 'webhook':
+      if (!config.url) {
+        console.error('No valid Webhook URL given');
+        throw new Error('Please provide a valid --webhookUrl parameter');
+      }
       try {
         console.log(`Sending report via webhook to ${config.type} ....`);
         await post2Webhook(config.type, config.url, config.title, outputContent, config.message);
@@ -122,38 +128,38 @@ yargs(hideBin(process.argv))
     alias: 'f',
     type: 'string',
     default: 'json',
-    description: 'output format, e.g. JSON|CSV'
+    description: 'output format, e.g. JSON|CSV',
   })
   .option('output', {
     alias: 'o',
     type: 'string',
     default: 'stdout',
-    description: 'output channel'
+    description: 'output channel',
   })
   .option('webhookType', {
     alias: 'w',
     type: 'string',
     default: 'slack',
-    description: 'Webhook Type'
+    description: 'Webhook Type',
   })
   .option('webhookMessage', {
     alias: 'm',
     type: 'string',
-    description: 'Webhook Message'
+    description: 'Webhook Message',
   })
   .option('webhookUrl', {
     alias: 't',
     type: 'string',
-    description: 'Webhook URL'
+    description: 'Webhook URL',
   })
   .option('reports', {
     alias: 'r',
     type: 'string',
-    description: 'Reports directory'
+    description: 'Reports directory',
   })
   .option('useAuditingEndpoint', {
     alias: 'a',
     type: 'boolean',
-    description: 'Reports directory'
+    description: 'Reports directory',
   })
   .parse();
