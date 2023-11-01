@@ -159,6 +159,9 @@ jobs:
           tags: 'rc_build ${{ github.sha }}'
           containerfiles: |
             ./Dockerfile
+          build-args: |
+            BUILD_DATE=$BUILD_DATE
+            APP_VERSION=$APP_VERSION
 
       - name: Push To Docker Hub
         id: push-to-dockerhub-preview
