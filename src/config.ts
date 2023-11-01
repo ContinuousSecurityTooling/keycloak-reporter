@@ -50,13 +50,6 @@ function buildEnvironmentVariablesConfig(schema) {
     }
   }, {});
 }
-
-function validate(data) {
-  const valid = ajvValidate(data);
-  if (valid) return true;
-  throw new Error(ajv.errorsText());
-}
-
 // merge the environment variables, config file values, and defaults
 const config = mergeAll(
   mergeDeepRight(
