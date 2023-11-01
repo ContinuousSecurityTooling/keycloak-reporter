@@ -29,9 +29,7 @@ function getKeycloakConfig(config, argv): Options {
     clientId: config.clientId ? config.clientId : (argv.clientId as string),
     clientSecret: config.clientSecret ? config.clientSecret : (argv.clientSecret as string),
     rootUrl: config.url ? config.url : (argv.url as string),
-    useAuditingEndpoint: config.useAuditingEndpoint
-      ? config.useAuditingEndpoint
-      : (argv.useAuditingEndpoint as boolean),
+    useAuditingEndpoint: argv.useAuditingEndpoint == true || config.useAuditingEndpoint.toLowerCase() == 'true',
   };
 }
 
@@ -160,6 +158,7 @@ yargs(hideBin(process.argv))
   .option('useAuditingEndpoint', {
     alias: 'a',
     type: 'boolean',
-    description: 'Reports directory',
+    default: false,
+    description: 'use auditior rest endpoint',
   })
   .parse();

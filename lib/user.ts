@@ -63,7 +63,8 @@ export async function clientListing(
       realmName: currentRealm,
     });
   } else {
-    for (const user of await client.clientListing()) {
+    const clients = await client.clientListing();
+    for (const user of clients) {
       allClients.push({
         client: user.clientId,
         id: user.id,
@@ -117,7 +118,8 @@ export async function userListing(
       realmName: currentRealm,
     });
   } else {
-    for (const user of await client.userListing()) {
+    const users = await client.userListing();
+    for (const user of users) {
       allUsers.push({
         username: user.username,
         id: user.id,
