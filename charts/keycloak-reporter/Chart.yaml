@@ -21,8 +21,8 @@ version: 1.1.0
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
-# renovate: datasource=github-tags depName=ContinuousSecurityTooling/keycloak-reporter
-appVersion: '0.6.0'
+# renovate: datasource=docker depName=ContinuousSecurityTooling/keycloak-reporter
+appVersion: '0.7.0'
 maintainers:
   # Martin Reinhardt
   - name: hypery2k
