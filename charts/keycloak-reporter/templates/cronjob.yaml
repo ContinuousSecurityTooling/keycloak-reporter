@@ -18,7 +18,6 @@ spec:
           imagePullSecrets:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          # automountServiceAccountToken: false # fix KubernetesClustersShouldDisableAutomountingAPICredentialsMonitoringEffect OPA policy
           serviceAccountName: {{ default "default" ($.Values.serviceAccount).name }}
           securityContext:
             {{- toYaml $.Values.podSecurityContext | nindent 12 }}
@@ -28,7 +27,7 @@ spec:
               imagePullPolicy: {{ $.Values.image.pullPolicy }}
               command:
                 - node
-                - /app/cli.js 
+                - /app/cli.js
                 - {{ $config.script }}
               env:
                 - name: CONFIG_FILE
