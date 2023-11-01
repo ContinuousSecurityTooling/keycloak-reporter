@@ -1,0 +1,57 @@
+{{- $fullName := include "keycloak-reporter.fullname" . }}
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ printf "%s-test-connection" $fullName }}
+  annotations:
+    helm.sh/hook: test
+    helm.sh/hook-delete-policy: "hook-succeeded,before-hook-creation"
+    helm.sh/hook-weight: "5"
+spec:
+  containers:
+    - name: config-test
+      image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
+      imagePullPolicy: {{ $.Values.image.pullPolicy }}
+      command:
+        - node
+        - /app/cli.js
+        - configTest
+      env:
+        - name: CONFIG_FILE
+          value: "/app/config.json"
+      {{- with $.Values.env }}
+      {{- tpl (toYaml .) $  | nindent 12 }}
+      {{- end }}
+      {{- if $.Values.resources }}
+      resources:
+        {{- toYaml $.Values.resources | nindent 16 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml $.Values.securityContext | nindent 16 }}
+      volumeMounts:
+        - name: config-file
+          mountPath: "/app/config.json"
+          subPath: "config.json"
+          readOnly: true
+        {{- if ($.Values.keycloak.config.volumes).reports }}
+        - name: reports-dir
+          mountPath: "/app/reports"
+        {{- end }}
+    {{- if $.Values.nodeSelector }}
+  nodeSelector:
+    {{ toYaml $.Values.nodeSelector | nindent 12 }}
+  {{- end }}
+  {{- if $.Values.tolerations }}
+  tolerations:
+    {{ toYaml $.Values.tolerations | nindent 12 }}
+  {{- end }}
+  volumes:
+  - name: config-file
+    secret:
+      secretName: {{ $fullName }}
+  {{- if ($.Values.keycloak.config.volumes).reports }}
+  - name: reports-dir
+    persistentVolumeClaim:
+      claimName: {{ $fullName }}-reports
+  {{- end }}
+  restartPolicy: Never

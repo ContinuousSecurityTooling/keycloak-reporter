@@ -25,3 +25,13 @@ export async function listClients(options: Options): Promise<Array<Client | Audi
   const clients = await clientListing(await kcClient(options));
   return new Promise((resolve) => resolve(clients));
 }
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export async function configTest(options: Options): Promise<any> {
+  try {
+    await userListing(await kcClient(options));
+    console.log(`Connection to ${options.rootUrl} was successfull`);
+  } catch (e) {
+    console.error(`Connection to ${options.rootUrl} was not: successfull`, e.response);
+    return Promise.reject(e.response.statusText);
+  }
+}

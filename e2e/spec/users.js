@@ -21,7 +21,7 @@ test('Should list users as JSON', { timeout: 3000 }, (t) => {
     }
   );
   cli.stdout.on('data', (chunk) => {
-    console.log(chunk.toString())
+    console.log('Response', JSON.parse(chunk.toString()));
     t.equal(JSON.parse(chunk.toString()).length, 3);
     t.end();
   });

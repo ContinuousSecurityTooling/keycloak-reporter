@@ -48,6 +48,7 @@ function buildEnvironmentVariablesConfig(schema) {
     }
   }, {});
 }
+
 // merge the environment variables, config file values, and defaults
 const config = mergeAll(
   mergeDeepRight(buildDefaults(schema, schema.definitions), buildConfigFromFile(process.env.CONFIG_FILE)),

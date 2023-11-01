@@ -4,7 +4,7 @@ import { writeFileSync } from 'node:fs';
 import path from 'path';
 import yargs from 'yargs/yargs';
 import { hideBin } from 'yargs/helpers';
-import { listUsers, listClients, Options, convertJSON2CSV, post2Webhook } from './index.js';
+import { configTest, listUsers, listClients, Options, convertJSON2CSV, post2Webhook } from './index.js';
 import config from './src/config.js';
 class WebhookConfig {
   type: string;
@@ -161,4 +161,11 @@ yargs(hideBin(process.argv))
     default: false,
     description: 'use auditior rest endpoint',
   })
+  .command(
+    'configTest [url] [clientId] [clientSecret]',
+    'validates keycloak configuration by reading data via REST API',
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    () => {},
+    async (argv) => configTest(getKeycloakConfig(config, argv)),
+  )
   .parse();
