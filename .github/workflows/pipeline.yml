@@ -160,8 +160,8 @@ jobs:
           containerfiles: |
             ./Dockerfile
           build-args: |
-            BUILD_DATE=$BUILD_DATE
-            APP_VERSION=$APP_VERSION
+            BUILD_DATE=${{env.BUILD_DATE}}
+            APP_VERSION=${{env.APP_VERSION}}
 
       - name: Push To Docker Hub
         id: push-to-dockerhub-preview
