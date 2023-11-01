@@ -6,6 +6,8 @@ on:
   push:
     branches:
       - develop
+    tags:
+      - '*'
 
 jobs:
   build:
@@ -160,11 +162,14 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
         if: github.ref == 'refs/heads/develop'
 
-      - name: Write release version
+      - name: Write version vars
         run: |
+          BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
           VERSION=${GITHUB_REF_NAME#v}
           echo Version: $VERSION
           echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "APP_VERSION=$VERSION" >> $GITHUB_ENV
+          echo "BUILD_DATE=$BUILD_DATE" >> $GITHUB_ENV
           if: github.ref_type == 'tag'
 
       - name: Push To Docker Hub
@@ -172,19 +177,8 @@ jobs:
         uses: redhat-actions/push-to-registry@v2
         with:
           image: ${{ steps.build-image.outputs.image }}
-          tags: ${VERSION}
+          tags: latest ${VERSION}
           registry: registry.hub.docker.com
           username: continuoussecuritytooling
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
         if: github.ref_type == 'tag'
-
-      - name: Push To Docker Hub
-        id: push-to-dockerhub
-        uses: redhat-actions/push-to-registry@v2
-        with:
-          image: ${{ steps.build-image.outputs.image }}
-          tags: latest
-          registry: registry.hub.docker.com
-          username: continuoussecuritytooling
-          password: ${{ secrets.DOCKER_HUB_TOKEN }}
-        if: github.ref == 'refs/heads/main'

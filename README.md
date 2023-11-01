@@ -9,7 +9,7 @@ Keycloak user and client reporting tool for automated regular access checks.
 [![Docker Stars](https://img.shields.io/docker/stars/continuoussecuritytooling/keycloak-reporting-cli.svg)](https://hub.docker.com/r/continuoussecuritytooling/keycloak-reporting-cli/)
 [![Known Vulnerabilities](https://snyk.io/test/github/ContinuousSecurityTooling/keycloak-reporter/badge.svg)](https://snyk.io/test/github/ContinuousSecurityTooling/keycloak-reporter)
 [![Docker Stars](https://img.shields.io/docker/stars/continuoussecuritytooling/keycloak-reporting-cli.svg)](https://hub.docker.com/r/continuoussecuritytooling/keycloak-reporting-cli/)
-[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/keycloak-reporter)](https://artifacthub.io/packages/search?repo=keycloak-reporter)
+[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/keycloak-reporter)](https://artifacthub.io/packages/helm/keycloak-reporter/keycloak-reporter)
 
 ## Usage
 
