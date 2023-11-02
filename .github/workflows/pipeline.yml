@@ -156,7 +156,7 @@ jobs:
         uses: redhat-actions/buildah-build@v2
         with:
           image: continuoussecuritytooling/keycloak-reporting-cli
-          tags: 'rc_build ${{ github.sha }}'
+          tags: 'next ${{env.APP_VERSION}}_rc'
           containerfiles: |
             ./Dockerfile
           build-args: |
@@ -179,7 +179,7 @@ jobs:
         uses: redhat-actions/push-to-registry@v2
         with:
           image: ${{ steps.build-image.outputs.image }}
-          tags: latest ${{env.APP_VERSION}}
+          tags: 'latest ${{env.APP_VERSION}}'
           registry: registry.hub.docker.com
           username: continuoussecuritytooling
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
