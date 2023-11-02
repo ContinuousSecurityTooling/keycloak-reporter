@@ -1,3 +1,7 @@
+# [0.7.0](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.6.0...v0.7.0) (2023-11-02)
+
+
+
 # [0.6.0](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/4c13fa0642d75b8e229091aca052a83fa8c7eb32...v0.6.0) (2023-11-01)
 
 
