@@ -1,4 +1,5 @@
-FROM node:18
+# renovate: datasource=docker depName=
+FROM node:20
 
 ARG BUILD_DATE
 ARG APP_VERSION
