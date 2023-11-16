@@ -148,10 +148,11 @@ jobs:
       - name: Write version vars
         run: |
           BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
-          VERSION=${GITHUB_REF_NAME#v}
-          echo Version: $VERSION
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
-          echo "APP_VERSION=$VERSION" >> $GITHUB_ENV
+          BRANCH=${GITHUB_REF_NAME#v}
+          APP_VERSION=$(cat package.json | grep version| head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g')
+          echo Version: $APP_VERSION
+          echo "VERSION=$APP_VERSION" >> $GITHUB_ENV
+          echo "APP_VERSION=$APP_VERSION" >> $GITHUB_ENV
           echo "BUILD_DATE=$BUILD_DATE" >> $GITHUB_ENV
 
       - name: Build Container Image
