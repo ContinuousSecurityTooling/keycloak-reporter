@@ -187,4 +187,4 @@ jobs:
           registry: registry.hub.docker.com
           username: continuoussecuritytooling
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
-        if: github.ref_type == 'tag'
+        if: github.ref_type == 'tag' || github.tag != '' 
