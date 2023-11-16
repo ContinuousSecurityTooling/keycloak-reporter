@@ -31,13 +31,13 @@ jobs:
           python-version: '3.9'
           check-latest: true
       - name: Set up chart-testing
-        uses: helm/chart-testing-action@v2.6.0
+        uses: helm/chart-testing-action@v2.6.1
 
       - name: Run chart-testing (lint)
-        run: ct lint --config .ct.yaml 
+        run: ct lint --config .ct.yaml
 
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.5.0
+        uses: helm/chart-releaser-action@v1.6.0
         with:
           charts_dir: charts/
         env:
@@ -49,6 +49,7 @@ jobs:
 
       - name: Push Charts to GHCR
         run: |
+          cd  charts/
           for pkg in .cr-release-packages/*; do
             if [ -z "${pkg:-}" ]; then
               break

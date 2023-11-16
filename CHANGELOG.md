@@ -1,3 +1,23 @@
+## [0.7.1](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.7.0...v0.7.1) (2023-11-16)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @continuoussecuritytooling/keycloak-auditor to v1.1.1 ([4fb7c58](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/4fb7c5801f8d5519d6c7132eabd29976e640cff3))
+* **deps:** update dependency @slack/webhook to v7.0.1 ([1c46ccf](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/1c46ccf7f9a91c4fc85464ddfe9aea8f8e588801))
+* **deps:** update dependency npm to v10.2.3 ([a42ac5c](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/a42ac5c5df195d5e9b15595bb377261f53acca03))
+
+
+### Features
+
+* Using NodeJS 20 as default ([ba468cf](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/ba468cfa7e17615a38ea5ea7e81c859e1f734f67))
+
+
+
+# [0.7.0](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.6.0...v0.7.0) (2023-11-02)
+
+
+
 # [0.6.0](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/4c13fa0642d75b8e229091aca052a83fa8c7eb32...v0.6.0) (2023-11-01)
 
 
@@ -54,6 +74,3 @@
 * **Users:** Adding user and client listing functionality ([4c13fa0](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/4c13fa0642d75b8e229091aca052a83fa8c7eb32))
 * **Webhook:** Allow custom text for message ([1707e24](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/1707e249c1c9c4c22b1510c767470a2670a4b33b))
 * **Webhooks:** Adding Support for Teams and Slack ([66da168](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/66da168d2cd234ebc6dd961cfe62a3c8191c0ccc)), closes [#2](https://github.com/ContinuousSecurityTooling/keycloak-reporter/issues/2)
-
-
-

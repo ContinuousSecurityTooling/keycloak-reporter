@@ -18,6 +18,7 @@ jobs:
         node_version:
           - 18
           - 20
+          - 21
         os:
           - ubuntu-latest
           - macOS-latest
@@ -55,7 +56,7 @@ jobs:
           check-latest: true
 
       - name: Helm Chart Testing
-        uses: helm/chart-testing-action@v2.6.0
+        uses: helm/chart-testing-action@v2.6.1
 
       - name: Run chart-testing (list-changed)
         id: list-changed
@@ -89,6 +90,8 @@ jobs:
       matrix:
         node_version:
           - 18
+          - 20
+          - 21
         os:
           - ubuntu-latest
     steps:
@@ -136,7 +139,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           # renovate: datasource=docker depName=node
-          node-version: '18'
+          node-version: '20'
       - name: 'Build Package'
         run: |
           npm run clean
@@ -145,10 +148,11 @@ jobs:
       - name: Write version vars
         run: |
           BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
-          VERSION=${GITHUB_REF_NAME#v}
-          echo Version: $VERSION
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
-          echo "APP_VERSION=$VERSION" >> $GITHUB_ENV
+          BRANCH=${GITHUB_REF_NAME#v}
+          APP_VERSION=$(cat package.json | grep version| head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g')
+          echo Version: $APP_VERSION
+          echo "VERSION=$APP_VERSION" >> $GITHUB_ENV
+          echo "APP_VERSION=$APP_VERSION" >> $GITHUB_ENV
           echo "BUILD_DATE=$BUILD_DATE" >> $GITHUB_ENV
 
       - name: Build Container Image
@@ -156,7 +160,7 @@ jobs:
         uses: redhat-actions/buildah-build@v2
         with:
           image: continuoussecuritytooling/keycloak-reporting-cli
-          tags: 'next ${{env.APP_VERSION}}_rc'
+          tags: 'latest next ${{env.APP_VERSION}} ${{env.APP_VERSION}}_rc'
           containerfiles: |
             ./Dockerfile
           build-args: |
@@ -168,7 +172,7 @@ jobs:
         uses: redhat-actions/push-to-registry@v2
         with:
           image: ${{ steps.build-image.outputs.image }}
-          tags: ${{ steps.build-image.outputs.tags }}
+          tags: 'next ${{env.APP_VERSION}}_rc'
           registry: registry.hub.docker.com
           username: continuoussecuritytooling
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
