@@ -1,4 +1,3 @@
-# renovate: datasource=docker depName=
 FROM node:20
 
 ARG BUILD_DATE
