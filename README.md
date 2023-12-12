@@ -65,6 +65,9 @@ To install the Helm Chart use the [OCI Package Registry](https://github.com/orgs
 helm install keycloak-reporter oci://ghcr.io/cloudtooling/helm-charts
 ```
 
+>**NOTE**
+>Keep in mind, that you need a client/service account in keycloak with the appropriate rights. You can use this [template](.docs/realm-config.json) to deploy with [keycloak-config-cli](https://github.com/adorsys/keycloak-config-cli) a service account.
+
 ### Config file
 
 You can also provider a config file via env var `CONFIG_FILE` and then just provide the commands, e.g.:
