@@ -1,4 +1,5 @@
 import { assoc, pick, mergeAll, mergeDeepRight } from 'ramda';
+import Ajv from 'ajv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
@@ -6,6 +7,9 @@ import fs from 'fs';
 const schema = JSON.parse(
   fs.readFileSync(fileURLToPath(path.join(import.meta.url, '../../config/schema.json')), 'utf8')
 );
+
+const ajv = new Ajv.default();
+const ajvValidate = ajv.compile(schema);
 
 // import the config file
 function buildConfigFromFile(filePath) {
@@ -49,10 +53,19 @@ function buildEnvironmentVariablesConfig(schema) {
   }, {});
 }
 
+function validate(data) {
+  const valid = ajvValidate(data);
+  console.log(valid);
+  if (valid) return true;
+  throw new Error(ajv.errorsText());
+}
+
 // merge the environment variables, config file values, and defaults
 const config = mergeAll(
   mergeDeepRight(buildDefaults(schema, schema.definitions), buildConfigFromFile(process.env.CONFIG_FILE)),
   buildEnvironmentVariablesConfig(schema)
 );
+
+validate(config);
 
 export default config;
