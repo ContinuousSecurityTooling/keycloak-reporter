@@ -22,7 +22,7 @@ version: 1.2.0
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
 # renovate: datasource=docker depName=ContinuousSecurityTooling/keycloak-reporter
-appVersion: '0.7.3'
+appVersion: '0.8.0'
 maintainers:
   # Martin Reinhardt
   - name: hypery2k
