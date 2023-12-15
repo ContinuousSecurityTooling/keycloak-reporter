@@ -1,3 +1,11 @@
+## [0.8.2](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.8.1...v0.8.2) (2023-12-15)
+
+
+### Bug Fixes
+
+* Fix GitHub pipeline
+
+
 ## [0.8.1](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.8.0...v0.8.1) (2023-12-15)
 
 
