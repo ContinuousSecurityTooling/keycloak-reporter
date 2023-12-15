@@ -1,3 +1,13 @@
+## [0.8.1](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.8.0...v0.8.1) (2023-12-15)
+
+
+### Bug Fixes
+
+* **Config:** Allow env overwrites ([37e07b7](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/37e07b71595b9f52509e207c3ccb9e6d526b6320))
+* **Helm:** Correcting invalid indent ([80f4859](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/80f485946384aedaa6bfce25178f928b3fb1b96a))
+
+
+
 # [0.8.0](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.7.2...v0.8.0) (2023-12-14)
 
 ### Features
@@ -13,7 +23,6 @@
 * **deps:** update dependency @keycloak/keycloak-admin-client to v23.0.1 ([babdf78](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/babdf78ce6b0f2736ce6703cb83338e37066639b))
 * **deps:** update dependency npm to v10.2.4 ([8529acf](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/8529acf82bf8ea1581c7510783087ba5d8d45dde))
 * **deps:** update dependency npm to v10.2.5 ([52a3c8b](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/52a3c8b48cbf0ee0d795aa00a9af36291025ae05))
-
 
 
 ## [0.7.2](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.7.1...v0.7.2) (2023-11-16)
@@ -101,3 +110,6 @@
 * **Users:** Adding user and client listing functionality ([4c13fa0](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/4c13fa0642d75b8e229091aca052a83fa8c7eb32))
 * **Webhook:** Allow custom text for message ([1707e24](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/1707e249c1c9c4c22b1510c767470a2670a4b33b))
 * **Webhooks:** Adding Support for Teams and Slack ([66da168](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/66da168d2cd234ebc6dd961cfe62a3c8191c0ccc)), closes [#2](https://github.com/ContinuousSecurityTooling/keycloak-reporter/issues/2)
+
+
+
