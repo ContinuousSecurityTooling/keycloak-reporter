@@ -132,7 +132,7 @@ jobs:
           WEBHOOK_ADDITIONAL_MESSAGE: ${{ github.head_ref || github.ref_name }}
 
   package:
-    name: Build Container Image
+    name: Package Application
     runs-on: ubuntu-latest
     needs:
       - build
@@ -177,8 +177,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
         run: |
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-          (cd core && npm i && npm publish)
-          (cd cli && npm i && npm publish)
+          npm publish
         if: github.ref_type == 'tag' || github.tag != ''
 
       - name: Push To Docker Hub
