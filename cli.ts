@@ -102,6 +102,7 @@ async function convert(format: string, output: string, reports: ReportConfig, co
 }
 
 yargs(hideBin(process.argv))
+  .env()
   .command(
     'listUsers [url] [clientId] [clientSecret]',
     'fetches all users in the realms.',
