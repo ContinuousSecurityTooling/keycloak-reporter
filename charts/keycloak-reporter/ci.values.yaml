@@ -1,0 +1,13 @@
+env:
+  - name: CLIENT_ID
+    value: "clientId"
+  - name: CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        key: clientSecret
+        name: kc-reporter
+keycloak:
+  config:
+    url: http://localhost:8080
+    webhookType: test
+    webhookUrl: http://localhost:8888

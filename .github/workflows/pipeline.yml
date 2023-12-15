@@ -74,9 +74,13 @@ jobs:
         if: steps.list-changed.outputs.changed == 'true'
         uses: helm/kind-action@v1.8.0
 
-      - name: Run chart-testing (install)
+      - name: Run chart-testing (install - no further args)
         if: steps.list-changed.outputs.changed == 'true'
-        run: ct install --target-branch ${{ github.event.repository.default_branch }} --helm-extra-set-args "--set 'keycloak.config.url=http://localhost:8080' --set 'keycloak.config.url=http://localhost:8080' --set 'keycloak.config.clientId=clientId' --set 'keycloak.config.clientSecret=clientSecret' --set 'keycloak.config.webhookType=test' --set 'keycloak.config.webhookUrl=http://localhost:8888'"
+        run: ct install --target-branch ${{ github.event.repository.default_branch }} --helm-extra-set-args "--set 'keycloak.config.url=http://localhost:8080' --set 'keycloak.config.url=http://localhost:8080' --set 'keycloak.config.clientId=clientId' --set 'keycloak.config.clientSecret=clientSecret'"
+
+      - name: Run chart-testing (install - with args)
+        if: steps.list-changed.outputs.changed == 'true'
+        run: ct install --target-branch ${{ github.event.repository.default_branch }} --helm-extra-set-args "-f charts/keycloak-reporter/ci.values.yaml"
 
       - uses: actions/upload-artifact@v4
         with:

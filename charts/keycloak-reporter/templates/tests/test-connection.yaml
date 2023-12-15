@@ -20,14 +20,14 @@ spec:
         - name: CONFIG_FILE
           value: "/app/config.json"
       {{- with $.Values.env }}
-      {{- tpl (toYaml .) $  | nindent 12 }}
+      {{- tpl (toYaml .) $  | nindent 8 }}
       {{- end }}
       {{- if $.Values.resources }}
       resources:
-        {{- toYaml $.Values.resources | nindent 16 }}
+        {{- toYaml $.Values.resources | nindent 10 }}
       {{- end }}
       securityContext:
-        {{- toYaml $.Values.securityContext | nindent 16 }}
+        {{- toYaml $.Values.securityContext | nindent 10 }}
       volumeMounts:
         - name: config-file
           mountPath: "/app/config.json"
@@ -39,11 +39,11 @@ spec:
         {{- end }}
     {{- if $.Values.nodeSelector }}
   nodeSelector:
-    {{ toYaml $.Values.nodeSelector | nindent 12 }}
+    {{ toYaml $.Values.nodeSelector | nindent 4 }}
   {{- end }}
   {{- if $.Values.tolerations }}
   tolerations:
-    {{ toYaml $.Values.tolerations | nindent 12 }}
+    {{ toYaml $.Values.tolerations | nindent 4 }}
   {{- end }}
   volumes:
   - name: config-file
