@@ -167,6 +167,16 @@ jobs:
             BUILD_DATE=${{env.BUILD_DATE}}
             APP_VERSION=${{env.APP_VERSION}}
 
+      - name: Push To NPM Registry
+        id: push-to-npm-tagged
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
+          (cd core && npm i && npm publish)
+          (cd cli && npm i && npm publish)
+        if: github.ref_type == 'tag' || github.tag != ''
+
       - name: Push To Docker Hub
         id: push-to-dockerhub-preview
         uses: redhat-actions/push-to-registry@v2
@@ -187,4 +197,4 @@ jobs:
           registry: registry.hub.docker.com
           username: continuoussecuritytooling
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
-        if: github.ref_type == 'tag' || github.tag != '' 
+        if: github.ref_type == 'tag' || github.tag != ''
