@@ -1,31 +1,4 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "labels": ["dependencies"],
-  "extends": ["config:base", ":dependencyDashboard", ":rebaseStalePrs"],
-  "automergeSchedule": ["after 5am and before 5pm every weekday"],
-  "separateMinorPatch": true,
-  "platformAutomerge": true,
-  "packageRules": [
-    {
-      "description": "Automatically merge minor and patch-level updates",
-      "matchUpdateTypes": ["minor", "patch", "digest"],
-      "automerge": true,
-      "automergeType": "branch"
-    }
-  ],
-  "regexManagers": [
-    {
-      "description": "Update image variables in YAML files",
-      "fileMatch": ["\\.y[a]?ml$", "\\.y[a]?ml\\.tpl$"],
-      "matchStrings": [
-        "# renovate: datasource=(?<datasource>[a-z-]+?) depName=(?<depName>[^\\s]+?)(?: (lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[^\\s]+?))?\\s.+?_version: (?<currentValue>.+?)\\s",
-        "# renovate: datasource=(?<datasource>[a-z-]+?) depName=(?<depName>[^\\s]+?)(?: (lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[^\\s]+?))?\\s.+?-version: (?<currentValue>.+?)\\s",
-        "# renovate: datasource=(?<datasource>[a-z-]+?) depName=(?<depName>[^\\s]+?)(?: (lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[^\\s]+?))?\\simage: (?<currentValue>.+?)\\s",
-        "# renovate: datasource=(?<datasource>[a-z-]+?) depName=(?<depName>.+?) versioning=(?<versioning>.+?)\\s\\s*image: (?<currentValue>.*)",
-        "# renovate: datasource=(?<datasource>[a-z-]+?) depName=(?<depName>.+?) \\s\\s*image: (?<currentValue>.*)"
-      ],
-      "extractVersionTemplate": "{{#if extractVersion}}{{{extractVersion}}}{{else}}^v?(?<version>.+)${{/if}}"
-    }
-  ],
-  "prHourlyLimit": 10
+  "extends": ["github>ContinuousSecurityTooling/renovate-config"]
 }
