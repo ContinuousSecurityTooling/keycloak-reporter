@@ -1,9 +1,21 @@
-## [0.8.2](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.8.1...v0.8.2) (2023-12-15)
+## [0.8.3](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.8.2...v0.8.3) (2024-01-26)
 
 
 ### Bug Fixes
 
-* Fix GitHub pipeline
+* **deps:** update dependency @continuoussecuritytooling/keycloak-auditor to v1.1.5 ([003b858](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/003b858aa36c34900fabe166ab318cd6d08399fe))
+* **deps:** update dependency @json2csv/node to v7.0.5 ([a391e73](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/a391e73b10c0b89b2ab47b96967e7432cf1821a9))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v23.0.3 ([e349e5b](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/e349e5b291b133ee3c781be5237f13cd48c87b30))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v23.0.4 ([025eca3](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/025eca33069909a2897f28f52c948fb7a0aef039))
+* **deps:** update dependency @slack/webhook to v7.0.2 ([0a3519a](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/0a3519ade828f9c05b963adf894c7ee22b2c6edd))
+* **deps:** update dependency npm to v10.3.0 ([371d62b](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/371d62bcedc0aea9b878d1432642e9a5c4cfadf9))
+* **deps:** update dependency openid-client to v5.6.2 ([26809d4](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/26809d4b8d2154bf3f38bb5d004d0d59f754ed7d))
+* **deps:** update dependency openid-client to v5.6.4 ([cf2e15f](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/cf2e15f3bb85a70157acc2807947320dac5059f6))
+
+
+
+## [0.8.2](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.8.1...v0.8.2) (2023-12-15)
+
 
 
 ## [0.8.1](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.8.0...v0.8.1) (2023-12-15)
@@ -18,9 +30,6 @@
 
 # [0.8.0](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.7.2...v0.8.0) (2023-12-14)
 
-### Features
-
-* **Config:** Adding config validation and helm test hook ([c29e945](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/c29e945567b4dfcdc9a10e710efa2b1a8c00f970))
 
 ### Bug Fixes
 
@@ -31,6 +40,12 @@
 * **deps:** update dependency @keycloak/keycloak-admin-client to v23.0.1 ([babdf78](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/babdf78ce6b0f2736ce6703cb83338e37066639b))
 * **deps:** update dependency npm to v10.2.4 ([8529acf](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/8529acf82bf8ea1581c7510783087ba5d8d45dde))
 * **deps:** update dependency npm to v10.2.5 ([52a3c8b](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/52a3c8b48cbf0ee0d795aa00a9af36291025ae05))
+
+
+### Features
+
+* **Config:** Adding config validation and helm test hook ([c29e945](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/c29e945567b4dfcdc9a10e710efa2b1a8c00f970))
+
 
 
 ## [0.7.2](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.7.1...v0.7.2) (2023-11-16)
