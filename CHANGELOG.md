@@ -1,3 +1,12 @@
+## [0.8.6](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.8.5...v0.8.6) (2024-01-29)
+
+
+### Bug Fixes
+
+* **Error-Handling:** Correcting error handling and improve error messages ([25f0ceb](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/25f0ceb241446205939b606c4022dc286cc5a965)), closes [#184](https://github.com/ContinuousSecurityTooling/keycloak-reporter/issues/184)
+
+
+
 ## [0.8.5](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.8.4...v0.8.5) (2024-01-29)
 
 
