@@ -1,6 +1,13 @@
-## [0.8.4](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.8.2...v0.8.4) (2024-01-26)
+## [0.8.5](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.8.4...v0.8.5) (2024-01-29)
 
-## [0.8.3](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.8.3...v0.8.4) (2024-01-26)
+
+### Bug Fixes
+
+* **Config:** Correcting TypeError on empty defaults ([c15a76a](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/c15a76ade89cea682d56085c1bd789df67dc81e8))
+
+
+
+## [0.8.4](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/0.8.4...v0.8.4) (2024-01-26)
 
 
 ### Bug Fixes
