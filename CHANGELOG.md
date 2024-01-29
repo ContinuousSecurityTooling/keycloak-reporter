@@ -1,3 +1,12 @@
+## [0.8.7](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.8.6...v0.8.7) (2024-01-29)
+
+
+### Bug Fixes
+
+* **Tests:** Correcting test assertions ([1619fb6](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/1619fb6663a68cbbe5daf07a6dcbb786eac77818))
+
+
+
 ## [0.8.6](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.8.5...v0.8.6) (2024-01-29)
 
 
