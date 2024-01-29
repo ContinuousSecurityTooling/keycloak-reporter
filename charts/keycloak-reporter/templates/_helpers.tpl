@@ -33,6 +33,16 @@ Create chart name and version as used by the chart label.
 {{/*
 Common labels
 */}}
+{{- define "keycloak-reporter.annotations" -}}
+net.cst.kc-reporter/config-checksum: {{ include (print $.Template.BasePath "/secret.yaml") $ | sha256sum }}
+{{- range $k, $v := .Values.podAnnotations }}
+{{ $k }}: {{ $v | quote }}
+{{- end }}
+{{- end }}
+
+{{/*
+Common labels
+*/}}
 {{- define "keycloak-reporter.labels" -}}
 helm.sh/chart: {{ include "keycloak-reporter.chart" . }}
 {{ include "keycloak-reporter.selectorLabels" . }}
@@ -40,6 +50,9 @@ helm.sh/chart: {{ include "keycloak-reporter.chart" . }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- range $k, $v := .Values.podLabels }}
+{{ $k }}: {{ $v | quote }}
+{{- end }}
 {{- end }}
 
 {{/*

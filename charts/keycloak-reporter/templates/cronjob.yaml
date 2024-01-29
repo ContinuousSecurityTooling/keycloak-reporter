@@ -4,19 +4,19 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: {{ printf "%s-job-%s" $fullName $name }}
+  annotations:
+    {{- include "keycloak-reporter.annotations" $ | nindent 4 }}
+  labels:
+    {{- include "keycloak-reporter.labels" $ | nindent 4 }}
 spec:
   schedule: {{ $config.schedule }}
   jobTemplate:
     spec:
       template:
-        {{- with $.Values.podAnnotations }}
         annotations:
-          {{- toYaml $ | nindent 10 }}
-        {{- end }}
-        {{- with $.Values.podLabels }}
-        label:
-          {{- toYaml $ | nindent 10 }}
-        {{- end }}
+          {{- include "keycloak-reporter.annotations" $ | nindent 8 }}
+        labels:
+          {{- include "keycloak-reporter.labels" $ | nindent 8 }}
         spec:
           {{- with $.Values.imagePullSecrets }}
           imagePullSecrets:

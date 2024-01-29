@@ -6,6 +6,11 @@ env:
       secretKeyRef:
         key: clientSecret
         name: kc-reporter
+podLabels:
+  a: "b"
+podAnnotations:
+  # see https://www.elastic.co/guide/en/beats/filebeat/current/configuration-autodiscover-hints.html
+  co.elastic.logs/enabled: "true"
 keycloak:
   config:
     url: http://localhost:8080

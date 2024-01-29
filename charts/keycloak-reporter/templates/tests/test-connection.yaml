@@ -7,13 +7,9 @@ metadata:
     helm.sh/hook: test
     helm.sh/hook-delete-policy: "hook-succeeded,before-hook-creation"
     helm.sh/hook-weight: "5"
-  {{- with $.Values.podAnnotations }}
-    {{- toYaml $ | nindent 10 }}
-  {{- end }}
-  {{- with $.Values.podLabels }}
-  label:
-    {{- toYaml $ | nindent 10 }}
-  {{- end }}
+    {{- include "keycloak-reporter.annotations" . | nindent 4 }}
+  labels:
+    {{- include "keycloak-reporter.labels" . | nindent 4 }}
 spec:
   containers:
     - name: config-test
