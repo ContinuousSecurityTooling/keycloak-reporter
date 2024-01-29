@@ -119,6 +119,9 @@ export async function userListing(
     });
   } else {
     const users = await client.userListing();
+    if ('error' in users) {
+      return new Promise((_resolve, reject) => reject(new Error('Auditing endpoint not reachable')));
+    }
     for (const user of users) {
       allUsers.push({
         username: user.username,

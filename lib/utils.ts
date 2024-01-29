@@ -55,6 +55,9 @@ export function getKeycloakConfig(config, argv): Options {
     clientId: config.clientId ? config.clientId : (argv?.clientId as string),
     clientSecret: config.clientSecret ? config.clientSecret : (argv?.clientSecret as string),
     rootUrl: config.url ? config.url : (argv?.url as string),
-    useAuditingEndpoint: argv?.useAuditingEndpoint == true || config.useAuditingEndpoint?.toLowerCase() == 'true',
+    useAuditingEndpoint:
+      'useAuditingEndpoint' in argv
+        ? String(argv.useAuditingEndpoint).toLowerCase() == 'true'
+        : String(config.useAuditingEndpoint).toLowerCase() == 'true',
   };
 }

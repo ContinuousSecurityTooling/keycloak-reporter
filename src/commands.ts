@@ -17,21 +17,19 @@ function kcClient(options: Options): Promise<KcAdminClient | AuditClient> {
 }
 
 export async function listUsers(options: Options): Promise<Array<User | AuditedUserRepresentation>> {
-  const users = await userListing(await kcClient(options));
-  return new Promise((resolve) => resolve(users));
+  return userListing(await kcClient(options));
 }
 
 export async function listClients(options: Options): Promise<Array<Client | AuditedClientRepresentation>> {
-  const clients = await clientListing(await kcClient(options));
-  return new Promise((resolve) => resolve(clients));
+  return clientListing(await kcClient(options));
 }
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export async function configTest(options: Options): Promise<any> {
+export async function configTest(options: Options) {
   try {
-    await userListing(await kcClient(options));
-    console.log(`Connection to ${options.rootUrl} was successfull`);
+    const users = await userListing(await kcClient(options));
+    console.log(`Connection to ${options.rootUrl} was successfull: ${users.length} users found.`);
   } catch (e) {
-    console.error(`Connection to ${options.rootUrl} was not: successfull`, e.response);
-    return Promise.reject(e.response.statusText);
+    console.error(`Connection to ${options.rootUrl} was not successfull`, e);
+    return;
   }
 }
