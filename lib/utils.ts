@@ -52,9 +52,9 @@ export function getConvertConfig(config, argv, name: string, title: string, json
 
 export function getKeycloakConfig(config, argv): Options {
   return {
-    clientId: config.clientId ? config.clientId : (argv.clientId as string),
-    clientSecret: config.clientSecret ? config.clientSecret : (argv.clientSecret as string),
-    rootUrl: config.url ? config.url : (argv.url as string),
-    useAuditingEndpoint: argv.useAuditingEndpoint == true || config.useAuditingEndpoint.toLowerCase() == 'true',
+    clientId: config.clientId ? config.clientId : (argv?.clientId as string),
+    clientSecret: config.clientSecret ? config.clientSecret : (argv?.clientSecret as string),
+    rootUrl: config.url ? config.url : (argv?.url as string),
+    useAuditingEndpoint: argv?.useAuditingEndpoint == true || config.useAuditingEndpoint?.toLowerCase() == 'true',
   };
 }
