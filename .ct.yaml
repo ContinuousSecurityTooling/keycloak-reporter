@@ -1,5 +1,5 @@
 chart-dirs:
-  - charts/keycloak-reporter/
+  - charts/
 debug: true
 target-branch: main
 check-version-increment: false
