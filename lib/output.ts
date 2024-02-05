@@ -19,7 +19,6 @@ export async function post2Webhook(
   reportContent: string,
   text?: string
 ): Promise<unknown> {
-  //const title= 'Keycloak Reporting';
   const date = new Date();
   switch (type) {
     case WebhookType.TEAMS.toString():
@@ -50,7 +49,7 @@ export async function post2Webhook(
                 },
                 {
                   type: 'TextBlock',
-                  text: text != null ? text : '',
+                  text: text ?? '',
                   wrap: true
                 }
               ],

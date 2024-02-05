@@ -37,7 +37,7 @@ export async function clientListing(
       realms = await client.realms.find();
     } catch (e) {
       console.error('Check Client role:', e.response.statusText);
-      return Promise.reject();
+      return Promise.reject(new Error('Client Role Error'));
     }
     for (const realm of realms) {
       // switch realm
@@ -77,7 +77,7 @@ export async function clientListing(
       });
     }
   }
-  return new Promise((resolve) => resolve(allClients));
+  return Promise.resolve(allClients);
 }
 
 export async function userListing(
@@ -92,7 +92,7 @@ export async function userListing(
       realms = await client.realms.find();
     } catch (e) {
       console.error('Check Client role:', e.response.statusText);
-      return Promise.reject();
+      return Promise.reject(new Error('Client Role Error'));
     }
     for (const realm of realms) {
       // switch realm
@@ -120,7 +120,7 @@ export async function userListing(
   } else {
     const users = await client.userListing();
     if ('error' in users) {
-      return new Promise((_resolve, reject) => reject(new Error('Auditing endpoint not reachable')));
+      return Promise.reject(new Error('Auditing endpoint not reachable'));
     }
     for (const user of users) {
       allUsers.push({
@@ -135,5 +135,5 @@ export async function userListing(
       });
     }
   }
-  return new Promise((resolve) => resolve(allUsers));
+  return Promise.resolve(allUsers);
 }
