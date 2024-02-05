@@ -1,3 +1,22 @@
+## [0.8.8](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.8.7...v0.8.8) (2024-02-05)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @keycloak/keycloak-admin-client to v23.0.5 ([d85eb6a](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/d85eb6a06607249c2f2cfa66268a19b9edc12d74))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v23.0.6 ([23b1248](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/23b1248d66272b53482ab228275c2b0c1f34f419))
+* **deps:** update dependency npm to v10.4.0 ([1b6058d](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/1b6058ddcaba382ecd31bf470e1ee99f462ecd29))
+* **Helm:** Correcting mapping issues for labels ([0fe2873](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/0fe2873594c91be59f435813174e4bacf7d1e59d))
+* **Helm:** Correcting resource limits ([1cb51b9](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/1cb51b95f83aefd0fae2d9d6d02fb5a6d24a1a42))
+* **Security:** Correcting chart security findings ([3a4bc67](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/3a4bc67bc8aaa0a1c2426a9baf58d32efca6937d))
+
+
+### Features
+
+* **Chart:** Allowing labels and annotations to be added ([f0f350b](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/f0f350bcc6deecc098743af09ab7e840179b4259))
+
+
+
 ## [0.8.7](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.8.6...v0.8.7) (2024-01-29)
 
 
