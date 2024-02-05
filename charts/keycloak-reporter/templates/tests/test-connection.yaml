@@ -11,6 +11,7 @@ metadata:
   labels:
     {{- include "keycloak-reporter.labels" . | nindent 4 }}
 spec:
+  automountServiceAccountToken: false
   containers:
     - name: config-test
       image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
@@ -31,6 +32,15 @@ spec:
       {{- end }}
       securityContext:
         {{- toYaml $.Values.securityContext | nindent 10 }}
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+          ephemeral-storage: "100Mi"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+          ephemeral-storage: "100Mi"
       volumeMounts:
         - name: config-file
           mountPath: "/app/config.json"
