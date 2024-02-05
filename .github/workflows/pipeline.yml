@@ -123,10 +123,15 @@ jobs:
       - name: Wait for Keycloak server
         run: .bin/wait-for-server.sh
 
-      - name: Run end2end tests
-        run: |
-          env
-          npm run end2end:test
+      - name: Run End2End Tests
+        uses: nick-fields/retry@v3
+        with:
+          max_attempts: 3
+          retry_on: error
+          timeout_minutes: 10
+          command: |
+            env
+            npm run end2end:test
         env:
           WEBHOOK_TESTING_TEAMS: ${{ secrets.WEBHOOK_TESTING_TEAMS }}
           WEBHOOK_TESTING_SLACK: ${{ secrets.WEBHOOK_TESTING_SLACK }}
