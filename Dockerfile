@@ -17,7 +17,7 @@ COPY dist/ docker_entrypoint.sh package.json /app
 
 WORKDIR /app
 
-RUN cd /app && npm install --omit=dev &&\
+RUN npm install --omit=dev &&\
     chown -R 1000:2000 /app
 
 # apt update
