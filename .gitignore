@@ -18,3 +18,4 @@ charts/*/charts/
 charts/*/Chart.lock
 # release packages
 .cr-release-packages/
+*.tgz
