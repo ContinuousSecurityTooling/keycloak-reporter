@@ -28,10 +28,10 @@ spec:
       {{- end }}
       {{- if $.Values.resources }}
       resources:
-        {{- toYaml $.Values.resources | nindent 10 }}
+        {{- toYaml $.Values.resources | nindent 8 }}
       {{- end }}
       securityContext:
-        {{- toYaml $.Values.securityContext | nindent 10 }}
+        {{- toYaml $.Values.securityContext | nindent 8 }}
       volumeMounts:
         - name: config-file
           mountPath: "/app/config.json"
