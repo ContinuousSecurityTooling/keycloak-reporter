@@ -92,6 +92,7 @@ jobs:
     name: 'End2End Test on Node ${{ matrix.node_version }} and ${{ matrix.os }}'
     runs-on: '${{ matrix.os }}'
     strategy:
+      fail-fast: true
       matrix:
         node_version:
           - 18
