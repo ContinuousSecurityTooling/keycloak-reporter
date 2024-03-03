@@ -36,11 +36,8 @@ jobs:
       - name: Run chart-testing (lint)
         run: ct lint --config .ct.yaml
 
-      - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.6.0
-        env:
-          CR_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-          CR_GENERATE_RELEASE_NOTES: true
+      - name: Helm Package
+        run: helm package charts/keycloak-reporter/
 
       - name: Login to GitHub Container Registry
         run: |
@@ -49,7 +46,7 @@ jobs:
       - name: Push Charts to GHCR
         run: |
           shopt -s nullglob
-          for pkg in .cr-release-packages/*; do
+          for pkg in *.tgz; do
             if [ -z "${pkg:-}" ]; then
               break
             fi
