@@ -1,3 +1,14 @@
+## [0.8.9](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.8.8...v0.8.9) (2024-03-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @json2csv/node to v7.0.6 ([9c6844e](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/9c6844e86e192cfc66fb8c36adda046652baff9b))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v23.0.7 ([70f698e](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/70f698e7262369964532a368d86d4a2ebab75158))
+* **deps:** update dependency npm to v10.5.0 ([1d36ea8](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/1d36ea84e74a761837f87f6084b28681e24e5401))
+
+
+
 ## [0.8.8](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.8.7...v0.8.8) (2024-02-05)
 
 
