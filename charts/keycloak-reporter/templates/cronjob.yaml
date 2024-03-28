@@ -14,9 +14,9 @@ spec:
     spec:
       template:
         annotations:
-          {{- include "keycloak-reporter.annotations" $ | nindent 8 }}
+          {{- include "keycloak-reporter.annotations" $ | nindent 10 }}
         labels:
-          {{- include "keycloak-reporter.labels" $ | nindent 8 }}
+          {{- include "keycloak-reporter.labels" $ | nindent 10 }}
         spec:
           {{- with $.Values.imagePullSecrets }}
           imagePullSecrets:
