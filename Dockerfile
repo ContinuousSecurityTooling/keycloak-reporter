@@ -1,4 +1,4 @@
-FROM node:20.12.2-slim
+FROM node:20.13.0-slim
 
 ARG BUILD_DATE
 ARG APP_VERSION
