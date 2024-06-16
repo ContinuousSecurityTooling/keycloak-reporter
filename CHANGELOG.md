@@ -1,3 +1,29 @@
+## [0.8.11](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.8.10...v0.8.11) (2024-06-16)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @continuoussecuritytooling/keycloak-auditor to v1.1.8 ([5656b22](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/5656b222af725e3e3d0555d3129a5b2751b40ffa))
+* **deps:** update dependency @continuoussecuritytooling/keycloak-auditor to v1.1.9 ([c077a40](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/c077a406c0636449b9dc56c43fc6689d4ca702a6))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v24.0.3 ([a6827e9](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/a6827e9d79287df4189b72c43f8fce1a8ac3530f))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v24.0.4 ([53d80cc](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/53d80cc7268690a2e3aca9378492b0429cbb1d57))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v24.0.5 ([3864f49](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/3864f493d09454b96b0ed3516a1f26306a3c7097))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v25 ([bb6a85b](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/bb6a85bb8f84c52368219dfea200a95b141e4037))
+* **deps:** update dependency ajv to v8.13.0 ([ce6d67d](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/ce6d67d6a09f27f3289c1c50d2904b18fc5b6762))
+* **deps:** update dependency ajv to v8.14.0 ([8618ff8](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/8618ff868b6aadc39ab6019dac42eeb427111997))
+* **deps:** update dependency ajv to v8.16.0 ([78b2ce1](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/78b2ce1e37b8fc9959bb267ff31dc38a8f1332f9))
+* **deps:** update dependency ms-teams-webhook to v2.1.0 ([d9f1662](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/d9f16622cdccec368b10278b8cef5f2c9383f4cb))
+* **deps:** update dependency npm to v10.5.1 ([3ac3f1f](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/3ac3f1fd2225ddf85b7a90fa40a8c951bd41b546))
+* **deps:** update dependency npm to v10.5.2 ([372e56c](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/372e56ca9c8aaaf4a400970413c2853f2775be31))
+* **deps:** update dependency npm to v10.6.0 ([7ea79af](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/7ea79af7616cc75d95c6798507a2411afa9950e8))
+* **deps:** update dependency npm to v10.7.0 ([4adeef7](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/4adeef7af981cac832df4daa5c92cf6adcc0b3df))
+* **deps:** update dependency npm to v10.8.0 ([b086d1b](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/b086d1baf975ba5a6eae7f1f0c51af9fa03e739d))
+* **deps:** update dependency npm to v10.8.1 ([3318fd0](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/3318fd06be4295a0fc7e3ffebf30b08722561e81))
+* **deps:** update dependency ramda to ^0.30.0 ([d8b7a83](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/d8b7a83313072472dbe19ee5b60aaae033a47f98))
+* **deps:** update dependency ramda to v0.30.1 ([6852d20](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/6852d2045fda5b6b2f230ea551ab5637e00942d5))
+
+
+
 ## [0.8.10](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.8.9...v0.8.10) (2024-03-28)
 
 
