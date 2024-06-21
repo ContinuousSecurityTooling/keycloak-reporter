@@ -45,7 +45,7 @@
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "@octokit/rest": "^20.0.0",
+    "@octokit/rest": "^21.0.0",
     "@types/jest": "^29.5.1",
     "@types/node": "^20.1.5",
     "@types/yargs": "^17.0.24",
