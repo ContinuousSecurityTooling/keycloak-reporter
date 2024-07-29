@@ -1,3 +1,16 @@
+## [0.8.12](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.8.11...v0.8.12) (2024-07-29)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @keycloak/keycloak-admin-client to v25.0.1 ([b267295](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/b267295b0f3b8a30834586ebb3f9554fad1393c0))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v25.0.2 ([d14e96b](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/d14e96b4d0f97516dda20c34c210a97cf98798cb))
+* **deps:** update dependency ajv to v8.17.1 ([ac581df](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/ac581df5f60bd52463aa102bd7176cb230ae4f0a))
+* **deps:** update dependency npm to v10.8.2 ([1671de8](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/1671de8e1c7f9ff73fb75fb2d4c5396103337b32))
+* Dockerfile to reduce vulnerabilities ([96c4505](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/96c450526d53d9efa5c8d74d6adeaaf9fef85470))
+
+
+
 ## [0.8.11](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.8.10...v0.8.11) (2024-06-16)
 
 
