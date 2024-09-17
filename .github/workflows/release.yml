@@ -40,10 +40,7 @@ jobs:
                 uses: actions/setup-java@v4 # Does also set up Maven and GPG
                 with:
                     distribution: 'temurin' # As good as any other, see: https://github.com/actions/setup-java#supported-distributions
-                    java-package: 'jdk'
                     java-version: '21'
-                    check-latest: true
-                    cache: 'maven'
 
             -   name: Configure git
                 run: |
