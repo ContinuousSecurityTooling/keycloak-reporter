@@ -1,6 +1,6 @@
 # keycloak-reporter
 
-![Version: 0.8.13](https://img.shields.io/badge/Version-0.8.13-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.8.10](https://img.shields.io/badge/AppVersion-0.8.10-informational?style=flat-square)
+![Version: 0.8.14](https://img.shields.io/badge/Version-0.8.14-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.8.10](https://img.shields.io/badge/AppVersion-0.8.10-informational?style=flat-square)
 
 Keycloak user and client reporting tool for automated regular access checks.
 
