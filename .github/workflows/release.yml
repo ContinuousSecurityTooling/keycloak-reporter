@@ -129,8 +129,10 @@ jobs:
 
                     export HELM_CHART_DIR=charts/keycloak-reporter
                     chartVersion=$(cat $HELM_CHART_DIR/Chart.yaml | grep "version: " | sed -E -n "s/^version: \s*(.*)$/\1/p")
+                    appVersion=$(cat $HELM_CHART_DIR/Chart.yaml | grep "appVersion: " | sed -E -n "s/^appVersion: \s*(.*)$/\1/p")
                     newVersion=$(increment_version -p $chartVersion)
                     sed -i 's/version: '"$chartVersion"'/version: '"$newVersion"'/g' $HELM_CHART_DIR/Chart.yaml
+                    sed -i 's/appVersion: '"$appVersion"'/appVersion: '"${{ github.event.inputs.releaseversion }}"'/g' $HELM_CHART_DIR/Chart.yaml
                     helm-docs
                     helm package $HELM_CHART_DIR
                     git add .
