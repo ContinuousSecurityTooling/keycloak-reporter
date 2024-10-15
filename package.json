@@ -40,7 +40,7 @@
     "install": "^0.13.0",
     "ms-teams-webhook": "^2.0.2",
     "npm": "^10.0.0",
-    "openid-client": "^5.4.2",
+    "openid-client": "^6.0.0",
     "ramda": "^0.30.0",
     "yargs": "^17.7.2"
   },
