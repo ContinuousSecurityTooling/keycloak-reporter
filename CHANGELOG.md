@@ -1,3 +1,27 @@
+# [1.0.0](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.8.12...v1.0.0) (2024-10-17)
+
+
+### Bug Fixes
+
+* **Chart:** Correcting chart version ([bd7eb36](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/bd7eb36b0e0c77cfedef23005c25190f2d9aa156))
+* **deps:** update dependency @continuoussecuritytooling/keycloak-auditor to v1.1.10 ([ac7118b](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/ac7118bbcdd08dc4df3e33aca1d207ff946abbe6))
+* **deps:** update dependency @continuoussecuritytooling/keycloak-auditor to v1.1.16 ([2c4a9b7](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/2c4a9b7e10d481fcfb663ce257abdfd0facc7ae1))
+* **deps:** update dependency @continuoussecuritytooling/keycloak-auditor to v2 ([ecee366](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/ecee366ba32cba49e14f116d0e0dffb836182d81))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v25.0.4 ([e79d129](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/e79d129308de45c661374303990aad06a3264a48))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v25.0.5 ([179de86](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/179de86d06f61eadf6975bee86784fab0fc510a2))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v25.0.6 ([291594b](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/291594b23d396d53de98ed458ce133f1b541f779))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v26 ([813c5b1](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/813c5b1c80bd657e97f7d7e1dd323d3f1a1d47a4))
+* **deps:** update dependency @slack/webhook to v7.0.3 ([483dce5](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/483dce5975e0722e531f673035703ef78983afa0))
+* **deps:** update dependency ms-teams-webhook to v2.2.0 ([38e4184](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/38e41849a6a5eb41edafe813f8d9dcd7bfc37f7e))
+* **deps:** update dependency ms-teams-webhook to v2.2.1 ([eb91bcf](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/eb91bcff5142099cada7ed1cb9cceac71ebfd9bd))
+* **deps:** update dependency ms-teams-webhook to v2.2.2 ([1ccd777](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/1ccd7771918077cadbe74e88e78554e7307871b1))
+* **deps:** update dependency npm to v10.8.3 ([b14ebf4](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/b14ebf4f2fa6295aad533f610949425313cb92ce))
+* **deps:** update dependency npm to v10.9.0 ([f2d65c4](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/f2d65c43374fc5a32262269d479355ede46ae7f8))
+* **deps:** update dependency openid-client to v5.7.0 ([8688200](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/8688200de26bd62077aeec9f01ce8f503e92e296))
+* **deps:** update dependency openid-client to v6 ([cd3edc3](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/cd3edc35ca2193a53bd5912d2dd6a074524e647b))
+
+
+
 ## [0.8.14](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.8.12...v0.8.14) (2024-09-17)
 
 
