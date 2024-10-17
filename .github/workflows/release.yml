@@ -62,6 +62,16 @@ jobs:
                     npm version --no-git-tag-version ${{ github.event.inputs.releaseversion }}
                     npm run build
 
+            -   name: Write version vars
+                run: |
+                    BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
+                    BRANCH=${GITHUB_REF_NAME#v}
+                    APP_VERSION=$(cat package.json | grep version| head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g')
+                    echo Version: $APP_VERSION
+                    echo "VERSION=$APP_VERSION" >> $GITHUB_ENV
+                    echo "APP_VERSION=$APP_VERSION" >> $GITHUB_ENV
+                    echo "BUILD_DATE=$BUILD_DATE" >> $GITHUB_ENV
+
             -   name: Install Helm
                 uses: azure/setup-helm@v4
 
@@ -171,6 +181,28 @@ jobs:
                     tag_name: v${{ github.event.inputs.releaseversion }}
                 env:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            -   name: Build Container Image
+                id: build-image
+                uses: redhat-actions/buildah-build@v2
+                with:
+                    image: continuoussecuritytooling/keycloak-reporting-cli
+                    tags: 'latest ${{ env.APP_VERSION }}'
+                    containerfiles: |
+                        ./Dockerfile
+                    build-args: |
+                        BUILD_DATE=${{ env.BUILD_DATE }}
+                        APP_VERSION=${{ env.APP_VERSION }}
+
+            -   name: Push To Docker Hub
+                id: push-to-dockerhub-preview
+                uses: redhat-actions/push-to-registry@v2
+                with:
+                    image: ${{ steps.build-image.outputs.image }}
+                    tags: 'latest ${{ env.APP_VERSION }}'
+                    registry: registry.hub.docker.com
+                    username: continuoussecuritytooling
+                    password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
             -   name: Publish npm package
                 run: |
