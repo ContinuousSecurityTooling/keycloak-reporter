@@ -1,3 +1,21 @@
+## [1.0.1](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.0.0...v1.0.1) (2024-10-31)
+
+
+### Bug Fixes
+
+* Correcting docker publish on release ([8930206](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/89302069cd56c8ec324cf5a028dd52e07ba3212a))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v26.0.1 ([4b640f2](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/4b640f2b9899bbc4055c08c9c6d807639495f3fd))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v26.0.2 ([7b2b427](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/7b2b42793de329365109e85d0f8f9dcc24ef66b1))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v26.0.4 ([12f2a15](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/12f2a154ee328505691cc8b635f3c916b08e2f0d))
+* **deps:** update dependency openid-client to v6.1.0 ([1238436](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/1238436517af761c1cb27e28a1ecd27a0f501b95))
+* **deps:** update dependency openid-client to v6.1.1 ([46c92db](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/46c92db73ed39b4c0f4a07f12369270460affaef))
+* **deps:** update dependency openid-client to v6.1.3 ([530087b](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/530087b716f8fbe6a7cbe304edfc03107c25189b))
+* **Tests:** Adjust end2end config for keycloak v26 ([79c6d9c](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/79c6d9c61b27157cb915f5532e2eb29674e2b763))
+* **Tests:** Adjust test spec ([431c1c6](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/431c1c6d6fa951d5c4d987b89d66a644cef5e250))
+* **Tests:** Adjust test to changed config ([8163c80](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/8163c80f7a46659d52ab88e9af0b3caf5d412218))
+
+
+
 # [1.0.0](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v0.8.12...v1.0.0) (2024-10-17)
 
 
