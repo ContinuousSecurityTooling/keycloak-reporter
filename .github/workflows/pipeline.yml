@@ -16,9 +16,8 @@ jobs:
     strategy:
       matrix:
         node_version:
-          - 18
           - 20
-          - 21
+          - 22
         os:
           - ubuntu-latest
           - macOS-latest
@@ -99,9 +98,8 @@ jobs:
       fail-fast: true
       matrix:
         node_version:
-          - 18
           - 20
-          - 21
+          - 22
         os:
           - ubuntu-latest
     steps:
