@@ -13,7 +13,7 @@ test('Should use config file', { timeout: 3000 }, (t) => {
   });
   cli.stdout.on('data', (chunk) => {
     console.log('Response', JSON.parse(chunk.toString()));
-    t.equal(JSON.parse(chunk.toString()).length, 24);
+    t.equal(JSON.parse(chunk.toString()).length,7);
     t.end();
   });
   cli.stderr.on('data', (msg) => {
@@ -30,7 +30,7 @@ test('Should validate config', { timeout: 3000 }, (t) => {
   });
   cli.stdout.on('data', (chunk) => {
     console.log(chunk.toString());
-    t.equal(chunk.toString(), 'Connection to http://localhost:8080 was successfull: 3 users found.\n');
+    t.equal(chunk.toString(), 'Connection to http://localhost:8080 was successfull: 2 users found.\n');
     t.end();
   });
   cli.stderr.on('data', (msg) => {

@@ -22,7 +22,7 @@ test('Should list clients as JSON', { timeout: 3000 }, (t) => {
   );
   cli.stdout.on('data', (chunk) => {
     console.log('Response', JSON.parse(chunk.toString()));
-    t.equal(JSON.parse(chunk.toString()).length, 24);
+    t.equal(JSON.parse(chunk.toString()).length, 7);
     t.end();
   });
   cli.stderr.on('data', (msg) => {

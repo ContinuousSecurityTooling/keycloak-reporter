@@ -127,7 +127,7 @@
       ],
       "client": {
         "security-admin-console": [],
-        "admin-cli-end2end-testing": [],
+        "keycloak-reporter": [],
         "admin-cli": [],
         "account-console": [],
         "broker": [
@@ -499,12 +499,12 @@
       },
       {
         "id": "8d55a42b-4087-4e82-81f1-cc77e897f4d8",
-        "username": "service-account-admin-cli-end2end-testing",
+        "username": "service-account-keycloak-reporter",
         "emailVerified": false,
         "createdTimestamp": 1688142582675,
         "enabled": true,
         "totp": false,
-        "serviceAccountClientId": "admin-cli-end2end-testing",
+        "serviceAccountClientId": "keycloak-reporter",
         "credentials": [],
         "disableableCredentialTypes": [],
         "requiredActions": [],
@@ -630,7 +630,7 @@
       },
       {
         "id": "3592a6f0-f576-4ca6-9de0-435a1986f59d",
-        "clientId": "admin-cli-end2end-testing",
+        "clientId": "keycloak-reporter",
         "name": "",
         "description": "",
         "rootUrl": "",
@@ -640,7 +640,7 @@
         "enabled": true,
         "alwaysDisplayInConsole": false,
         "clientAuthenticatorType": "client-secret",
-        "secret": "tIr3tYSCr0uEya2xx9vl9xnMgZTN4e0Y",
+        "secret": "3UYhI2hryFwoVtcd7ljlaDuD9HXrGV5r",
         "redirectUris": ["*"],
         "webOrigins": ["+"],
         "notBefore": 0,
