@@ -1,3 +1,13 @@
+## [1.0.3](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.0.2...v1.0.3) (2024-11-22)
+
+
+### Bug Fixes
+
+* **Build:** Correcting npm publish ([76b84fb](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/76b84fb1c5d50173d5f19475790b74d4aa45960f))
+* **Build:** Correcting npm versioning ([afaa792](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/afaa79215fee5612ea8502947524684ec3c691ef))
+
+
+
 ## [1.0.2](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.0.1...v1.0.2) (2024-11-22)
 
 
