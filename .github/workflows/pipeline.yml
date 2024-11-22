@@ -203,7 +203,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
         run: |
           echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
-          npm version --no-git-tag-version ${{env.APP_VERSION}}_build${{ github.run_number }}
+          npm version --no-git-tag-version ${{env.APP_VERSION}}-${{ github.run_number }}
           npm publish
         if: github.ref == 'refs/heads/develop'
 
