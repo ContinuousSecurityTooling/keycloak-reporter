@@ -187,25 +187,26 @@ jobs:
                 uses: redhat-actions/buildah-build@v2
                 with:
                     image: continuoussecuritytooling/keycloak-reporting-cli
-                    tags: 'latest ${{ env.APP_VERSION }}'
+                    tags: 'latest ${{ github.event.inputs.releaseversion }}'
                     containerfiles: |
                         ./Dockerfile
                     build-args: |
                         BUILD_DATE=${{ env.BUILD_DATE }}
-                        APP_VERSION=${{ env.APP_VERSION }}
+                        APP_VERSION=${{ github.event.inputs.releaseversion }}
 
             -   name: Push To Docker Hub
                 id: push-to-dockerhub-preview
                 uses: redhat-actions/push-to-registry@v2
                 with:
                     image: ${{ steps.build-image.outputs.image }}
-                    tags: 'latest ${{ env.APP_VERSION }}'
+                    tags: 'latest ${{ github.event.inputs.releaseversion }}'
                     registry: registry.hub.docker.com
                     username: continuoussecuritytooling
                     password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
             -   name: Publish npm package
                 run: |
+                    npm version --no-git-tag-version ${{ github.event.inputs.releaseversion }}
                     npm publish
                 env:
                     NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
