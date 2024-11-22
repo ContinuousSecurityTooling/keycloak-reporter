@@ -204,7 +204,7 @@ jobs:
         run: |
           echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
           npm version --no-git-tag-version ${{env.APP_VERSION}}-${{ github.run_number }}
-          npm publish
+          npm publish --tag next
         if: github.ref == 'refs/heads/develop'
 
       - name: Push To Docker Hub
