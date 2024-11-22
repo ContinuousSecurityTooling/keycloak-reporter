@@ -1,3 +1,16 @@
+## [1.0.2](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.0.1...v1.0.2) (2024-11-22)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @continuoussecuritytooling/keycloak-auditor to v2.0.8 ([c235380](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/c23538068b54f0f326642e83c132d69b3a7cfcc7))
+* **deps:** update dependency @continuoussecuritytooling/keycloak-auditor to v2.0.9 ([3b7ca63](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/3b7ca632baccdc660aca70402d2c02d9b4ceabc4))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v26.0.5 ([ecc5d2f](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/ecc5d2fe7a9ff8de6b99d356f9f828d2b21941e4))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v26.0.6 ([2cd12b7](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/2cd12b7e0ea627cde535203e21fe4a181e97e1a9))
+* **deps:** update dependency npm to v10.9.1 ([cd1e62a](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/cd1e62a35980b3d7c4cd1fbbda631b600c89031c))
+
+
+
 ## [1.0.1](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.0.0...v1.0.1) (2024-10-31)
 
 
