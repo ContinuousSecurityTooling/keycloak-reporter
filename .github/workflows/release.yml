@@ -206,7 +206,6 @@ jobs:
 
             -   name: Publish npm package
                 run: |
-                    npm version --no-git-tag-version ${{ github.event.inputs.releaseversion }}
                     npm publish
                 env:
                     NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
