@@ -1,3 +1,46 @@
+## [1.0.6](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.0.4...v1.0.6) (2025-05-07)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @continuoussecuritytooling/keycloak-auditor to v2.0.10 ([ab976cf](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/ab976cf4e909671f6eda93459a4dba44abcfcfc0))
+* **deps:** update dependency @continuoussecuritytooling/keycloak-auditor to v2.0.11 ([f836e50](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/f836e502a1e53ccb0164aff87c5887b206a5bc8b))
+* **deps:** update dependency @continuoussecuritytooling/keycloak-auditor to v2.0.12 ([2143a61](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/2143a61bbf1da7d5f74406c71f06ddd449ab6898))
+* **deps:** update dependency @continuoussecuritytooling/keycloak-auditor to v2.0.13 ([195d1b2](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/195d1b234f6380e492b90baa6ea2d9f44de2345b))
+* **deps:** update dependency @continuoussecuritytooling/keycloak-auditor to v2.1.0 ([8f216cd](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/8f216cdd15eefd3726946a99b48f7a5c387b713c))
+* **deps:** update dependency @continuoussecuritytooling/keycloak-auditor to v2.1.2 ([d855c0a](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/d855c0a457bb581dd05ee6a4627107b163096025))
+* **deps:** update dependency @continuoussecuritytooling/keycloak-auditor to v2.1.3 ([c5171ef](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/c5171ef739a76852147109c1d4cb122abe673b6e))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v26.0.7 ([a3ad64b](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/a3ad64bdb380630be45de0e9b5c3b672ede42924))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v26.0.8 ([9fd4ea6](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/9fd4ea6736f384ee15ec7f377cbfa81c37b7d6ba))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v26.1.0 ([14ee2fa](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/14ee2fa75763b85fc05bc5a2e31982ff3b3db098))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v26.1.1 ([1d39e30](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/1d39e309afeeb17ddca6323500281683cd56cb2c))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v26.1.2 ([a41f261](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/a41f26178b5c19a84c188b355193232a219b671f))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v26.1.3 ([2bb6062](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/2bb60626afe2a1056579a9527be13012fd61d00a))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v26.1.4 ([9b4faf7](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/9b4faf755808690dbdd09ac106479c33410d04e8))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v26.1.5 ([5aed7cf](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/5aed7cf3fae5b548f2bd1047c42400840c0813f4))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v26.2.0 ([309f5b7](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/309f5b7e025b7314b803247729f270bd2289251a))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v26.2.1 ([595bc88](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/595bc885ebfc88b315b15ae8f2af7443cf19166d))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v26.2.2 ([bbb0d81](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/bbb0d81916d323dfdd47773c36a10efdf286deda))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v26.2.3 ([e0c395c](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/e0c395c6e96d0c5c0dd4c3b62cd0c7a163e5fd63))
+* **deps:** update dependency @slack/webhook to v7.0.4 ([1e6be38](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/1e6be38559644ec0bcec8fc595975bd1b12489c9))
+* **deps:** update dependency @slack/webhook to v7.0.5 ([1b4495b](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/1b4495b6109eae90bd9693440e87bb5cc74775f3))
+* **deps:** update dependency npm to v10.9.2 ([be23fc6](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/be23fc677b6a4d073f617a57c0c31482e5be8150))
+* **deps:** update dependency openid-client to v6.1.4 ([690b023](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/690b023ab0106eedb1e20a3ca5a14edb8614d774))
+* **deps:** update dependency openid-client to v6.1.5 ([076a138](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/076a138e3e8f67d76e94b59f7a479a2fc377e683))
+* **deps:** update dependency openid-client to v6.1.6 ([60e1ef0](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/60e1ef0056a47d5ff0a16ba2c3adf19f56a519ac))
+* **deps:** update dependency openid-client to v6.1.7 ([5dbf34d](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/5dbf34db60237a86a940045395f1db0d5849605a))
+* **deps:** update dependency openid-client to v6.2.0 ([e084d0a](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/e084d0a8e2b27a0879ebbcc67ece6f3622e65b36))
+* **deps:** update dependency openid-client to v6.3.0 ([5ca3cd3](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/5ca3cd3551e08b1ca0523469760b2f0023297820))
+* **deps:** update dependency openid-client to v6.3.1 ([7d679dc](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/7d679dc8921faa3a32ea04551d9d239b4f3e63ff))
+* **deps:** update dependency openid-client to v6.3.3 ([2a692b0](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/2a692b043998017c5408b460cc90c280ea333772))
+* **deps:** update dependency openid-client to v6.3.4 ([6a933a7](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/6a933a7308e2059c444ead06155c1411fcc0cc04))
+* **deps:** update dependency openid-client to v6.4.0 ([3a1425c](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/3a1425cf8dadf360c90c83e7280721cfe9dfaaba))
+* **deps:** update dependency openid-client to v6.4.1 ([7aad4b2](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/7aad4b26079e6ca2700c837c22c312f729238fc0))
+* **deps:** update dependency openid-client to v6.4.2 ([ad85d3e](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/ad85d3ee033ed2bd2a60f80bd81e9f7d3a6b8790))
+* **deps:** update dependency openid-client to v6.5.0 ([bc2cea7](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/bc2cea7c24ee2cda06ca6efe818da804cefce943))
+
+
+
 ## [1.0.5](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.0.4...v1.0.5) (2024-12-03)
 
 
