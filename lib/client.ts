@@ -1,5 +1,6 @@
 import KcAdminClient from '@keycloak/keycloak-admin-client';
 import { AuditClient } from '@continuoussecuritytooling/keycloak-auditor';
+import logger from './logger.js';
 
 export interface Options {
   clientId: string;
@@ -23,7 +24,7 @@ export async function createClient(options: Options): Promise<KcAdminClient | Au
       grantType: 'client_credentials',
     });
   } catch (e) {
-    console.error('Check Client Config:', e.response ? e.responseData.error_description : e);
+    logger.error('Check Client Config:', e.response ? e.responseData.error_description : e);
     return Promise.reject(e.response ? e.responseData.error_description : e);
   }
   return Promise.resolve(kcAdminClient);

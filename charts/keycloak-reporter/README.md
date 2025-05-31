@@ -1,6 +1,6 @@
 # keycloak-reporter
 
-![Version: 1.3.11](https://img.shields.io/badge/Version-1.3.11-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.6](https://img.shields.io/badge/AppVersion-1.0.6-informational?style=flat-square)
+![Version: 1.4.0](https://img.shields.io/badge/Version-1.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.6](https://img.shields.io/badge/AppVersion-1.0.6-informational?style=flat-square)
 
 Keycloak user and client reporting tool for automated regular access checks.
 
@@ -22,7 +22,7 @@ Keycloak user and client reporting tool for automated regular access checks.
 | image.repository | string | `"continuoussecuritytooling/keycloak-reporting-cli"` |  |
 | image.tag | string | `""` |  |
 | imagePullSecrets | list | `[]` |  |
-| keycloak | map | `{"config":{"clientId":"","clientSecret":"","output":"webhook","url":"","useAuditingEndpoint":false,"webhookMessage":"","webhookType":"","webhookUrl":""},"volumes":{"reports":""}}` | Keycloak configuration |
+| keycloak | map | `{"config":{"clientId":"","clientSecret":"","jsonLogFormat":false,"output":"webhook","url":"","useAuditingEndpoint":false,"webhookMessage":"","webhookType":"","webhookUrl":""},"volumes":{"reports":""}}` | Keycloak configuration |
 | keycloak.config.webhookMessage | string | `""` | optional message for the webhook post |
 | nameOverride | string | `""` |  |
 | nodeSelector | object | `{}` |  |

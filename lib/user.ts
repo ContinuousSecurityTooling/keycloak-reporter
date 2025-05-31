@@ -4,6 +4,7 @@ import {
   AuditedClientRepresentation,
   AuditedUserRepresentation,
 } from '@continuoussecuritytooling/keycloak-auditor';
+import logger from './logger.js';
 
 export interface User {
   username: string;
@@ -36,7 +37,7 @@ export async function clientListing(
       // iterate over realms
       realms = await client.realms.find();
     } catch (e) {
-      console.error('Check Client role:', e.response.statusText);
+      logger.error('Check Client role:', e.response.statusText);
       return Promise.reject(new Error('Client Role Error'));
     }
     for (const realm of realms) {
@@ -91,7 +92,7 @@ export async function userListing(
     try {
       realms = await client.realms.find();
     } catch (e) {
-      console.error('Check Client role:', e.response.statusText);
+      logger.error('Check Client role:', e.response.statusText);
       return Promise.reject(new Error('Client Role Error'));
     }
     for (const realm of realms) {
