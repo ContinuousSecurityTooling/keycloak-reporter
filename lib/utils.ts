@@ -12,6 +12,12 @@ export class WebhookConfig {
     this.message = message;
   }
 }
+export class LogConfig {
+  json: boolean;
+  constructor(json: boolean = false) {
+    this.json = json;
+  }
+}
 
 class ReportConfig {
   name: string;
@@ -32,6 +38,14 @@ export class ConvertConfig {
     this.json = json;
   }
 }
+
+export class AppConfig {
+  log: LogConfig;
+  json: object;
+  constructor(logConfig: LogConfig) {
+    this.log = logConfig;
+  }
+}
 export function getConvertConfig(config, argv, name: string, title: string, json: object): ConvertConfig {
   return new ConvertConfig(
     config.format ? config.format : (argv.format as string),
@@ -47,6 +61,16 @@ export function getConvertConfig(config, argv, name: string, title: string, json
       config.webhookMessage ? config.webhookMessage : (argv.webhookMessage as string)
     ),
     json
+  );
+}
+
+export function getAppConfig(config, argv): AppConfig {
+  return new AppConfig(
+    new LogConfig(
+      'jsonLogFormat' in argv
+        ? String(argv.jsonLogFormat).toLowerCase() == 'true'
+        : String(config.jsonLogFormat).toLowerCase() == 'true'
+    )
   );
 }
 

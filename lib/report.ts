@@ -3,6 +3,7 @@ import path from 'path';
 import { convertJSON2CSV } from './convert.js';
 import { post2Webhook } from './output.js';
 import { ConvertConfig } from './utils.js';
+import logger from './logger.js';
 
 export async function convert(cfg: ConvertConfig) {
   let outputContent: string;
@@ -27,29 +28,29 @@ export async function convert(cfg: ConvertConfig) {
   switch (cfg.output) {
     case 'webhook':
       if (!cfg.config.url) {
-        console.error('No valid Webhook URL given');
+        logger.error('No valid Webhook URL given');
         throw new Error('Please provide a valid --webhookUrl parameter');
       }
       try {
-        console.log(`Sending report via webhook to ${cfg.config.type} ....`);
+        logger.info(`Sending report via webhook to ${cfg.config.type} ....`);
         await post2Webhook(cfg.config.type, cfg.config.url, cfg.config.title, outputContent, cfg.config.message);
-        console.log('Done sending.');
+        logger.info('Done sending.');
       } catch (e) {
         switch (e.code || e.message) {
           case 'Request failed with status code 400':
-            console.error('Invalid Teams Webhook Payload. Check your params.');
+            logger.error('Invalid Teams Webhook Payload. Check your params.');
             throw new Error('Invalid Teams Payload');
           case 'slack_webhook_http_error':
-            console.error('Invalid Slack Webhook Payload. Check your params.');
+            logger.error('Invalid Slack Webhook Payload. Check your params.');
             throw new Error('Invalid Slack Payload');
           default:
-            console.error(`Error during sending webhook.(${e?.code})`, e?.original);
+            logger.error(`Error during sending webhook.(${e?.code})`, e?.original);
             throw e;
         }
       }
       break;
     // defaulting to standard out
     default:
-      console.log(outputContent);
+      logger.info(outputContent);
   }
 }

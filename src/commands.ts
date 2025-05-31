@@ -6,6 +6,7 @@ import {
 } from '@continuoussecuritytooling/keycloak-auditor';
 import { Options, createClient } from '../lib/client.js';
 import { User, userListing, clientListing, Client } from '../lib/user.js';
+import logger from '../lib/logger.js';
 
 function kcClient(options: Options): Promise<KcAdminClient | AuditClient> {
   return createClient({
@@ -27,9 +28,9 @@ export async function listClients(options: Options): Promise<Array<Client | Audi
 export async function configTest(options: Options) {
   try {
     const users = await userListing(await kcClient(options));
-    console.log(`Connection to ${options.rootUrl} was successfull: ${users.length} users found.`);
+    logger.info(`Connection to ${options.rootUrl} was successful: ${users.length} users found.`);
   } catch (e) {
-    console.error(`Connection to ${options.rootUrl} was not successfull`, e);
+    logger.error(`Connection to ${options.rootUrl} was not successful`, e);
     return;
   }
 }

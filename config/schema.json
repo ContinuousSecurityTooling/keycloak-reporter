@@ -65,6 +65,11 @@
       "type": "boolean",
       "default": "false",
       "description": "Enable usage of keycloak reporter auditing endpoint"
+    },
+    "jsonLogFormat": {
+      "type": "boolean",
+      "default": "false",
+      "description": "Enable json log format"
     }
   }
 }

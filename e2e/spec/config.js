@@ -30,7 +30,7 @@ test('Should validate config', { timeout: 3000 }, (t) => {
   });
   cli.stdout.on('data', (chunk) => {
     console.log(chunk.toString());
-    t.equal(chunk.toString(), 'Connection to http://localhost:8080 was successfull: 3 users found.\n');
+    t.equal(chunk.toString(), 'Connection to http://localhost:8080 was successful: 3 users found.\n');
     t.end();
   });
   cli.stderr.on('data', (msg) => {

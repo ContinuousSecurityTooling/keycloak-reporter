@@ -66,7 +66,13 @@ yargs(hideBin(process.argv))
     alias: 'a',
     type: 'boolean',
     default: false,
-    description: 'use auditior rest endpoint',
+    description: 'use auditor rest endpoint',
+  })
+  .option('jsonLogFormat', {
+    alias: 'a',
+    type: 'boolean',
+    default: false,
+    description: 'use JSON log format',
   })
   .command(
     'configTest [url] [clientId] [clientSecret]',
