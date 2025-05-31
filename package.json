@@ -44,7 +44,7 @@
     "openid-client": "^6.0.0",
     "ramda": "^0.30.0",
     "winston": "^3.17.0",
-    "yargs": "^17.7.2"
+    "yargs": "^18.0.0"
   },
   "devDependencies": {
     "@octokit/rest": "^21.0.0",
