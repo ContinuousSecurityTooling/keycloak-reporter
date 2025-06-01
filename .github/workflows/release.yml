@@ -59,7 +59,7 @@ jobs:
             -   name: Package Application
                 run: |
                     npm run clean
-                    npm version --no-git-tag-version ${{ github.event.inputs.releaseversion }}
+                    npm version --no-git-tag-version ${{ github.event.inputs.releaseversion }} || true
                     npm run build
 
             -   name: Write version vars
