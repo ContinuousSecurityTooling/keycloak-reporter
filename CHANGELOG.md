@@ -1,3 +1,18 @@
+# [1.1.0](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.0.6...v1.1.0) (2025-06-01)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @keycloak/keycloak-admin-client to v26.2.4 ([681663f](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/681663fa9f56f6c98b67361f958cc667c28f7f7b))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v26.2.5 ([75f209d](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/75f209dfc3cbe2ebe9a0d73b17de09bdce983a18))
+
+
+### Features
+
+* **Logging:** Adding support for JSON logging ([2ea2420](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/2ea24205ff14c267ed3d7a2d280b4d3c8889a441))
+
+
+
 ## [1.0.6](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.0.4...v1.0.6) (2025-05-07)
 
 
