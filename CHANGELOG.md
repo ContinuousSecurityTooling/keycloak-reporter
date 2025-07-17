@@ -1,3 +1,22 @@
+## [1.1.1](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.1.0...v1.1.1) (2025-07-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @keycloak/keycloak-admin-client to v26.3.0 ([7e2941f](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/7e2941f98c3ce70fbb4e56ac657ee7b65d765858))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v26.3.1 ([1806200](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/180620065140b3d1466f4e7912319c2d663842ac))
+* **deps:** update dependency npm to v10.9.3 ([0443961](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/044396122677486df29acc2c4508f3e591b2a62d))
+* **deps:** update dependency openid-client to v6.5.1 ([0b77b64](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/0b77b64c7aaad3c0d46cf3ec07636ddb11fd9567))
+* **deps:** update dependency openid-client to v6.5.3 ([0d516f9](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/0d516f98b577d384322c40fe82161095f00fc9ca))
+* **deps:** update dependency openid-client to v6.6.0 ([25b4dab](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/25b4dabb4c43df941053ebda42c5f98fdc1cafb8))
+* **deps:** update dependency openid-client to v6.6.1 ([a0735c6](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/a0735c64a3bc25bd8d8c6aed7df6312f089d3ce3))
+* **deps:** update dependency openid-client to v6.6.2 ([c96c423](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/c96c42308bee5ed1acf3a56e2ea87c3a89eb2ec3))
+* **deps:** update dependency ramda to ^0.31.0 ([15e036f](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/15e036f13398c60893a9876b40da08ef25e84586))
+* **deps:** update dependency ramda to v0.31.3 ([23079ea](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/23079eaec03f70a2c399c28bfc5cf8d945d1a33c))
+* **deps:** update dependency yargs to v18 ([b7252e0](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/b7252e09a7031d6390f18dd22bde3a634dcc94d2))
+
+
+
 # [1.1.0](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.0.6...v1.1.0) (2025-06-01)
 
 
