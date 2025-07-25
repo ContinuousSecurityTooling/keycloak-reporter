@@ -1,3 +1,14 @@
+## [1.1.2](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.1.1...v1.1.2) (2025-07-25)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @continuoussecuritytooling/keycloak-auditor to v2.1.4 ([29ff7a9](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/29ff7a9f990d5d0c6f7793b9177d7b79ed306a84))
+* **deps:** update dependency @continuoussecuritytooling/keycloak-auditor to v2.1.5 ([7c23215](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/7c23215eae882dfd7953efbfc2688e5723f9a48c))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v26.3.2 ([087c3f7](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/087c3f77f0bd74e710dc3dbd00b35cb0c5be1281))
+
+
+
 ## [1.1.1](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.1.0...v1.1.1) (2025-07-17)
 
 
