@@ -1,3 +1,15 @@
+## [1.1.4](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.1.3...v1.1.4) (2025-09-11)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @continuoussecuritytooling/keycloak-auditor to v2.1.7 ([f67751e](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/f67751ec48ad46ddb3e4a02573c7d866be66efd6))
+* **deps:** update dependency @slack/webhook to v7.0.6 ([89355f1](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/89355f1da2cd36575410433c38cfc8f545df0d09))
+* **deps:** update dependency openid-client to v6.7.0 ([d2ce7e3](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/d2ce7e32c91b34bb3e2a3f2715ae037754a60f78))
+* **deps:** update dependency openid-client to v6.7.1 ([41fb68e](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/41fb68ef3e4b905d7964a7e5f71f478a039619cd))
+
+
+
 ## [1.1.3](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.1.2...v1.1.3) (2025-08-20)
 
 
