@@ -4,7 +4,7 @@ counter=0
 printf 'Waiting for Keycloak server to start'
 until $(curl --output /dev/null --silent --head --fail http://localhost:8080/realms/master/.well-known/openid-configuration); do
     printf '.'
-    sleep 5
+    sleep 10
     if [[ "$counter" -gt 24 ]]; then
         printf "Keycloak server failed to start. Timeout!"
         curl --head --fail http://localhost:8080/realms/master/.well-known/openid-configuration
