@@ -1,3 +1,14 @@
+## [1.1.5](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.1.4...v1.1.5) (2025-09-26)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @keycloak/keycloak-admin-client to v26.3.4 ([46eca25](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/46eca256036d072947c6fbfbd3cd698e27d368c1))
+* **deps:** update dependency @keycloak/keycloak-admin-client to v26.3.5 ([25a0d5f](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/25a0d5f63fa957a662f89323e0854b26c75fb3b5))
+* **deps:** update dependency openid-client to v6.8.0 ([71d6229](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/71d62296cfba5634e146a0271a297b0a5b1dc4f3))
+
+
+
 ## [1.1.4](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.1.3...v1.1.4) (2025-09-11)
 
 
