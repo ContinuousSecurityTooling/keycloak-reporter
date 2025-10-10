@@ -41,7 +41,7 @@
     "install": "^0.13.0",
     "ms-teams-webhook": "^2.0.2",
     "openid-client": "^6.0.0",
-    "ramda": "^0.31.0",
+    "ramda": "^0.32.0",
     "winston": "^3.17.0",
     "yargs": "^18.0.0"
   },
