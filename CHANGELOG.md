@@ -1,3 +1,12 @@
+## [1.1.6](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.1.5...v1.1.6) (2025-10-22)
+
+
+### Bug Fixes
+
+* **deps:** update dependency ramda to ^0.32.0 ([1cb9344](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/1cb9344109539f24d76e58672b544f9e6838f185))
+
+
+
 ## [1.1.5](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.1.4...v1.1.5) (2025-09-26)
 
 
