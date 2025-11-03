@@ -172,7 +172,7 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           # renovate: datasource=docker depName=node
-          node-version: '22'
+          node-version: '24'
       - name: 'Build Package'
         run: |
           npm run clean
