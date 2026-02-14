@@ -1,3 +1,12 @@
+## [1.1.8](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.1.7...v1.1.8) (2026-02-14)
+
+
+### Bug Fixes
+
+* **Chart:** Correcting cron template error ([c0d9b2f](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/c0d9b2f34f5234681fa141cf17b4379972ba9b8e))
+
+
+
 ## [1.1.6](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.1.5...v1.1.6) (2025-10-22)
 
 
