@@ -1,3 +1,12 @@
+## [1.1.9](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.1.8...v1.1.9) (2026-02-14)
+
+
+### Bug Fixes
+
+* **Chart:** Remove metadata ([7628a56](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/7628a56d741d36f7d2da2e7ab02ba67434690cae))
+
+
+
 ## [1.1.8](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.1.7...v1.1.8) (2026-02-14)
 
 
