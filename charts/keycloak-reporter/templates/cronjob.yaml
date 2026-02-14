@@ -13,11 +13,6 @@ spec:
   jobTemplate:
     spec:
       template:
-        metadata:
-          annotations:
-            {{- include "keycloak-reporter.annotations" $ | nindent 10 }}
-          labels:
-            {{- include "keycloak-reporter.labels" $ | nindent 10 }}
         spec:
           {{- with $.Values.imagePullSecrets }}
           imagePullSecrets:
