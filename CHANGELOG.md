@@ -1,3 +1,12 @@
+# [1.2.0](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.1.9...v1.2.0) (2026-03-10)
+
+
+### Features
+
+* **Webhooks:** Adding generic webhook support ([c79ca91](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/c79ca917c4debd0796bcd10117f3c7b5924b5806)), closes [#240](https://github.com/ContinuousSecurityTooling/keycloak-reporter/issues/240)
+
+
+
 ## [1.1.9](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.1.8...v1.1.9) (2026-02-14)
 
 
