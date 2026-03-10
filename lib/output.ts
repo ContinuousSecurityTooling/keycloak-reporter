@@ -4,7 +4,8 @@ import { IncomingWebhook as SlackWebhook } from '@slack/webhook';
 
 enum WebhookType {
   SLACK = 'slack',
-  TEAMS = 'teams'
+  TEAMS = 'teams',
+  GENERIC = 'generic'
 }
 
 export interface WebhookMessage {
@@ -75,6 +76,27 @@ export async function post2Webhook(
           }
         ]
       });
+    case WebhookType.GENERIC.toString(): {
+      const payload: Record<string, unknown> = {
+        title,
+        date: `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`,
+        reportContent
+      };
+      if (text != null) {
+        payload.message = text;
+      }
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!response.ok) {
+        const error = new Error(`Generic webhook request failed with status ${response.status}`);
+        (error as NodeJS.ErrnoException).code = 'generic_webhook_http_error';
+        throw error;
+      }
+      return response;
+    }
     // defaulting to Slack
     default:
       // eslint-disable-next-line no-case-declarations

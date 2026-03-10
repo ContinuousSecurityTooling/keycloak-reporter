@@ -43,6 +43,9 @@ export async function convert(cfg: ConvertConfig) {
           case 'slack_webhook_http_error':
             logger.error('Invalid Slack Webhook Payload. Check your params.');
             throw new Error('Invalid Slack Payload');
+          case 'generic_webhook_http_error':
+            logger.error('Generic Webhook request failed. Check your URL and params.');
+            throw new Error('Invalid Generic Webhook request');
           default:
             logger.error(`Error during sending webhook.(${e?.code})`, e?.original);
             throw e;
