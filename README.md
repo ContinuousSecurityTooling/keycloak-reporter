@@ -75,7 +75,7 @@ You can also provider a config file via env var `CONFIG_FILE` and then just prov
 CONFIG_FILE==$(pwd)/e2e/fixtures/config.json kc-reporter listClients
 ```
 
-### Post to Slack or Teams
+### Post to Slack, Teams or Generic Webhook
 
 When using this command:
 ```
@@ -90,3 +90,28 @@ kc-reporter listUsers <Keycloak_Root_URL> <Client_ID> <Client_Secret> --format=j
 ```
 the following entry in slack will be created:
 ![Team Sample](.docs/webhook-teams-sample.png)
+
+#### Generic Webhook
+
+The `generic` webhook type posts a plain JSON payload via HTTP POST to any URL, making it compatible with custom integrations, automation platforms, or any HTTP endpoint.
+
+```sh
+kc-reporter listUsers <Keycloak_Root_URL> <Client_ID> <Client_Secret> --format=json --output=webhook --webhookType=generic --webhookUrl=$WEBHOOK_URL
+```
+
+The JSON payload sent to the endpoint has the following structure:
+
+```json
+{
+  "title": "Users Report",
+  "date": "10-3-2026",
+  "reportContent": "{...}",
+  "message": "Optional message (only included when --webhookMessage is provided)"
+}
+```
+
+An optional message can be included:
+
+```sh
+kc-reporter listUsers <Keycloak_Root_URL> <Client_ID> <Client_Secret> --format=json --output=webhook --webhookType=generic --webhookUrl=$WEBHOOK_URL --webhookMessage="Scheduled report"
+```

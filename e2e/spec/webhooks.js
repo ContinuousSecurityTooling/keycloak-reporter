@@ -15,12 +15,12 @@ test('Should post message to Teams', { timeout: 10000 }, (t) => {
       '3UYhI2hryFwoVtcd7ljlaDuD9HXrGV5r',
       '--output=webhook',
       '--webhookType=teams',
-      '--webhookUrl=' + process.env.WEBHOOK_TESTING_TEAMS
+      '--webhookUrl=' + process.env.WEBHOOK_TESTING_TEAMS,
     ],
     {
       env: {
-        ...process.env
-      }
+        ...process.env,
+      },
     }
   );
   cli.stdout.on('data', (chunk) => {
@@ -34,79 +34,67 @@ test('Should post message to Teams', { timeout: 10000 }, (t) => {
   });
 });
 
-test(
-  'Should post message to Teams with additional message',
-  { timeout: 10000 },
-  (t) => {
-    const cli = spawn(
-      path.join(path.dirname('.'), 'node'),
-      [
-        'dist/cli.js',
-        'listUsers',
-        'http://localhost:8080',
-        'keycloak-reporter',
-        '3UYhI2hryFwoVtcd7ljlaDuD9HXrGV5r',
-        '--output=webhook',
-        '--webhookType=teams',
-        '--webhookUrl=' + process.env.WEBHOOK_TESTING_TEAMS,
-        '--webhookMessage="' +
-          (process.env.WEBHOOK_ADDITIONAL_MESSAGE || 'From Github Actions') +
-          '"'
-      ],
-      {
-        env: {
-          ...process.env
-        }
-      }
-    );
-    cli.stdout.on('data', (chunk) => {
-      console.log(chunk.toString());
-    });
-    cli.stderr.on('data', (msg) => {
-      t.fail(msg);
-    });
-    cli.stdout.on('end', () => {
-      t.end();
-    });
-  }
-);
+test('Should post message to Teams with additional message', { timeout: 10000 }, (t) => {
+  const cli = spawn(
+    path.join(path.dirname('.'), 'node'),
+    [
+      'dist/cli.js',
+      'listUsers',
+      'http://localhost:8080',
+      'keycloak-reporter',
+      '3UYhI2hryFwoVtcd7ljlaDuD9HXrGV5r',
+      '--output=webhook',
+      '--webhookType=teams',
+      '--webhookUrl=' + process.env.WEBHOOK_TESTING_TEAMS,
+      '--webhookMessage="' + (process.env.WEBHOOK_ADDITIONAL_MESSAGE || 'From Github Actions') + '"',
+    ],
+    {
+      env: {
+        ...process.env,
+      },
+    }
+  );
+  cli.stdout.on('data', (chunk) => {
+    console.log(chunk.toString());
+  });
+  cli.stderr.on('data', (msg) => {
+    t.fail(msg);
+  });
+  cli.stdout.on('end', () => {
+    t.end();
+  });
+});
 
-test(
-  'Should post message to Slack with additional message',
-  { timeout: 10000 },
-  (t) => {
-    const cli = spawn(
-      path.join(path.dirname('.'), 'node'),
-      [
-        'dist/cli.js',
-        'listUsers',
-        'http://localhost:8080',
-        'keycloak-reporter',
-        '3UYhI2hryFwoVtcd7ljlaDuD9HXrGV5r',
-        '--output=webhook',
-        '--webhookType=slack',
-        '--webhookUrl=' + process.env.WEBHOOK_TESTING_SLACK,
-        '--webhookMessage="' +
-          (process.env.WEBHOOK_ADDITIONAL_MESSAGE || 'From Github Actions') +
-          '"'
-      ],
-      {
-        env: {
-          ...process.env
-        }
-      }
-    );
-    cli.stdout.on('data', (chunk) => {
-      console.log(chunk.toString());
-    });
-    cli.stderr.on('data', (msg) => {
-      t.fail(msg);
-    });
-    cli.stdout.on('end', () => {
-      t.end();
-    });
-  }
-);
+test('Should post message to Slack with additional message', { timeout: 10000 }, (t) => {
+  const cli = spawn(
+    path.join(path.dirname('.'), 'node'),
+    [
+      'dist/cli.js',
+      'listUsers',
+      'http://localhost:8080',
+      'keycloak-reporter',
+      '3UYhI2hryFwoVtcd7ljlaDuD9HXrGV5r',
+      '--output=webhook',
+      '--webhookType=slack',
+      '--webhookUrl=' + process.env.WEBHOOK_TESTING_SLACK,
+      '--webhookMessage="' + (process.env.WEBHOOK_ADDITIONAL_MESSAGE || 'From Github Actions') + '"',
+    ],
+    {
+      env: {
+        ...process.env,
+      },
+    }
+  );
+  cli.stdout.on('data', (chunk) => {
+    console.log(chunk.toString());
+  });
+  cli.stderr.on('data', (msg) => {
+    t.fail(msg);
+  });
+  cli.stdout.on('end', () => {
+    t.end();
+  });
+});
 
 test('Should post message to Slack', { timeout: 10000 }, (t) => {
   const cli = spawn(
@@ -119,12 +107,73 @@ test('Should post message to Slack', { timeout: 10000 }, (t) => {
       '3UYhI2hryFwoVtcd7ljlaDuD9HXrGV5r',
       '--output=webhook',
       '--webhookType=slack',
-      '--webhookUrl=' + process.env.WEBHOOK_TESTING_SLACK
+      '--webhookUrl=' + process.env.WEBHOOK_TESTING_SLACK,
     ],
     {
       env: {
-        ...process.env
-      }
+        ...process.env,
+      },
+    }
+  );
+  cli.stdout.on('data', (chunk) => {
+    console.log(chunk.toString());
+  });
+  cli.stderr.on('data', (msg) => {
+    t.fail(msg);
+  });
+  cli.stdout.on('end', () => {
+    t.end();
+  });
+});
+
+test.skip('Should post message to generic webhook', { timeout: 10000 }, (t) => {
+  const cli = spawn(
+    path.join(path.dirname('.'), 'node'),
+    [
+      'dist/cli.js',
+      'listUsers',
+      'http://localhost:8080',
+      'keycloak-reporter',
+      '3UYhI2hryFwoVtcd7ljlaDuD9HXrGV5r',
+      '--output=webhook',
+      '--webhookType=generic',
+      '--webhookUrl=' + process.env.WEBHOOK_TESTING_GENERIC,
+    ],
+    {
+      env: {
+        ...process.env,
+      },
+    }
+  );
+  cli.stdout.on('data', (chunk) => {
+    console.log(chunk.toString());
+  });
+  cli.stderr.on('data', (msg) => {
+    t.fail(msg);
+  });
+  cli.stdout.on('end', () => {
+    t.end();
+  });
+});
+
+test.skip('Should post message to generic webhook with additional message', { timeout: 10000 }, (t) => {
+  const cli = spawn(
+    path.join(path.dirname('.'), 'node'),
+    [
+      'dist/cli.js',
+      'listUsers',
+      'http://localhost:8080',
+      'keycloak-reporter',
+      '3UYhI2hryFwoVtcd7ljlaDuD9HXrGV5r',
+      '--output=webhook',
+      '--webhookType=generic',
+      '--webhookUrl=' + process.env.WEBHOOK_TESTING_GENERIC,
+      '--webhookMessage="' + (process.env.WEBHOOK_ADDITIONAL_MESSAGE || 'From Github Actions') + '"',
+    ],
+    {
+      env: {
+        ...process.env,
+      },
     }
   );
   cli.stdout.on('data', (chunk) => {
