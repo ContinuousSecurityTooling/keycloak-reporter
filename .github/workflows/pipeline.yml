@@ -130,7 +130,7 @@ jobs:
         run: .bin/wait-for-server.sh
 
       - name: Run End2End Tests
-        uses: nick-fields/retry@v3
+        uses: nick-fields/retry@v4
         with:
           max_attempts: 3
           retry_on: error
