@@ -73,7 +73,7 @@ jobs:
                     echo "BUILD_DATE=$BUILD_DATE" >> $GITHUB_ENV
 
             -   name: Install Helm
-                uses: azure/setup-helm@v4
+                uses: azure/setup-helm@v5
 
             -   name: Install Python
                 uses: actions/setup-python@v6
