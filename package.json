@@ -1,6 +1,6 @@
 {
   "name": "@continuoussecuritytooling/keycloak-reporter",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Reporting Tools for Keycloak",
   "main": "dist/index.js",
   "bin": {

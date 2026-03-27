@@ -1,3 +1,14 @@
+## [1.2.1](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.2.0...v1.2.1) (2026-03-27)
+
+
+### Bug Fixes
+
+* Add missing packages and resolve linting errors ([cde369c](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/cde369c61e05abb70c67f365fb755b4cec77254c))
+* Correcting keycloak test config setup ([7210d49](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/7210d49330640b5df4c796c1dfe4d9e1b8df1567))
+* Exclude dist folder ([ce2f7b2](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/ce2f7b2621fb2b10a1a53153ec9156e1c4b95b66))
+
+
+
 # [1.2.0](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.1.9...v1.2.0) (2026-03-10)
 
 
