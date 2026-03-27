@@ -7,5 +7,5 @@
     "outDir": "dist",
     "lib": ["dom", "es2017"]
   },
-  "exclude": ["test"]
+  "exclude": ["test", "dist"]
 }
