@@ -39,13 +39,13 @@ export async function convert(cfg: ConvertConfig) {
         switch (e.code || e.message) {
           case 'Request failed with status code 400':
             logger.error('Invalid Teams Webhook Payload. Check your params.');
-            throw new Error('Invalid Teams Payload');
+            throw new Error('Invalid Teams Payload', { cause: e });
           case 'slack_webhook_http_error':
             logger.error('Invalid Slack Webhook Payload. Check your params.');
-            throw new Error('Invalid Slack Payload');
+            throw new Error('Invalid Slack Payload', { cause: e });
           case 'generic_webhook_http_error':
             logger.error('Generic Webhook request failed. Check your URL and params.');
-            throw new Error('Invalid Generic Webhook request');
+            throw new Error('Invalid Generic Webhook request', { cause: e });
           default:
             logger.error(`Error during sending webhook.(${e?.code})`, e?.original);
             throw e;
