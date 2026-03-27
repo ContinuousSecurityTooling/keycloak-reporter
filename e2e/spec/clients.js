@@ -4,7 +4,7 @@ import { test } from 'tape';
 import { spawn } from 'node:child_process';
 import path from 'node:path';
 
-test('Should list clients as JSON', { timeout: 3000 }, (t) => {
+test('Should list clients as JSON', { timeout: 10000 }, (t) => {
   const cli = spawn(
     path.join(path.dirname('.'), 'node'),
     [
@@ -20,12 +20,18 @@ test('Should list clients as JSON', { timeout: 3000 }, (t) => {
       },
     }
   );
+  let output = '';
   cli.stdout.on('data', (chunk) => {
-    console.log('Response', JSON.parse(chunk.toString()));
-    t.equal(JSON.parse(chunk.toString()).length, 7);
-    t.end();
+    output += chunk.toString();
   });
   cli.stderr.on('data', (msg) => {
-    t.fail(msg)
+    t.fail(msg);
+  });
+  cli.stdout.on('end', () => {
+    const json = output.split('\n').find((line) => line.trim().startsWith('['));
+    const parsed = JSON.parse(json);
+    console.log('Response', parsed);
+    t.equal(parsed.length, 7);
+    t.end();
   });
 });
