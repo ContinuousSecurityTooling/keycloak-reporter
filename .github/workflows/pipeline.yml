@@ -199,24 +199,3 @@ jobs:
           build-args: |
             BUILD_DATE=${{env.BUILD_DATE}}
             APP_VERSION=${{env.APP_VERSION}}
-
-      - name: Push To NPM Registry
-        id: push-to-npm-preview
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-        run: |
-          echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
-          npm version --no-git-tag-version ${{env.APP_VERSION}}-${{ github.run_number }}
-          npm publish --tag next
-        if: github.ref == 'refs/heads/develop'
-
-      - name: Push To Docker Hub
-        id: push-to-dockerhub-preview
-        uses: redhat-actions/push-to-registry@v2
-        with:
-          image: ${{ steps.build-image.outputs.image }}
-          tags: 'next ${{env.APP_VERSION}}_rc'
-          registry: registry.hub.docker.com
-          username: continuoussecuritytooling
-          password: ${{ secrets.DOCKER_HUB_TOKEN }}
-        if: github.ref == 'refs/heads/develop'
