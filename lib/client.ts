@@ -24,8 +24,9 @@ export async function createClient(options: Options): Promise<KcAdminClient | Au
       grantType: 'client_credentials',
     });
   } catch (e) {
-    logger.error('Check Client Config:', e.response ? e.responseData.error_description : e);
-    return Promise.reject(e.response ? e.responseData.error_description : e);
+    const err = e as { response?: unknown; responseData?: { error_description?: string } };
+    logger.error('Check Client Config:', err.response ? err.responseData?.error_description : e);
+    return Promise.reject(err.response ? err.responseData?.error_description : e);
   }
   return Promise.resolve(kcAdminClient);
 }

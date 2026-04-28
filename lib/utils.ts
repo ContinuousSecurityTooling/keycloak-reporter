@@ -20,8 +20,8 @@ export class LogConfig {
 }
 
 class ReportConfig {
-  name: string;
-  directory: string;
+  name!: string;
+  directory!: string;
 }
 
 export class ConvertConfig {
@@ -41,30 +41,30 @@ export class ConvertConfig {
 
 export class AppConfig {
   log: LogConfig;
-  json: object;
+  json?: object;
   constructor(logConfig: LogConfig) {
     this.log = logConfig;
   }
 }
-export function getConvertConfig(config, argv, name: string, title: string, json: object): ConvertConfig {
+export function getConvertConfig(config: Record<string, unknown>, argv: Record<string, unknown>, name: string, title: string, json: object): ConvertConfig {
   return new ConvertConfig(
-    config.format ? config.format : (argv.format as string),
-    config.output ? config.output : (argv.output as string),
+    (config.format || argv.format) as string,
+    (config.output || argv.output) as string,
     {
       name,
-      directory: argv.reports ? (argv.reports as string) : config.reports,
+      directory: (argv.reports || config.reports) as string,
     },
     new WebhookConfig(
-      config.webhookType ? config.webhookType : (argv.webhookType as string),
-      config.webhookUrl ? config.webhookUrl : (argv.webhookUrl as string),
+      (config.webhookType || argv.webhookType) as string,
+      (config.webhookUrl || argv.webhookUrl) as string,
       title,
-      config.webhookMessage ? config.webhookMessage : (argv.webhookMessage as string)
+      (config.webhookMessage || argv.webhookMessage) as string | undefined
     ),
     json
   );
 }
 
-export function getAppConfig(config, argv): AppConfig {
+export function getAppConfig(config: Record<string, unknown>, argv: Record<string, unknown>): AppConfig {
   return new AppConfig(
     new LogConfig(
       'jsonLogFormat' in argv
@@ -74,11 +74,11 @@ export function getAppConfig(config, argv): AppConfig {
   );
 }
 
-export function getKeycloakConfig(config, argv): Options {
+export function getKeycloakConfig(config: Record<string, unknown>, argv: Record<string, unknown>): Options {
   return {
-    clientId: config.clientId ? config.clientId : (argv?.clientId as string),
-    clientSecret: config.clientSecret ? config.clientSecret : (argv?.clientSecret as string),
-    rootUrl: config.url ? config.url : (argv?.url as string),
+    clientId: (config.clientId || argv.clientId) as string,
+    clientSecret: (config.clientSecret || argv.clientSecret) as string,
+    rootUrl: (config.url || argv.url) as string,
     useAuditingEndpoint:
       'useAuditingEndpoint' in argv
         ? String(argv.useAuditingEndpoint).toLowerCase() == 'true'

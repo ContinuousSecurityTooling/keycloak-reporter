@@ -37,7 +37,8 @@ export async function clientListing(
       // iterate over realms
       realms = await client.realms.find();
     } catch (e) {
-      logger.error('Check Client role:', e.response.statusText);
+      const err = e as { response?: { statusText?: string } };
+      logger.error('Check Client role:', err.response?.statusText);
       return Promise.reject(new Error('Client Role Error'));
     }
     for (const realm of realms) {
@@ -48,12 +49,12 @@ export async function clientListing(
       const realmClients = new Array<Client>();
       for (const user of await client.clients.find()) {
         realmClients.push({
-          client: user.clientId,
-          id: user.id,
-          description: user.description,
-          realm: realm.realm,
-          enabled: user.enabled,
-          public: user.publicClient,
+          client: user.clientId!,
+          id: user.id!,
+          description: user.description!,
+          realm: realm.realm!,
+          enabled: user.enabled!,
+          public: user.publicClient!,
           allowedOrigins: JSON.stringify(user.webOrigins),
         });
       }
@@ -92,7 +93,8 @@ export async function userListing(
     try {
       realms = await client.realms.find();
     } catch (e) {
-      logger.error('Check Client role:', e.response.statusText);
+      const err = e as { response?: { statusText?: string } };
+      logger.error('Check Client role:', err.response?.statusText);
       return Promise.reject(new Error('Client Role Error'));
     }
     for (const realm of realms) {
@@ -103,13 +105,13 @@ export async function userListing(
       const realmUsers = new Array<User>();
       for (const user of await client.users.find()) {
         realmUsers.push({
-          username: user.username,
-          id: user.id,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          email: user.email,
-          realm: realm.realm,
-          enabled: user.enabled,
+          username: user.username!,
+          id: user.id!,
+          firstName: user.firstName!,
+          lastName: user.lastName!,
+          email: user.email!,
+          realm: realm.realm!,
+          enabled: user.enabled!,
         });
       }
       allUsers = [...allUsers, ...realmUsers];

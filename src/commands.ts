@@ -24,7 +24,6 @@ export async function listUsers(options: Options): Promise<Array<User | AuditedU
 export async function listClients(options: Options): Promise<Array<Client | AuditedClientRepresentation>> {
   return clientListing(await kcClient(options));
 }
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export async function configTest(options: Options) {
   try {
     const users = await userListing(await kcClient(options));

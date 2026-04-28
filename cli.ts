@@ -12,7 +12,6 @@ yargs(hideBin(process.argv))
   .command(
     'listUsers [url] [clientId] [clientSecret]',
     'fetches all users in the realms.',
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
     () => {},
     async (argv) => {
       const users = await listUsers(getKeycloakConfig(config, argv));
@@ -22,7 +21,6 @@ yargs(hideBin(process.argv))
   .command(
     'listClients [url] [clientId] [clientSecret]',
     'fetches all clients in the realms.',
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
     () => {},
     async (argv) => {
       const clients = await listClients(getKeycloakConfig(config, argv));
@@ -77,7 +75,6 @@ yargs(hideBin(process.argv))
   .command(
     'configTest [url] [clientId] [clientSecret]',
     'validates keycloak configuration by reading data via REST API',
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
     () => {},
     async (argv) => configTest(getKeycloakConfig(config, argv))
   )
