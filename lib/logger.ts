@@ -3,7 +3,7 @@ import { ecsFormat } from '@elastic/ecs-winston-format';
 import config from '../src/config.js';
 import { getAppConfig } from './utils.js';
 
-const appConfig = getAppConfig(config, process.argv);
+const appConfig = getAppConfig(config, {});
 
 const logger = appConfig.json
   ? winston.createLogger({

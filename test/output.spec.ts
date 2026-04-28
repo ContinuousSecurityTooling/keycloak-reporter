@@ -1,6 +1,14 @@
 /// <reference types="jest-extended" />
 import { post2Webhook } from '../lib/output';
 
+type Block = {
+  type: string;
+  text?: string;
+  elements?: Array<{ text: string }>;
+  fields?: Array<{ text: string }>;
+  facts?: Array<{ title: string; value: string }>;
+};
+
 const mockSlackSend = jest.fn();
 jest.mock('@slack/webhook', () => ({
   IncomingWebhook: jest.fn().mockImplementation(() => ({
@@ -33,15 +41,15 @@ describe('post2Webhook - Slack', () => {
     await post2Webhook('slack', 'https://hooks.slack.com/test', 'Users Report', 'report content', 'Hello from CI');
     expect(mockSlackSend).toHaveBeenCalledTimes(1);
     const blocks = mockSlackSend.mock.calls[0][0].blocks;
-    const contextBlock = blocks.find((b) => b.type === 'context' && b.elements?.[0]?.text === 'Hello from CI');
+    const contextBlock = (blocks as Block[]).find((b) => b.type === 'context' && b.elements?.[0]?.text === 'Hello from CI');
     expect(contextBlock).toBeDefined();
   });
 
   test('Slack payload includes title and date fields', async () => {
     await post2Webhook('slack', 'https://hooks.slack.com/test', 'My Title', 'content');
     const blocks = mockSlackSend.mock.calls[0][0].blocks;
-    const sectionBlock = blocks.find((b) => b.type === 'section');
-    expect(sectionBlock.fields[0].text).toContain('My Title');
+    const sectionBlock = (blocks as Block[]).find((b) => b.type === 'section');
+    expect(sectionBlock!.fields![0].text).toContain('My Title');
   });
 });
 
@@ -63,16 +71,16 @@ describe('post2Webhook - Teams', () => {
     await post2Webhook('teams', 'https://outlook.office.com/webhook/test', 'Clients Report', 'report content', 'Hello from CI');
     expect(mockTeamsSend).toHaveBeenCalledTimes(1);
     const attachment = mockTeamsSend.mock.calls[0][0].attachments[0];
-    const textBlock = attachment.content.body.find((b) => b.type === 'TextBlock' && b.text === 'Hello from CI');
+    const textBlock = (attachment.content.body as Block[]).find((b) => b.type === 'TextBlock' && b.text === 'Hello from CI');
     expect(textBlock).toBeDefined();
   });
 
   test('Teams payload includes title in FactSet', async () => {
     await post2Webhook('teams', 'https://outlook.office.com/webhook/test', 'My Title', 'content');
     const attachment = mockTeamsSend.mock.calls[0][0].attachments[0];
-    const factSet = attachment.content.body.find((b) => b.type === 'FactSet');
-    const typeFact = factSet.facts.find((f) => f.title === 'Type');
-    expect(typeFact.value).toBe('My Title');
+    const factSet = (attachment.content.body as Block[]).find((b) => b.type === 'FactSet');
+    const typeFact = factSet!.facts!.find((f) => f.title === 'Type');
+    expect(typeFact!.value).toBe('My Title');
   });
 });
 

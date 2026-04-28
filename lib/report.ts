@@ -36,7 +36,8 @@ export async function convert(cfg: ConvertConfig) {
         await post2Webhook(cfg.config.type, cfg.config.url, cfg.config.title, outputContent, cfg.config.message);
         logger.info('Done sending.');
       } catch (e) {
-        switch (e.code || e.message) {
+        const err = e as { code?: string; message?: string; original?: unknown };
+        switch (err.code || err.message) {
           case 'Request failed with status code 400':
             logger.error('Invalid Teams Webhook Payload. Check your params.');
             throw new Error('Invalid Teams Payload', { cause: e });
@@ -47,7 +48,7 @@ export async function convert(cfg: ConvertConfig) {
             logger.error('Generic Webhook request failed. Check your URL and params.');
             throw new Error('Invalid Generic Webhook request', { cause: e });
           default:
-            logger.error(`Error during sending webhook.(${e?.code})`, e?.original);
+            logger.error(`Error during sending webhook.(${err.code})`, err.original);
             throw e;
         }
       }

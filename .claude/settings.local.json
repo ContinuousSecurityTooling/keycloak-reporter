@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(npm install:*)",
+      "Bash(git -C /Users/mreinhardt/git/job/keycloak-reporter log --oneline -10)",
+      "Bash(git -C /Users/mreinhardt/git/job/keycloak-reporter log --oneline --all)",
+      "Bash(git -C /Users/mreinhardt/git/job/keycloak-reporter diff HEAD~5 HEAD -- e2e/fixtures/)",
+      "Bash(npm ls:*)",
+      "Bash(node -e \"const f=JSON.parse\\(require\\(''fs''\\).readFileSync\\(''/Users/mreinhardt/git/job/keycloak-reporter/e2e/fixtures/auth-utils/test-realm.json'',''utf8''\\)\\); console.log\\(Array.isArray\\(f\\), f.length, f.map\\(r=>r.realm||r.id\\)\\)\")",
+      "Bash(node -e \":*)",
+      "Bash(curl -s -X POST http://localhost:8080/realms/master/protocol/openid-connect/token -d 'grant_type=client_credentials' -d 'client_id=keycloak-reporter' -d 'client_secret=3UYhI2hryFwoVtcd7ljlaDuD9HXrGV5r')"
+    ]
+  }
+}
