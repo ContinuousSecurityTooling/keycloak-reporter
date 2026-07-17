@@ -1,3 +1,12 @@
+## [1.3.2](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.3.1...v1.3.2) (2026-07-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @slack/webhook to v8 ([9644fce](https://github.com/ContinuousSecurityTooling/keycloak-reporter/commit/9644fcedf644c317d4a20c32a2c01bde43483c59))
+
+
+
 ## [1.2.1](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.2.0...v1.2.1) (2026-03-27)
 
 
