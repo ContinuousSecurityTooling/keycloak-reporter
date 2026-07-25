@@ -199,7 +199,7 @@ jobs:
 
             -   name: Push To Docker Hub
                 id: push-to-dockerhub-preview
-                uses: redhat-actions/push-to-registry@v2
+                uses: redhat-actions/push-to-registry@v3
                 with:
                     image: ${{ steps.build-image.outputs.image }}
                     tags: 'latest ${{ github.event.inputs.releaseversion }}'
