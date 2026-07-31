@@ -20,3 +20,5 @@ charts/*/Chart.lock
 .cr-release-packages/
 *.tgz
 .qodo
+
+.env
