@@ -1,3 +1,36 @@
+
+## [1.3.3](https://github.com/ContinuousSecurityTooling/keycloak-auditor/compare/v1.3.2...v1.3.3) (2026-08-04)
+
+### Dependency Updates
+
+* **deps:** Update actions/setup-python action to v7 ([79e4659](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/79e4659c91dfde4fdbe0ce0a84854a87ae4e7655))
+
+* **deps:** Update typescript-eslint monorepo to v8.65.0 ([77f73bf](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/77f73bf53890266963a44de528f54ca7e01d729e))
+
+* **deps:** Update dependency @continuoussecuritytooling/keycloak-auditor to v2.2.8 ([f4fcc72](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/f4fcc72a5c8c0aab46509229a3d313069b147c2f))
+
+* **deps:** Update dependency ts-jest to v29.4.12 ([0f1f1f5](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/0f1f1f59360a9802d85f66d86b6419a0db6e7dd1))
+
+* **deps:** Update dependency eslint to v10.8.0 ([59792c3](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/59792c360e3fdcb47731a54465da205d8cc5c9f7))
+
+* **deps:** Update redhat-actions/push-to-registry action to v3 ([d70bc28](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/d70bc28c39bdcce8a5be396f7875e36f5e7e126a))
+
+* **deps:** Update redhat-actions/buildah-build action to v3 ([bf3abce](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/bf3abcea334f31c248e4bd494a182dff601272be))
+
+* **deps:** Update dependency yargs to v18.1.0 ([a6c9225](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/a6c92251d5393ca62412efa8252e9fbc0bc49009))
+
+* **deps:** Update dependency globals to v17.8.0 ([7c1c9f9](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/7c1c9f920a5a45ce2e531c87cf5b239fcdbaeaf7))
+
+* **deps:** Update node.js to v24.18.1 ([9d9ca95](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/9d9ca95f1f486a314a1ebd367da2700fa3c2da26))
+
+* **deps:** Update dependency globals to v17.9.0 ([11a3f25](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/11a3f250325b33c61e1815819eb92cc02bb1c136))
+
+* **deps:** Update typescript-eslint monorepo to v8.66.0 ([012fe3a](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/012fe3ae24f589db259787843490cb1de5758fca))
+
+* **deps:** Update node.js to v24.19.0 ([62e4e8c](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/62e4e8c2f9894a19beb214199f784b4d93170643))
+
+
+
 ## [1.3.2](https://github.com/ContinuousSecurityTooling/keycloak-reporter/compare/v1.3.1...v1.3.2) (2026-07-17)
 
 
