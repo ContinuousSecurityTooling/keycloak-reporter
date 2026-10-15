@@ -50,7 +50,7 @@ function buildEnvironmentVariablesConfig(schema: SchemaSpec): Record<string, unk
     const { type } = (schema.properties as any)[key];
     switch (type) {
       case 'integer':
-        return assoc(key, parseInt(env[key]!, 10), acc);
+        return assoc(key, Number.parseInt(env[key]!, 10), acc);
       case 'boolean':
         return assoc(key, trueRx.test(env[key]!), acc);
       default:

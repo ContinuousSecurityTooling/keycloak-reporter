@@ -26,7 +26,7 @@ export async function createClient(options: Options): Promise<KcAdminClient | Au
   } catch (e) {
     const err = e as { response?: unknown; responseData?: { error_description?: string } };
     logger.error('Check Client Config:', err.response ? err.responseData?.error_description : e);
-    return Promise.reject(err.response ? err.responseData?.error_description : e);
+    throw err.response ? err.responseData?.error_description : e;
   }
   return Promise.resolve(kcAdminClient);
 }
