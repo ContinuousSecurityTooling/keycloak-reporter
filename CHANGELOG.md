@@ -1,4 +1,37 @@
 
+## [1.3.5](https://github.com/ContinuousSecurityTooling/keycloak-auditor/compare/v1.3.4...v1.3.5) (2026-10-15)
+
+### Dependency Updates
+
+* **deps:** Update typescript-eslint monorepo to v8.71.1 ([0880f12](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/0880f12216e413906c7553e985c6221bab8df16c))
+
+* **deps:** Update helm/kind-action action to v1.15.1 ([4b1ed12](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/4b1ed12514282d8b0c031f1940e7a763e8653c60))
+
+* **deps:** Update helm/chart-testing-action action to v2.9.0 ([73b3651](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/73b36517c2c3b8c7e07f265ed3bcba12b8a7a144))
+
+* **deps:** Update dependency @types/node to v24.19.2 ([5223ba6](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/5223ba60a9582bf37fbdf46f4399ad54c67f2f03))
+
+* **deps:** Update dependency python to 3.15 ([0354009](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/03540094d0e82368bef589934a6a8d8879607312))
+
+* **deps:** Update typescript-eslint monorepo to v8.71.2 ([6c73d29](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/6c73d2994b0b81fee979c6c281f0c1609828878e))
+
+* **deps:** Update dependency @keycloak/keycloak-admin-client to v26.8.1 ([e70cd9c](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/e70cd9cf6df249df4b280d171afb243e0eb7259e))
+
+* **deps:** Update dependency chart-testing to v3.15.0 ([ffdf34a](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/ffdf34a763a426d56b11ba170f023cdcb05854af))
+
+* **deps:** Update dependency eslint-plugin-prettier to v5.5.7 ([acd17fc](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/acd17fc8110741e0eb8d1e9188e2516596052912))
+
+* **deps:** Update dependency tape to v5.10.3 ([0c2cd6f](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/0c2cd6fbc837a0f83a0c5c2875c5105c77224f65))
+
+* **deps:** Update dependency helm to v4.3.1 ([ef8dd06](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/ef8dd0640a48384ee3c237511be3ca66b98ac1f9))
+
+* **deps:** Update node.js to v24.22.0 ([6739631](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/673963181e2c374959b9d508cfcc3e9c6193cb08))
+
+* **deps:** Bump keycloak-auditor ([7552318](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/755231889eac8e86319fd88d8f1538ce82e67c92))
+
+
+
+
 ## [1.3.4](https://github.com/ContinuousSecurityTooling/keycloak-auditor/compare/v1.3.3...v1.3.4) (2026-10-04)
 
 ### Dependency Updates
