@@ -13,6 +13,7 @@ import tar from 'tar-fs'
 
 const DIR_NAME = path.dirname(fileURLToPath(import.meta.url))
 const SERVER_DIR = path.resolve(DIR_NAME, '../tmp/server')
+const READY_MARKER = path.resolve(DIR_NAME, '../tmp/keycloak-ready')
 const SCRIPT_EXTENSION = process.platform === 'win32' ? '.bat' : '.sh'
 const KC_BASE = 'http://localhost:8080'
 const ADMIN_USER = 'admin'
@@ -26,6 +27,9 @@ await startServer()
 
 async function startServer () {
   await downloadServer()
+
+  // Remove stale ready marker from a previous run
+  if (fs.existsSync(READY_MARKER)) fs.rmSync(READY_MARKER)
 
   // Wipe data so each start gets a clean realm state (binary is preserved)
   const dataDir = path.join(SERVER_DIR, 'data')
@@ -100,6 +104,7 @@ async function provisionKeycloakReporter () {
     body: JSON.stringify({
       clientId: 'keycloak-reporter',
       secret: '3UYhI2hryFwoVtcd7ljlaDuD9HXrGV5r',
+      protocol: 'openid-connect',
       serviceAccountsEnabled: true,
       directAccessGrantsEnabled: true,
       publicClient: false,
@@ -111,12 +116,42 @@ async function provisionKeycloakReporter () {
     throw new Error(`Failed to create client: ${clientRes.status}`)
   }
 
-  // Resolve the service account user Keycloak auto-creates
-  const saRes = await fetch(
-    `${KC_BASE}/admin/realms/master/users?username=service-account-keycloak-reporter`,
+  // Keycloak 26 requires the kc-admin-api scope for admin REST API access: it sets
+  // the token audience to the admin URL. Without it the admin API rejects the token
+  // with 401 "Expected audience not available in the token".
+  const clientsRes = await fetch(
+    `${KC_BASE}/admin/realms/master/clients?clientId=keycloak-reporter`,
     { headers }
   )
-  const [serviceAccount] = /** @type {{ id: string }[]} */ (await saRes.json())
+  const [reporterClient] = /** @type {{ id: string }[]} */ (await clientsRes.json())
+  if (!reporterClient) throw new Error('keycloak-reporter client not found after creation')
+
+  const scopesRes = await fetch(`${KC_BASE}/admin/realms/master/client-scopes`, { headers })
+  const scopes = /** @type {{ id: string, name: string }[]} */ (await scopesRes.json())
+  const adminApiScope = scopes.find((s) => s.name === 'kc-admin-api')
+  if (!adminApiScope) throw new Error('kc-admin-api client scope not found in master realm')
+
+  const scopeAssignRes = await fetch(
+    `${KC_BASE}/admin/realms/master/clients/${reporterClient.id}/default-client-scopes/${adminApiScope.id}`,
+    { method: 'PUT', headers }
+  )
+  if (!scopeAssignRes.ok) {
+    throw new Error(`Failed to assign kc-admin-api scope: HTTP ${scopeAssignRes.status}`)
+  }
+  console.info('Assigned kc-admin-api default client scope.')
+
+  // Resolve the service account user Keycloak auto-creates (may not appear immediately)
+  let serviceAccount
+  for (let i = 0; i < 20; i++) {
+    const saRes = await fetch(
+      `${KC_BASE}/admin/realms/master/users?username=service-account-keycloak-reporter`,
+      { headers }
+    )
+    const [found] = /** @type {{ id: string }[]} */ (await saRes.json())
+    if (found) { serviceAccount = found; break }
+    await new Promise(r => setTimeout(r, 1000))
+  }
+  if (!serviceAccount) throw new Error('Service account for keycloak-reporter not found after retries')
 
   // Fetch the admin realm role and assign it to the service account
   const roleRes = await fetch(`${KC_BASE}/admin/realms/master/roles/admin`, { headers })
@@ -145,6 +180,50 @@ async function provisionKeycloakReporter () {
     }),
   })
 
+  // Verify service account can actually reach the admin API before signalling readiness
+  for (let i = 0; i < 4; i++) {
+    const vtRes = await fetch(`${KC_BASE}/realms/master/protocol/openid-connect/token`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        grant_type: 'client_credentials',
+        client_id: 'keycloak-reporter',
+        client_secret: '3UYhI2hryFwoVtcd7ljlaDuD9HXrGV5r',
+      }),
+    })
+    const { access_token } = /** @type {{ access_token?: string }} */ (await vtRes.json())
+    if (access_token) {
+      const adminRes = await fetch(`${KC_BASE}/admin/realms`, {
+        headers: { Authorization: `Bearer ${access_token}` },
+      })
+      console.info(`Admin API verification: HTTP ${adminRes.status}`)
+      if (adminRes.ok) break
+      if (i === 0) {
+        const payload = JSON.parse(
+          Buffer.from(access_token.split('.')[1], 'base64url').toString()
+        )
+        console.info('--- token claims ---')
+        console.info(JSON.stringify({
+          iss: payload.iss,
+          aud: payload.aud,
+          azp: payload.azp,
+          typ: payload.typ,
+          sub: payload.sub,
+          scope: payload.scope,
+          realm_access: payload.realm_access,
+          resource_access: payload.resource_access,
+        }, null, 2))
+        console.info('--- admin response ---')
+        console.info('www-authenticate:', adminRes.headers.get('www-authenticate'))
+        console.info('body:', await adminRes.text())
+        console.info('--- end diagnostics ---')
+      }
+      if (i === 3) throw new Error(`Service account cannot access admin API: HTTP ${adminRes.status}`)
+    }
+    await new Promise(r => setTimeout(r, 1000))
+  }
+
+  fs.writeFileSync(READY_MARKER, 'ready')
   console.info('keycloak-reporter client provisioned successfully.')
 }
 
@@ -173,7 +252,7 @@ async function downloadServer () {
 
 async function getNightlyAsset () {
   const api = new Octokit()
-  const tag = process.env.kcVersion || 'nightly';
+  const tag = process.env.kcVersion || '26.8.2';
   const release = await api.repos.getReleaseByTag({
     owner: 'keycloak',
     repo: 'keycloak',

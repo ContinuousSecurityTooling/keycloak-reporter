@@ -120,13 +120,22 @@ jobs:
           npm run clean
           npm run build
       - name: Tune GitHub-hosted runner network
-        uses: smorimoto/tune-github-hosted-runner-network@v1
+        run: |
+          iface=$(ip route | awk '/default/ { print $5 }')
+          sudo ethtool -K "$iface" tx off rx off || true
 
       - name: Start Keycloak server
-        run: npm run end2end:start-server &
+        env:
+          # renovate: datasource=github-releases depName=keycloak/keycloak
+          kcVersion: '26.8.2'
+        run: npm run end2end:start-server > /tmp/keycloak-start.log 2>&1 &
 
       - name: Wait for Keycloak server
         run: .bin/wait-for-server.sh
+
+      - name: Show Keycloak startup and provisioning log
+        if: always()
+        run: cat /tmp/keycloak-start.log || echo '(no startup log - an earlier step failed before Keycloak started)'
 
       - name: Run End2End Tests
         uses: nick-fields/retry@v4
