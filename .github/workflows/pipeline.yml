@@ -120,7 +120,9 @@ jobs:
           npm run clean
           npm run build
       - name: Tune GitHub-hosted runner network
-        uses: smorimoto/tune-github-hosted-runner-network@v1
+        run: |
+          iface=$(ip route | awk '/default/ { print $5 }')
+          sudo ethtool -K "$iface" tx off rx off || true
 
       - name: Start Keycloak server
         run: npm run end2end:start-server &
