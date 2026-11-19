@@ -1,47 +1,75 @@
-name: Create release # You may choose a different name
-run-name: ${{ inputs.releaseversion }} # Enumerates entries in the "workflow runs" view
+name: Create release
+run-name: Release ${{ inputs.release_type == 'custom' && inputs.custom_version || inputs.release_type }}
+
 on:
   workflow_dispatch:
     inputs:
-      releaseversion:
-        description: 'Release version'
-        required: true
+      release_type:
+        description: 'Type of release to build (base: the version in package.json)'
+        type: choice
+        default: patch
+        options: [patch, minor, major, custom]
+      custom_version:
+        description: "Version to release (only used when release_type is 'custom', e.g. 1.2.3)"
         type: string
-        default: 'X.Y.Z'
+        required: false
+      draft_release:
+        description: 'Create the GitHub release as a draft'
+        type: boolean
+        default: true
+
+concurrency:
+  group: release
+  cancel-in-progress: false
 
 jobs:
-  release: # Arbitrarily chosen
-    name: Release
-    runs-on: ubuntu-latest
+  # Version bump (package.json, lockfile, Helm chart + its README), changelog,
+  # multi-arch image push to Docker Hub with provenance, push and GitHub release.
+  release:
+    uses: m13tLabs/gh-actions-templates/.github/workflows/docker-release.yml@main
     permissions:
-      contents: write
+      contents: read
       packages: write
       attestations: write
       id-token: write
-    steps:
-      - uses: actions/create-github-app-token@v3
-        id: app-token
-        with:
-          app-id: ${{ vars.CI_APP_ID }}
-          private-key: ${{ secrets.CI_PRIVATE_KEY }}
+    with:
+      images: '["docker.io/continuoussecuritytooling/keycloak-reporting-cli"]'
+      client_id: ${{ vars.CI_CLIENT_ID }}
+      release_type: ${{ inputs.release_type }}
+      custom_version: ${{ inputs.custom_version }}
+      default_branch: develop
+      version_file: package.json
+      dockerhub: true
+      draft_release: ${{ inputs.draft_release }}
+      # Lockfile version, chart patch bump + appVersion, regenerated chart README.
+      bump_command: |
+        npm version --no-git-tag-version --allow-same-version "$RELEASE_VERSION" >/dev/null
+        chart=charts/keycloak-reporter/Chart.yaml
+        current=$(sed -n -E 's/^version: *([0-9]+\.[0-9]+\.[0-9]+) *$/\1/p' "$chart")
+        IFS=. read -r major minor patch <<< "$current"
+        next="${major}.${minor}.$((patch + 1))"
+        sed -i -E "s/^version: .*/version: ${next}/; s/^appVersion: .*/appVersion: ${RELEASE_VERSION}/" "$chart"
+        grep -qx "version: ${next}" "$chart"
+        grep -qx "appVersion: ${RELEASE_VERSION}" "$chart"
+        docker run --rm -v "$PWD:/helm-docs" -u "$(id -u):$(id -g)" jnorwood/helm-docs:v1.14.2
+    # `secrets: inherit` doesn't cross organizations (template lives in m13tLabs)
+    secrets:
+      CI_PRIVATE_KEY: ${{ secrets.CI_PRIVATE_KEY }}
+      DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
 
-      - name: Checkout
+  # Built from the release commit: the draft release has no tag yet.
+  publish:
+    name: Publish npm package and Helm chart
+    needs: release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # npm trusted publishing / provenance
+    steps:
+      - name: Checkout release commit
         uses: actions/checkout@v7
         with:
-          fetch-depth: 0
-          token: ${{ steps.app-token.outputs.token }}
-          ref: ${{ github.head_ref }}
-
-      - name: Get GitHub App User ID
-        id: get-user-id
-        run: echo "user-id=$(gh api "/users/${{ steps.app-token.outputs.app-slug }}[bot]" --jq .id)" >> "$GITHUB_OUTPUT"
-        env:
-          GH_TOKEN: ${{ steps.app-token.outputs.token }}
-
-      - name: Configure Git author
-        run: |
-          git config --global user.name '${{ steps.app-token.outputs.app-slug }}[bot]'
-          git config --global user.email '${{ steps.get-user-id.outputs.user-id }}+${{ steps.app-token.outputs.app-slug }}[bot]@users.noreply.github.com>'
+          ref: ${{ needs.release.outputs.release_sha }}
 
       - name: Setup NodeJS
         uses: actions/setup-node@v7
@@ -49,179 +77,27 @@ jobs:
           node-version: '26'
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Setup Java
-        uses: actions/setup-java@v6 # Does also set up Maven and GPG
-        with:
-          distribution: 'temurin' # As good as any other, see: https://github.com/actions/setup-java#supported-distributions
-          java-version: '25.0.5+8.0.LTS'
-
-      - name: Package Application
+      - name: Build
         run: |
-          npm run clean
-          npm version --no-git-tag-version ${{ github.event.inputs.releaseversion }} || true
+          npm ci
           npm run build
 
-      - name: Write version vars
-        run: |
-          BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
-          BRANCH=${GITHUB_REF_NAME#v}
-          APP_VERSION=$(cat package.json | grep version| head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g')
-          echo Version: $APP_VERSION
-          echo "VERSION=$APP_VERSION" >> $GITHUB_ENV
-          echo "APP_VERSION=$APP_VERSION" >> $GITHUB_ENV
-          echo "BUILD_DATE=$BUILD_DATE" >> $GITHUB_ENV
+      - name: Publish npm package
+        run: npm publish
 
       - name: Install Helm
         uses: azure/setup-helm@v5
 
-      - name: Install Python
-        uses: actions/setup-python@v7.1.0
-        with:
-          python-version: '3.15'
-          check-latest: true
-      - name: Set up chart-testing
-        uses: helm/chart-testing-action@v2.9.0
-        with:
-          version: v3.15.0
-          yamale_version: '6.0.0'
-
-      - name: Set up helm-docs
-        uses: gabe565/setup-helm-docs-action@v1
-
-      - name: Run chart-testing (lint)
-        run: ct lint --config .ct.yaml
-
-      - name: Helm Package
+      - name: Package Helm chart
         run: |
+          helm lint charts/keycloak-reporter
+          helm package charts/keycloak-reporter
 
-          # Increment a version string using Semantic Versioning (SemVer) terminology.
-          # Parse command line options.
-          # Source: https://github.com/fmahnke/shell-semver
-          #
-          # usage: increment_version.sh [-Mmp] major.minor.patch
-          increment_version() {
-            while getopts ":Mmp" Option
-            do
-              case $Option in
-                M ) major=true;;
-                m ) minor=true;;
-                p ) patch=true;;
-                * ) patch=true;;
-              esac
-            done
-
-            # shellcheck disable=SC2004,SC2206
-            shift $(($OPTIND - 1))
-
-            version=$1
-
-            # Build array from version string.
-            # shellcheck disable=SC2206
-            a=( ${version//./ } )
-            # If version string is missing or has the wrong number of members, show usage message.
-            if [ ${#a[@]} -ne 3 ]
-            then
-              echo "usage: $(basename $0) [-Mmp] major.minor.patch"
-              exit 1
-            fi
-
-            # Increment version numbers as requested.
-
-            if [ -n "$major" ]
-            then
-              ((a[0]++))
-              a[1]=0
-              a[2]=0
-            fi
-
-            if [ -n "$minor" ]
-            then
-              ((a[1]++))
-              a[2]=0
-            fi
-
-            if [ -n "$patch" ]
-            then
-              ((a[2]++))
-            fi
-
-            echo "${a[0]}.${a[1]}.${a[2]}"
-          }
-
-          export HELM_CHART_DIR=charts/keycloak-reporter
-          chartVersion=$(cat $HELM_CHART_DIR/Chart.yaml | grep "version: " | sed -E -n "s/^version: \s*(.*)$/\1/p")
-          appVersion=$(cat $HELM_CHART_DIR/Chart.yaml | grep "appVersion: " | sed -E -n "s/^appVersion: \s*(.*)$/\1/p")
-          newVersion=$(increment_version -p $chartVersion)
-          sed -i 's/version: '"$chartVersion"'/version: '"$newVersion"'/g' $HELM_CHART_DIR/Chart.yaml
-          sed -i 's/appVersion: '"$appVersion"'/appVersion: '"${{ github.event.inputs.releaseversion }}"'/g' $HELM_CHART_DIR/Chart.yaml
-          helm-docs
-          helm package $HELM_CHART_DIR
-          git add .
-
-      - name: Run chart-testing (lint)
-        run: ct lint --config .ct.yaml
-
-      - name: Generate Changelog
-        uses: orhun/git-cliff-action@v4
-        with:
-          config: cliff.toml
-          args: --tag v${{ inputs.releaseversion }} --prepend CHANGELOG.md --unreleased
+      - name: Push Helm chart to GHCR
         env:
-          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
-
-      - name: Commit Changelog
+          CT_OCI_GITHUB_TOKEN: ${{ secrets.CT_OCI_GITHUB_TOKEN }}
         run: |
-          git add CHANGELOG.md
-          git diff --staged --quiet || git commit -m "chore(release): update changelog for v${{ inputs.releaseversion }}"
-          git tag v${{ github.event.inputs.releaseversion }} || true
-          git push
-          git push --tags || true
-      - name: Create Release on GH
-        id: tag-and-release
-        uses: avakar/tag-and-release@v1.0.0
-        with:
-          draft: true
-          release_name: ${{ github.event.inputs.releaseversion }}
-          tag_name: v${{ github.event.inputs.releaseversion }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build Container Image
-        id: build-image
-        uses: redhat-actions/buildah-build@v3
-        with:
-          image: continuoussecuritytooling/keycloak-reporting-cli
-          tags: 'latest ${{ github.event.inputs.releaseversion }}'
-          containerfiles: |
-            ./Dockerfile
-          build-args: |
-            BUILD_DATE=${{ env.BUILD_DATE }}
-            APP_VERSION=${{ github.event.inputs.releaseversion }}
-
-      - name: Push To Docker Hub
-        id: push-to-dockerhub-preview
-        uses: redhat-actions/push-to-registry@v3
-        with:
-          image: ${{ steps.build-image.outputs.image }}
-          tags: 'latest ${{ github.event.inputs.releaseversion }}'
-          registry: registry.hub.docker.com
-          username: continuoussecuritytooling
-          password: ${{ secrets.DOCKER_HUB_TOKEN }}
-
-      - name: Publish npm package
-        run: |
-          npm publish
-
-      - name: Login to GitHub Container Registry
-        run: |
-          echo ${{ secrets.CT_OCI_GITHUB_TOKEN }} | helm registry login ghcr.io -u $ --password-stdin
-
-      - name: Push Charts to GHCR
-        run: |
-          shopt -s nullglob
-          for pkg in *.tgz; do
-            if [ -z "${pkg:-}" ]; then
-              break
-            fi
-            helm push "${pkg}" oci://ghcr.io/cloudtooling/helm-charts
+          echo "$CT_OCI_GITHUB_TOKEN" | helm registry login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+          for pkg in keycloak-reporter-*.tgz; do
+            helm push "$pkg" oci://ghcr.io/cloudtooling/helm-charts
           done

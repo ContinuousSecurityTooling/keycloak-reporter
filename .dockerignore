@@ -1,0 +1,12 @@
+# Only what the Dockerfile copies; the image builds dist/ itself.
+*
+!package.json
+!package-lock.json
+!tsconfig.json
+!cli.ts
+!index.ts
+!config/
+!lib/
+!src/
+!types/
+!docker_entrypoint.sh

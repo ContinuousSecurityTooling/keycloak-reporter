@@ -1,3 +1,17 @@
+# Compiles the TypeScript sources; the output is plain JS, so this stage runs on the
+# build platform only, even for multi-arch builds.
+FROM --platform=$BUILDPLATFORM node:26.13.1-slim AS build
+
+WORKDIR /src
+COPY package.json package-lock.json ./
+RUN npm ci --ignore-scripts
+COPY tsconfig.json cli.ts index.ts ./
+COPY config/ config/
+COPY lib/ lib/
+COPY src/ src/
+COPY types/ types/
+RUN npm run build
+
 FROM node:26.13.1-slim
 
 ARG BUILD_DATE
@@ -13,7 +27,8 @@ LABEL org.opencontainers.image.authors='Martin Reinhardt (martin@m13t.de)' \
 
 ENV CONFIG_FILE=/app/config.json
 
-COPY dist/ docker_entrypoint.sh package.json /app
+COPY --from=build /src/dist/ /app/
+COPY docker_entrypoint.sh package.json /app/
 
 WORKDIR /app
 
