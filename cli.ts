@@ -67,7 +67,7 @@ yargs(hideBin(process.argv))
     description: 'use auditor rest endpoint',
   })
   .option('jsonLogFormat', {
-    alias: 'a',
+    alias: 'j',
     type: 'boolean',
     default: false,
     description: 'use JSON log format',
