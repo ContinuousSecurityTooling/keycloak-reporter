@@ -113,8 +113,9 @@ jobs:
       - name: Install Java
         uses: actions/setup-java@v6
         with:
-          distribution: 'temurin' # See 'Supported distributions' for available options
-          java-version: '25.0.5+8.0.LTS'
+          distribution: 'temurin'
+          # renovate: datasource=java-version depName=java packageName=java-jre
+          java-version: '21'
       - name: npm build and test
         run: |
           npm run clean
@@ -125,6 +126,9 @@ jobs:
           sudo ethtool -K "$iface" tx off rx off || true
 
       - name: Start Keycloak server
+        env:
+          # renovate: datasource=github-releases depName=keycloak/keycloak
+          kcVersion: '26.8.2'
         run: npm run end2end:start-server &
 
       - name: Wait for Keycloak server

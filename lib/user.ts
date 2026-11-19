@@ -37,8 +37,8 @@ export async function clientListing(
       // iterate over realms
       realms = await client.realms.find();
     } catch (e) {
-      const err = e as { response?: { statusText?: string } };
-      logger.error('Check Client role:', err.response?.statusText);
+      const err = e as { response?: { statusText?: string; data?: unknown; status?: number } };
+      logger.error('Check Client role:', err.response?.status, err.response?.statusText, JSON.stringify(err.response?.data));
       return Promise.reject(new Error('Client Role Error'));
     }
     for (const realm of realms) {
@@ -93,8 +93,8 @@ export async function userListing(
     try {
       realms = await client.realms.find();
     } catch (e) {
-      const err = e as { response?: { statusText?: string } };
-      logger.error('Check Client role:', err.response?.statusText);
+      const err = e as { response?: { statusText?: string; data?: unknown; status?: number } };
+      logger.error('Check Client role:', err.response?.status, err.response?.statusText, JSON.stringify(err.response?.data));
       return Promise.reject(new Error('Client Role Error'));
     }
     for (const realm of realms) {

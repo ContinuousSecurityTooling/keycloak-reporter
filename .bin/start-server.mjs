@@ -13,6 +13,7 @@ import tar from 'tar-fs'
 
 const DIR_NAME = path.dirname(fileURLToPath(import.meta.url))
 const SERVER_DIR = path.resolve(DIR_NAME, '../tmp/server')
+const READY_MARKER = path.resolve(DIR_NAME, '../tmp/keycloak-ready')
 const SCRIPT_EXTENSION = process.platform === 'win32' ? '.bat' : '.sh'
 const KC_BASE = 'http://localhost:8080'
 const ADMIN_USER = 'admin'
@@ -26,6 +27,9 @@ await startServer()
 
 async function startServer () {
   await downloadServer()
+
+  // Remove stale ready marker from a previous run
+  if (fs.existsSync(READY_MARKER)) fs.rmSync(READY_MARKER)
 
   // Wipe data so each start gets a clean realm state (binary is preserved)
   const dataDir = path.join(SERVER_DIR, 'data')
@@ -84,6 +88,7 @@ async function provisionKeycloakReporter () {
         client_id: 'admin-cli',
         username: ADMIN_USER,
         password: ADMIN_PASS,
+        scope: 'openid',
       }),
     }
   )
@@ -111,12 +116,18 @@ async function provisionKeycloakReporter () {
     throw new Error(`Failed to create client: ${clientRes.status}`)
   }
 
-  // Resolve the service account user Keycloak auto-creates
-  const saRes = await fetch(
-    `${KC_BASE}/admin/realms/master/users?username=service-account-keycloak-reporter`,
-    { headers }
-  )
-  const [serviceAccount] = /** @type {{ id: string }[]} */ (await saRes.json())
+  // Resolve the service account user Keycloak auto-creates (may not be immediately visible)
+  let serviceAccount
+  for (let i = 0; i < 20; i++) {
+    const saRes = await fetch(
+      `${KC_BASE}/admin/realms/master/users?username=service-account-keycloak-reporter`,
+      { headers }
+    )
+    const [found] = /** @type {{ id: string }[]} */ (await saRes.json())
+    if (found) { serviceAccount = found; break }
+    await new Promise(r => setTimeout(r, 1000))
+  }
+  if (!serviceAccount) throw new Error('Service account for keycloak-reporter not found after retries')
 
   // Fetch the admin realm role and assign it to the service account
   const roleRes = await fetch(`${KC_BASE}/admin/realms/master/roles/admin`, { headers })
@@ -130,6 +141,28 @@ async function provisionKeycloakReporter () {
       body: JSON.stringify([{ id: adminRole.id, name: adminRole.name }]),
     }
   )
+
+  // Also assign realm-admin from realm-management client (required by Keycloak 26+)
+  const rmClientsRes = await fetch(
+    `${KC_BASE}/admin/realms/master/clients?clientId=realm-management`,
+    { headers }
+  )
+  const [rmClient] = /** @type {{ id: string }[]} */ (await rmClientsRes.json())
+  if (rmClient) {
+    const rmRoleRes = await fetch(
+      `${KC_BASE}/admin/realms/master/clients/${rmClient.id}/roles/realm-admin`,
+      { headers }
+    )
+    const rmRole = /** @type {{ id: string, name: string }} */ (await rmRoleRes.json())
+    await fetch(
+      `${KC_BASE}/admin/realms/master/users/${serviceAccount.id}/role-mappings/clients/${rmClient.id}`,
+      {
+        method: 'POST',
+        headers,
+        body: JSON.stringify([{ id: rmRole.id, name: rmRole.name }]),
+      }
+    )
+  }
 
   // Create a test user so e2e user-listing tests have predictable data
   await fetch(`${KC_BASE}/admin/realms/master/users`, {
@@ -145,6 +178,7 @@ async function provisionKeycloakReporter () {
     }),
   })
 
+  fs.writeFileSync(READY_MARKER, 'ready')
   console.info('keycloak-reporter client provisioned successfully.')
 }
 
@@ -173,7 +207,7 @@ async function downloadServer () {
 
 async function getNightlyAsset () {
   const api = new Octokit()
-  const tag = process.env.kcVersion || 'nightly';
+  const tag = process.env.kcVersion || '26.8.2';
   const release = await api.repos.getReleaseByTag({
     owner: 'keycloak',
     repo: 'keycloak',

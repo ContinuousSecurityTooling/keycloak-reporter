@@ -22,6 +22,7 @@ export async function createClient(options: Options): Promise<KcAdminClient | Au
       clientId: options.clientId,
       clientSecret: options.clientSecret,
       grantType: 'client_credentials',
+      scopes: ['openid'],
     });
   } catch (e) {
     const err = e as { response?: unknown; responseData?: { error_description?: string } };
