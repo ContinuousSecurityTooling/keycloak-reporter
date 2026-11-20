@@ -1,5 +1,5 @@
 /// <reference types="jest-extended" />
-import { getKeycloakConfig } from '../lib/utils';
+import { getKeycloakConfig } from '../lib/utils.js';
 test('no config', () => {
   expect(getKeycloakConfig({}, {})).toEqual({
     clientId: undefined,

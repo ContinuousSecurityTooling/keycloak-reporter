@@ -1,5 +1,5 @@
 /// <reference types="jest-extended" />
-import { post2Webhook } from '../lib/output';
+import { post2Webhook } from '../lib/output.js';
 
 type Block = {
   type: string;
@@ -131,7 +131,7 @@ describe('post2Webhook - Generic', () => {
 
   test('thrown error has generic_webhook_http_error code', async () => {
     (global.fetch as jest.Mock).mockResolvedValue({ ok: false, status: 400 });
-    const err = await post2Webhook('generic', 'https://example.com/webhook', 'My Title', 'my content').catch((e) => e);
+    const err = await post2Webhook('generic', 'https://example.com/webhook', 'My Title', 'my content').catch((e: unknown) => e);
     expect((err as NodeJS.ErrnoException).code).toBe('generic_webhook_http_error');
   });
 });
