@@ -1,5 +1,5 @@
 /// <reference types="jest-extended" />
-import { convertJSON2CSV } from '../lib/convert';
+import { convertJSON2CSV } from '../lib/convert.js';
 test('convert empty JSON', async () => {
   expect(await convertJSON2CSV({})).toBe('');
 });
