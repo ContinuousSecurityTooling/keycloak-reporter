@@ -5,7 +5,7 @@ import { getAppConfig } from './utils.js';
 
 const appConfig = getAppConfig(config, {});
 
-const logger = appConfig.json
+const logger = appConfig.log.json
   ? winston.createLogger({
       format: ecsFormat(/* options */),
       transports: [new winston.transports.Console()],
