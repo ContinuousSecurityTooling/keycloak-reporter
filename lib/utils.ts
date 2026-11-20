@@ -41,7 +41,6 @@ export class ConvertConfig {
 
 export class AppConfig {
   log: LogConfig;
-  json?: object;
   constructor(logConfig: LogConfig) {
     this.log = logConfig;
   }
