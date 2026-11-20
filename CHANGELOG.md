@@ -1,4 +1,37 @@
 
+## [1.3.7](https://github.com/ContinuousSecurityTooling/keycloak-auditor/compare/v1.3.6...v1.3.7) (2026-11-20)
+
+### Bug Fixes
+
+* **Logging:** Correcting log config ([b921f62](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/b921f625fe97c95ad3e9727c7df62b51ac10b6d3))
+
+
+
+### Dependency Updates
+
+* **deps:** Update typescript-eslint monorepo to v8.73.0 ([e058850](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/e058850956da2381b6866eff1f1a31cfe6e5d818))
+
+* **deps:** Update dependency helm to v4.3.2 ([5ac4f27](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/5ac4f2703d69b115a7e85e3db96c3d9d194196a1))
+
+* **deps:** Update dependency @slack/webhook to v8.1.0 ([b0a162a](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/b0a162ad8aaf93466805a697ef10cbff4dd73acc))
+
+* **deps:** Update dependency openid-client to v6.9.0 ([7f5832e](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/7f5832e5315ac947ded2b15304a76f0d7616eef3))
+
+* **deps:** Update dependency eslint to v10.15.0 ([e270e73](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/e270e732c50826ee8a90f103f569ec0d9dd6f840))
+
+* **deps:** Update dependency tape to v5.11.0 ([d44c964](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/d44c964605eabaa300b8b06c02b97d7a50ffa754))
+
+* **deps:** Update dependency ts-jest to v29.4.15 ([b3fde11](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/b3fde11740e53733781d685fe21ed8516e979bc3))
+
+
+
+### Testing
+
+* Increase test coverage ([be570dc](https://github.com/ContinuousSecurityTooling/keycloak-auditor/commit/be570dc003f20a8a1f912ab069b5c504bf3db7ed))
+
+
+
+
 ## [1.3.6](https://github.com/ContinuousSecurityTooling/keycloak-auditor/compare/v1.3.5...v1.3.6) (2026-11-19)
 
 ### Bug Fixes
